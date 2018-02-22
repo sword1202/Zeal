@@ -1,0 +1,22 @@
+//
+//  CustomTableFinancialAccountsTableViewCell.h
+//  Zeal
+//
+//  Created by P1 on 6/9/17.
+//  Copyright © 2017 ZealOfCnorth2. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface CustomTableFinancialAccountsTableViewCell : UITableViewCell
+{
+    
+}
+@property (weak, nonatomic) IBOutlet UILabel *mLabelAccountName;
+@property (weak, nonatomic) IBOutlet UILabel *minstitutionName;
+@property (weak, nonatomic) IBOutlet UILabel *mAmounts;
+@property (weak, nonatomic) IBOutlet UIImageView *logo_img;
+@property (weak, nonatomic) IBOutlet UIImageView *logo_img_ChartView;
+@property (weak, nonatomic) IBOutlet UILabel *seperator_line;
+
+@end

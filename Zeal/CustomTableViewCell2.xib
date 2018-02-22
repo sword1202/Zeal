@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell2" id="KGk-i7-Jjw" customClass="CustomTableViewCell2">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CmK-LA-h5L">
+                        <rect key="frame" x="18" y="12" width="55" height="55"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="55" id="qrw-f5-fw7"/>
+                            <constraint firstAttribute="width" constant="55" id="z1q-Al-0CL"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YqD-rU-mjj">
+                        <rect key="frame" x="81" y="12" width="191" height="18"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDC-2y-XfP" userLabel="subTitle">
+                        <rect key="frame" x="81" y="31" width="191" height="15.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOu-CF-Ar1" userLabel="rateShowView">
+                        <rect key="frame" x="81" y="46.5" width="128" height="25"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIP Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Lh-XI-HoO">
+                                <rect key="frame" x="0.0" y="3" width="65" height="8.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="7"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tje-hh-qrR" customClass="HCSStarRatingView">
+                                <rect key="frame" x="75" y="-1.5" width="50" height="18"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="QdG-Kp-XvN"/>
+                                    <constraint firstAttribute="height" constant="18" id="aMd-Xo-bOP"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="spacing">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBa-uw-7k0" customClass="HCSStarRatingView">
+                                <rect key="frame" x="75.5" y="12" width="50" height="18"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="0H7-oS-LAt"/>
+                                    <constraint firstAttribute="height" constant="18" id="ohT-hJ-tvB"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="spacing">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Discounts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AV7-tU-l0t">
+                                <rect key="frame" x="0.0" y="16.5" width="65" height="8.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="7"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NBa-uw-7k0" firstAttribute="leading" secondItem="AV7-tU-l0t" secondAttribute="trailing" constant="10" id="Aqr-vM-FaK"/>
+                            <constraint firstItem="tje-hh-qrR" firstAttribute="centerY" secondItem="4Lh-XI-HoO" secondAttribute="centerY" id="BJb-cf-kCo"/>
+                            <constraint firstItem="tje-hh-qrR" firstAttribute="leading" secondItem="4Lh-XI-HoO" secondAttribute="trailing" constant="10" id="IkH-hS-V92"/>
+                            <constraint firstItem="4Lh-XI-HoO" firstAttribute="leading" secondItem="EOu-CF-Ar1" secondAttribute="leading" id="IuU-9I-Aod"/>
+                            <constraint firstItem="AV7-tU-l0t" firstAttribute="top" secondItem="4Lh-XI-HoO" secondAttribute="bottom" constant="5" id="Olg-m8-88r"/>
+                            <constraint firstItem="4Lh-XI-HoO" firstAttribute="trailing" secondItem="AV7-tU-l0t" secondAttribute="trailing" id="RyX-iJ-M2a"/>
+                            <constraint firstItem="4Lh-XI-HoO" firstAttribute="top" secondItem="EOu-CF-Ar1" secondAttribute="top" constant="3" id="YQC-0d-1Vp"/>
+                            <constraint firstItem="AV7-tU-l0t" firstAttribute="leading" secondItem="4Lh-XI-HoO" secondAttribute="leading" id="hC7-yB-rs5"/>
+                            <constraint firstItem="NBa-uw-7k0" firstAttribute="centerY" secondItem="AV7-tU-l0t" secondAttribute="centerY" id="i43-DX-pXM"/>
+                            <constraint firstAttribute="trailing" secondItem="tje-hh-qrR" secondAttribute="trailing" constant="3" id="wLX-Kv-t4v"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dN6-a5-fDw">
+                        <rect key="frame" x="282" y="27" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="NEV-Xn-hr9"/>
+                            <constraint firstAttribute="width" constant="25" id="QIB-Ap-00j"/>
+                        </constraints>
+                        <state key="normal" image="plus"/>
+                        <connections>
+                            <action selector="didSelectPlusButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LBw-A3-gEw"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xDC-2y-XfP" firstAttribute="top" secondItem="YqD-rU-mjj" secondAttribute="bottom" constant="1" id="3OB-ct-Qa5"/>
+                    <constraint firstItem="CmK-LA-h5L" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="56B-ev-chx"/>
+                    <constraint firstItem="EOu-CF-Ar1" firstAttribute="top" secondItem="xDC-2y-XfP" secondAttribute="bottom" id="8Lw-z2-NWR"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="dN6-a5-fDw" secondAttribute="trailing" constant="5" id="DHC-71-nO7"/>
+                    <constraint firstItem="YqD-rU-mjj" firstAttribute="leading" secondItem="CmK-LA-h5L" secondAttribute="trailing" constant="8" id="KAh-xn-X7A"/>
+                    <constraint firstItem="EOu-CF-Ar1" firstAttribute="leading" secondItem="xDC-2y-XfP" secondAttribute="leading" id="LFJ-2e-hkW"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="EOu-CF-Ar1" secondAttribute="bottom" id="Qe5-mT-4vU"/>
+                    <constraint firstItem="xDC-2y-XfP" firstAttribute="leading" secondItem="CmK-LA-h5L" secondAttribute="trailing" constant="8" id="TVc-78-GYh"/>
+                    <constraint firstItem="dN6-a5-fDw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dLP-Ti-YOJ"/>
+                    <constraint firstItem="YqD-rU-mjj" firstAttribute="top" secondItem="CmK-LA-h5L" secondAttribute="top" id="pwJ-NK-SbS"/>
+                    <constraint firstItem="CmK-LA-h5L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="rUp-YU-m6e"/>
+                    <constraint firstItem="xDC-2y-XfP" firstAttribute="trailing" secondItem="YqD-rU-mjj" secondAttribute="trailing" id="tCF-4v-94Z"/>
+                    <constraint firstItem="dN6-a5-fDw" firstAttribute="leading" secondItem="YqD-rU-mjj" secondAttribute="trailing" constant="10" id="v8h-AB-qQv"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="iconImageView" destination="CmK-LA-h5L" id="3g2-9T-7S9"/>
+                <outlet property="plus_button" destination="dN6-a5-fDw" id="2yA-UG-PuS"/>
+                <outlet property="productHCStarRatingView" destination="NBa-uw-7k0" id="drd-iv-hUT"/>
+                <outlet property="ratingView" destination="EOu-CF-Ar1" id="l20-pA-KTB"/>
+                <outlet property="subTitleLabel" destination="xDC-2y-XfP" id="cWa-bf-1Io"/>
+                <outlet property="titleLabel" destination="YqD-rU-mjj" id="dpH-ym-IAW"/>
+                <outlet property="vipHCStarRatingView" destination="tje-hh-qrR" id="Xqb-X0-hoy"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="plus" width="40" height="38"/>
+    </resources>
+</document>

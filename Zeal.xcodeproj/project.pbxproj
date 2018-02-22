@@ -1,0 +1,810 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6C91FBA81EDB8245000243DA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91FBA71EDB8245000243DA /* MainViewController.m */; };
+		6C91FBAA1EDBB301000243DA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C91FBA91EDBB301000243DA /* QuartzCore.framework */; };
+		6C91FBAC1EDC78EA000243DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C91FBAB1EDC78E9000243DA /* GoogleService-Info.plist */; };
+		6CB3996C1EDD0C8700149C5D /* ToastHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3996B1EDD0C8700149C5D /* ToastHelper.m */; };
+		6CB3996F1EDD0D5800149C5D /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3996E1EDD0D5800149C5D /* UIViewController+Alerts.m */; };
+		6CB399731EDD1EEE00149C5D /* about_text.html in Resources */ = {isa = PBXBuildFile; fileRef = 6CB399721EDD1EEE00149C5D /* about_text.html */; };
+		6CB3997F1EDE2B7700149C5D /* MerchantPharmacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3997D1EDE2B7700149C5D /* MerchantPharmacy.m */; };
+		6CB399801EDE2B7700149C5D /* MerchantPharmacy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB3997E1EDE2B7700149C5D /* MerchantPharmacy.xib */; };
+		6CB399841EDE2BA700149C5D /* MerchantHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB399821EDE2BA700149C5D /* MerchantHome.m */; };
+		6CB399851EDE2BA700149C5D /* MerchantHome.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB399831EDE2BA700149C5D /* MerchantHome.xib */; };
+		6CB3998C1EE0B4BB00149C5D /* CustomTableViewCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3998A1EE0B4BB00149C5D /* CustomTableViewCell1.m */; };
+		6CB3998D1EE0B4BB00149C5D /* CustomTableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB3998B1EE0B4BB00149C5D /* CustomTableViewCell1.xib */; };
+		6CB399911EE0B4D000149C5D /* CustomTableViewCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3998F1EE0B4D000149C5D /* CustomTableViewCell2.m */; };
+		6CB399921EE0B4D000149C5D /* CustomTableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB399901EE0B4D000149C5D /* CustomTableViewCell2.xib */; };
+		6CBF93B21EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93B01EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m */; };
+		6CBF93B31EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CBF93B11EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib */; };
+		6CBF93BC1EEDFE950036EBA3 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93B71EEDFE950036EBA3 /* MFSideMenuContainerViewController.m */; };
+		6CBF93BD1EEDFE950036EBA3 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93B91EEDFE950036EBA3 /* MFSideMenuShadow.m */; };
+		6CBF93BE1EEDFE950036EBA3 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93BB1EEDFE950036EBA3 /* UIViewController+MFSideMenuAdditions.m */; };
+		6CBF93C01EEDFED00036EBA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CBF93BF1EEDFED00036EBA3 /* UIKit.framework */; };
+		6CBF93C21EEDFEDB0036EBA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CBF93C11EEDFEDB0036EBA3 /* Foundation.framework */; };
+		6CBF93C41EEDFEE50036EBA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CBF93C31EEDFEE50036EBA3 /* CoreGraphics.framework */; };
+		6CBF93C71EEE068B0036EBA3 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93C61EEE068B0036EBA3 /* SideMenuViewController.m */; };
+		6CBF93CB1EF097A10036EBA3 /* PlaidHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93CA1EF097A10036EBA3 /* PlaidHTTPClient.m */; };
+		6CBF93EA1EF2B2C80036EBA3 /* BarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93D21EF2B2C70036EBA3 /* BarChartView.m */; };
+		6CBF93EB1EF2B2C80036EBA3 /* BarLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93D41EF2B2C70036EBA3 /* BarLabel.m */; };
+		6CBF93EC1EF2B2C80036EBA3 /* BarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93D71EF2B2C70036EBA3 /* BarView.m */; };
+		6CBF93ED1EF2B2C80036EBA3 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93DB1EF2B2C70036EBA3 /* CMPopTipView.m */; };
+		6CBF93EE1EF2B2C80036EBA3 /* UIColor+i7HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93DE1EF2B2C70036EBA3 /* UIColor+i7HexColor.m */; };
+		6CBF93EF1EF2B2C80036EBA3 /* UIViewSizeShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93E01EF2B2C70036EBA3 /* UIViewSizeShortcuts.m */; };
+		6CBF93F01EF2B2C80036EBA3 /* XMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93E31EF2B2C70036EBA3 /* XMLElement.m */; };
+		6CBF93F11EF2B2C80036EBA3 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93E51EF2B2C70036EBA3 /* XMLParser.m */; };
+		6CBF93F21EF2B2C80036EBA3 /* XMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93E71EF2B2C80036EBA3 /* XMLParserDelegate.m */; };
+		6CBF93F31EF2B2C80036EBA3 /* PlotChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93E91EF2B2C80036EBA3 /* PlotChartView.m */; };
+		6CD3550C1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD3550B1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m */; };
+		6CD355101EE5DDB400D1508F /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD3550F1EE5DDB400D1508F /* HCSStarRatingView.m */; };
+		6CD3551C1EE83AB100D1508F /* PlaidAPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD3551A1EE83AB100D1508F /* PlaidAPIViewController.m */; };
+		6CD355221EE8F91700D1508F /* LinkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD355211EE8F91700D1508F /* LinkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6CD355241EE8FA7500D1508F /* LinkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD355211EE8F91700D1508F /* LinkKit.framework */; };
+		6CD9B03A1ED3874B003ADF99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD9B0391ED3874B003ADF99 /* main.m */; };
+		6CD9B03D1ED3874B003ADF99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD9B03C1ED3874B003ADF99 /* AppDelegate.m */; };
+		6CD9B0401ED3874B003ADF99 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD9B03F1ED3874B003ADF99 /* HomeViewController.m */; };
+		6CD9B0431ED3874B003ADF99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CD9B0411ED3874B003ADF99 /* Main.storyboard */; };
+		6CD9B0451ED3874B003ADF99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CD9B0441ED3874B003ADF99 /* Assets.xcassets */; };
+		6CD9B0481ED3874B003ADF99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CD9B0461ED3874B003ADF99 /* LaunchScreen.storyboard */; };
+		6CD9B0541ED39178003ADF99 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD9B0531ED39178003ADF99 /* LoginViewController.m */; };
+		F7364C240F2CDE19B79C865E /* Pods_Zeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3CCF38D5C1C19A98F1DAAE /* Pods_Zeal.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6CD355151EE5E2AB00D1508F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6CD355221EE8F91700D1508F /* LinkKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6C4F85341EF8B46D00D192F1 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		6C4F85351EF8B46D00D192F1 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		6C4F85361EF8B51D00D192F1 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		6C91FBA61EDB8245000243DA /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		6C91FBA71EDB8245000243DA /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		6C91FBA91EDBB301000243DA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6C91FBAB1EDC78E9000243DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6CB3996A1EDD0C8700149C5D /* ToastHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToastHelper.h; path = CustomClasses/ToastHelper.h; sourceTree = "<group>"; };
+		6CB3996B1EDD0C8700149C5D /* ToastHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToastHelper.m; path = CustomClasses/ToastHelper.m; sourceTree = "<group>"; };
+		6CB3996D1EDD0D5800149C5D /* UIViewController+Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Alerts.h"; path = "CustomClasses/UIViewController+Alerts.h"; sourceTree = "<group>"; };
+		6CB3996E1EDD0D5800149C5D /* UIViewController+Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Alerts.m"; path = "CustomClasses/UIViewController+Alerts.m"; sourceTree = "<group>"; };
+		6CB399721EDD1EEE00149C5D /* about_text.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about_text.html; sourceTree = "<group>"; };
+		6CB3997C1EDE2B7700149C5D /* MerchantPharmacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantPharmacy.h; sourceTree = "<group>"; };
+		6CB3997D1EDE2B7700149C5D /* MerchantPharmacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantPharmacy.m; sourceTree = "<group>"; };
+		6CB3997E1EDE2B7700149C5D /* MerchantPharmacy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MerchantPharmacy.xib; sourceTree = "<group>"; };
+		6CB399811EDE2BA700149C5D /* MerchantHome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantHome.h; sourceTree = "<group>"; };
+		6CB399821EDE2BA700149C5D /* MerchantHome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantHome.m; sourceTree = "<group>"; };
+		6CB399831EDE2BA700149C5D /* MerchantHome.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MerchantHome.xib; sourceTree = "<group>"; };
+		6CB399891EE0B4BB00149C5D /* CustomTableViewCell1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell1.h; sourceTree = "<group>"; };
+		6CB3998A1EE0B4BB00149C5D /* CustomTableViewCell1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell1.m; sourceTree = "<group>"; };
+		6CB3998B1EE0B4BB00149C5D /* CustomTableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell1.xib; sourceTree = "<group>"; };
+		6CB3998E1EE0B4D000149C5D /* CustomTableViewCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell2.h; sourceTree = "<group>"; };
+		6CB3998F1EE0B4D000149C5D /* CustomTableViewCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell2.m; sourceTree = "<group>"; };
+		6CB399901EE0B4D000149C5D /* CustomTableViewCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell2.xib; sourceTree = "<group>"; };
+		6CBF93AF1EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableFinancialAccountsTableViewCell.h; sourceTree = "<group>"; };
+		6CBF93B01EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableFinancialAccountsTableViewCell.m; sourceTree = "<group>"; };
+		6CBF93B11EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableFinancialAccountsTableViewCell.xib; sourceTree = "<group>"; };
+		6CBF93B51EEDFE950036EBA3 /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
+		6CBF93B61EEDFE950036EBA3 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
+		6CBF93B71EEDFE950036EBA3 /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
+		6CBF93B81EEDFE950036EBA3 /* MFSideMenuShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuShadow.h; sourceTree = "<group>"; };
+		6CBF93B91EEDFE950036EBA3 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
+		6CBF93BA1EEDFE950036EBA3 /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
+		6CBF93BB1EEDFE950036EBA3 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		6CBF93BF1EEDFED00036EBA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6CBF93C11EEDFEDB0036EBA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6CBF93C31EEDFEE50036EBA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6CBF93C51EEE068B0036EBA3 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
+		6CBF93C61EEE068B0036EBA3 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
+		6CBF93C91EF097A10036EBA3 /* PlaidHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaidHTTPClient.h; path = PlaidHelper/PlaidHTTPClient.h; sourceTree = "<group>"; };
+		6CBF93CA1EF097A10036EBA3 /* PlaidHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaidHTTPClient.m; path = PlaidHelper/PlaidHTTPClient.m; sourceTree = "<group>"; };
+		6CBF93D11EF2B2C70036EBA3 /* BarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarChartView.h; path = "BarChart Library/BarChartView.h"; sourceTree = "<group>"; };
+		6CBF93D21EF2B2C70036EBA3 /* BarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarChartView.m; path = "BarChart Library/BarChartView.m"; sourceTree = "<group>"; };
+		6CBF93D31EF2B2C70036EBA3 /* BarLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarLabel.h; path = "BarChart Library/BarLabel.h"; sourceTree = "<group>"; };
+		6CBF93D41EF2B2C70036EBA3 /* BarLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarLabel.m; path = "BarChart Library/BarLabel.m"; sourceTree = "<group>"; };
+		6CBF93D51EF2B2C70036EBA3 /* BarTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarTypes.h; path = "BarChart Library/BarTypes.h"; sourceTree = "<group>"; };
+		6CBF93D61EF2B2C70036EBA3 /* BarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarView.h; path = "BarChart Library/BarView.h"; sourceTree = "<group>"; };
+		6CBF93D71EF2B2C70036EBA3 /* BarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarView.m; path = "BarChart Library/BarView.m"; sourceTree = "<group>"; };
+		6CBF93DA1EF2B2C70036EBA3 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
+		6CBF93DB1EF2B2C70036EBA3 /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
+		6CBF93DD1EF2B2C70036EBA3 /* UIColor+i7HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+i7HexColor.h"; sourceTree = "<group>"; };
+		6CBF93DE1EF2B2C70036EBA3 /* UIColor+i7HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+i7HexColor.m"; sourceTree = "<group>"; };
+		6CBF93DF1EF2B2C70036EBA3 /* UIViewSizeShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewSizeShortcuts.h; sourceTree = "<group>"; };
+		6CBF93E01EF2B2C70036EBA3 /* UIViewSizeShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewSizeShortcuts.m; sourceTree = "<group>"; };
+		6CBF93E21EF2B2C70036EBA3 /* XMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLElement.h; sourceTree = "<group>"; };
+		6CBF93E31EF2B2C70036EBA3 /* XMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLElement.m; sourceTree = "<group>"; };
+		6CBF93E41EF2B2C70036EBA3 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
+		6CBF93E51EF2B2C70036EBA3 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
+		6CBF93E61EF2B2C80036EBA3 /* XMLParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserDelegate.h; sourceTree = "<group>"; };
+		6CBF93E71EF2B2C80036EBA3 /* XMLParserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserDelegate.m; sourceTree = "<group>"; };
+		6CBF93E81EF2B2C80036EBA3 /* PlotChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlotChartView.h; path = "BarChart Library/PlotChartView.h"; sourceTree = "<group>"; };
+		6CBF93E91EF2B2C80036EBA3 /* PlotChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlotChartView.m; path = "BarChart Library/PlotChartView.m"; sourceTree = "<group>"; };
+		6CD3550A1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantAccountRateReviewsViewController.h; sourceTree = "<group>"; };
+		6CD3550B1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantAccountRateReviewsViewController.m; sourceTree = "<group>"; };
+		6CD3550E1EE5DDB400D1508F /* HCSStarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSStarRatingView.h; sourceTree = "<group>"; };
+		6CD3550F1EE5DDB400D1508F /* HCSStarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSStarRatingView.m; sourceTree = "<group>"; };
+		6CD355191EE83AB100D1508F /* PlaidAPIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaidAPIViewController.h; sourceTree = "<group>"; };
+		6CD3551A1EE83AB100D1508F /* PlaidAPIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaidAPIViewController.m; sourceTree = "<group>"; };
+		6CD355211EE8F91700D1508F /* LinkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LinkKit.framework; sourceTree = "<group>"; };
+		6CD9B0351ED3874B003ADF99 /* Zeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CD9B0391ED3874B003ADF99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6CD9B03B1ED3874B003ADF99 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6CD9B03C1ED3874B003ADF99 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6CD9B03E1ED3874B003ADF99 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		6CD9B03F1ED3874B003ADF99 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		6CD9B0421ED3874B003ADF99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6CD9B0441ED3874B003ADF99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6CD9B0471ED3874B003ADF99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6CD9B0491ED3874B003ADF99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CD9B0521ED39178003ADF99 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		6CD9B0531ED39178003ADF99 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		7F3CCF38D5C1C19A98F1DAAE /* Pods_Zeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6FBBEFEB75EBB5008300B41 /* Pods-Zeal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeal/Pods-Zeal.debug.xcconfig"; sourceTree = "<group>"; };
+		DD273674B4856BFCF9D6E0AB /* Pods-Zeal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zeal/Pods-Zeal.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6CD9B0321ED3874B003ADF99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CBF93C41EEDFEE50036EBA3 /* CoreGraphics.framework in Frameworks */,
+				6CBF93C21EEDFEDB0036EBA3 /* Foundation.framework in Frameworks */,
+				6CBF93C01EEDFED00036EBA3 /* UIKit.framework in Frameworks */,
+				6CD355241EE8FA7500D1508F /* LinkKit.framework in Frameworks */,
+				6C91FBAA1EDBB301000243DA /* QuartzCore.framework in Frameworks */,
+				F7364C240F2CDE19B79C865E /* Pods_Zeal.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3207C34D48574342407EE62A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6CBF93C31EEDFEE50036EBA3 /* CoreGraphics.framework */,
+				6CBF93C11EEDFEDB0036EBA3 /* Foundation.framework */,
+				6CBF93BF1EEDFED00036EBA3 /* UIKit.framework */,
+				6CD355211EE8F91700D1508F /* LinkKit.framework */,
+				6C91FBA91EDBB301000243DA /* QuartzCore.framework */,
+				7F3CCF38D5C1C19A98F1DAAE /* Pods_Zeal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		612B64D5229A455C28672B05 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A6FBBEFEB75EBB5008300B41 /* Pods-Zeal.debug.xcconfig */,
+				DD273674B4856BFCF9D6E0AB /* Pods-Zeal.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6CB399691EDD089B00149C5D /* CustomClasses */ = {
+			isa = PBXGroup;
+			children = (
+				6CB3996A1EDD0C8700149C5D /* ToastHelper.h */,
+				6CB3996B1EDD0C8700149C5D /* ToastHelper.m */,
+				6CB3996D1EDD0D5800149C5D /* UIViewController+Alerts.h */,
+				6CB3996E1EDD0D5800149C5D /* UIViewController+Alerts.m */,
+			);
+			name = CustomClasses;
+			sourceTree = "<group>";
+		};
+		6CB399931EE0D51D00149C5D /* MerchantSubViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6CB399811EDE2BA700149C5D /* MerchantHome.h */,
+				6CB399821EDE2BA700149C5D /* MerchantHome.m */,
+				6CB399831EDE2BA700149C5D /* MerchantHome.xib */,
+				6CB399891EE0B4BB00149C5D /* CustomTableViewCell1.h */,
+				6CB3998A1EE0B4BB00149C5D /* CustomTableViewCell1.m */,
+				6CB3998B1EE0B4BB00149C5D /* CustomTableViewCell1.xib */,
+				6CB3997C1EDE2B7700149C5D /* MerchantPharmacy.h */,
+				6CB3997D1EDE2B7700149C5D /* MerchantPharmacy.m */,
+				6CB3997E1EDE2B7700149C5D /* MerchantPharmacy.xib */,
+				6CB3998E1EE0B4D000149C5D /* CustomTableViewCell2.h */,
+				6CB3998F1EE0B4D000149C5D /* CustomTableViewCell2.m */,
+				6CB399901EE0B4D000149C5D /* CustomTableViewCell2.xib */,
+				6CD3550A1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.h */,
+				6CD3550B1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m */,
+				6CD3550E1EE5DDB400D1508F /* HCSStarRatingView.h */,
+				6CD3550F1EE5DDB400D1508F /* HCSStarRatingView.m */,
+			);
+			name = MerchantSubViewControllers;
+			sourceTree = "<group>";
+		};
+		6CBF93B41EEDFE7B0036EBA3 /* MFSideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				6CBF93B51EEDFE950036EBA3 /* MFSideMenu.h */,
+				6CBF93B61EEDFE950036EBA3 /* MFSideMenuContainerViewController.h */,
+				6CBF93B71EEDFE950036EBA3 /* MFSideMenuContainerViewController.m */,
+				6CBF93B81EEDFE950036EBA3 /* MFSideMenuShadow.h */,
+				6CBF93B91EEDFE950036EBA3 /* MFSideMenuShadow.m */,
+				6CBF93BA1EEDFE950036EBA3 /* UIViewController+MFSideMenuAdditions.h */,
+				6CBF93BB1EEDFE950036EBA3 /* UIViewController+MFSideMenuAdditions.m */,
+			);
+			name = MFSideMenu;
+			sourceTree = "<group>";
+		};
+		6CBF93C81EF097550036EBA3 /* PlaidHelper */ = {
+			isa = PBXGroup;
+			children = (
+				6CBF93C91EF097A10036EBA3 /* PlaidHTTPClient.h */,
+				6CBF93CA1EF097A10036EBA3 /* PlaidHTTPClient.m */,
+			);
+			name = PlaidHelper;
+			sourceTree = "<group>";
+		};
+		6CBF93D01EF2B2B80036EBA3 /* BarChart Library */ = {
+			isa = PBXGroup;
+			children = (
+				6CBF93D11EF2B2C70036EBA3 /* BarChartView.h */,
+				6CBF93D21EF2B2C70036EBA3 /* BarChartView.m */,
+				6CBF93D31EF2B2C70036EBA3 /* BarLabel.h */,
+				6CBF93D41EF2B2C70036EBA3 /* BarLabel.m */,
+				6CBF93D51EF2B2C70036EBA3 /* BarTypes.h */,
+				6CBF93D61EF2B2C70036EBA3 /* BarView.h */,
+				6CBF93D71EF2B2C70036EBA3 /* BarView.m */,
+				6CBF93D81EF2B2C70036EBA3 /* External */,
+				6CBF93E81EF2B2C80036EBA3 /* PlotChartView.h */,
+				6CBF93E91EF2B2C80036EBA3 /* PlotChartView.m */,
+			);
+			name = "BarChart Library";
+			sourceTree = "<group>";
+		};
+		6CBF93D81EF2B2C70036EBA3 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				6CBF93D91EF2B2C70036EBA3 /* CMPopTipView */,
+				6CBF93DC1EF2B2C70036EBA3 /* Helpers */,
+				6CBF93E11EF2B2C70036EBA3 /* XMLParser */,
+			);
+			name = External;
+			path = "BarChart Library/External";
+			sourceTree = "<group>";
+		};
+		6CBF93D91EF2B2C70036EBA3 /* CMPopTipView */ = {
+			isa = PBXGroup;
+			children = (
+				6CBF93DA1EF2B2C70036EBA3 /* CMPopTipView.h */,
+				6CBF93DB1EF2B2C70036EBA3 /* CMPopTipView.m */,
+			);
+			path = CMPopTipView;
+			sourceTree = "<group>";
+		};
+		6CBF93DC1EF2B2C70036EBA3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6CBF93DD1EF2B2C70036EBA3 /* UIColor+i7HexColor.h */,
+				6CBF93DE1EF2B2C70036EBA3 /* UIColor+i7HexColor.m */,
+				6CBF93DF1EF2B2C70036EBA3 /* UIViewSizeShortcuts.h */,
+				6CBF93E01EF2B2C70036EBA3 /* UIViewSizeShortcuts.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6CBF93E11EF2B2C70036EBA3 /* XMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				6CBF93E21EF2B2C70036EBA3 /* XMLElement.h */,
+				6CBF93E31EF2B2C70036EBA3 /* XMLElement.m */,
+				6CBF93E41EF2B2C70036EBA3 /* XMLParser.h */,
+				6CBF93E51EF2B2C70036EBA3 /* XMLParser.m */,
+				6CBF93E61EF2B2C80036EBA3 /* XMLParserDelegate.h */,
+				6CBF93E71EF2B2C80036EBA3 /* XMLParserDelegate.m */,
+			);
+			path = XMLParser;
+			sourceTree = "<group>";
+		};
+		6CD9B02C1ED3874B003ADF99 = {
+			isa = PBXGroup;
+			children = (
+				6CD9B0371ED3874B003ADF99 /* Zeal */,
+				6CD9B0361ED3874B003ADF99 /* Products */,
+				612B64D5229A455C28672B05 /* Pods */,
+				3207C34D48574342407EE62A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6CD9B0361ED3874B003ADF99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CD9B0351ED3874B003ADF99 /* Zeal.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6CD9B0371ED3874B003ADF99 /* Zeal */ = {
+			isa = PBXGroup;
+			children = (
+				6CBF93D01EF2B2B80036EBA3 /* BarChart Library */,
+				6CBF93B41EEDFE7B0036EBA3 /* MFSideMenu */,
+				6CB399691EDD089B00149C5D /* CustomClasses */,
+				6CBF93C81EF097550036EBA3 /* PlaidHelper */,
+				6CD9B03B1ED3874B003ADF99 /* AppDelegate.h */,
+				6CD9B03C1ED3874B003ADF99 /* AppDelegate.m */,
+				6CD9B03E1ED3874B003ADF99 /* HomeViewController.h */,
+				6CD9B03F1ED3874B003ADF99 /* HomeViewController.m */,
+				6CD9B0521ED39178003ADF99 /* LoginViewController.h */,
+				6CD9B0531ED39178003ADF99 /* LoginViewController.m */,
+				6C91FBA61EDB8245000243DA /* MainViewController.h */,
+				6C91FBA71EDB8245000243DA /* MainViewController.m */,
+				6CBF93C51EEE068B0036EBA3 /* SideMenuViewController.h */,
+				6CBF93C61EEE068B0036EBA3 /* SideMenuViewController.m */,
+				6CB399931EE0D51D00149C5D /* MerchantSubViewControllers */,
+				6CD355191EE83AB100D1508F /* PlaidAPIViewController.h */,
+				6CD3551A1EE83AB100D1508F /* PlaidAPIViewController.m */,
+				6CBF93AF1EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.h */,
+				6CBF93B01EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m */,
+				6CBF93B11EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib */,
+				6CD9B0441ED3874B003ADF99 /* Assets.xcassets */,
+				6CD9B0491ED3874B003ADF99 /* Info.plist */,
+				6CD9B0381ED3874B003ADF99 /* Supporting Files */,
+			);
+			path = Zeal;
+			sourceTree = "<group>";
+		};
+		6CD9B0381ED3874B003ADF99 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CD9B0411ED3874B003ADF99 /* Main.storyboard */,
+				6CD9B0461ED3874B003ADF99 /* LaunchScreen.storyboard */,
+				6C91FBAB1EDC78E9000243DA /* GoogleService-Info.plist */,
+				6CB399721EDD1EEE00149C5D /* about_text.html */,
+				6C4F85341EF8B46D00D192F1 /* Roboto-Italic.ttf */,
+				6C4F85351EF8B46D00D192F1 /* Roboto-Regular.ttf */,
+				6C4F85361EF8B51D00D192F1 /* Roboto-Medium.ttf */,
+				6CD9B0391ED3874B003ADF99 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6CD9B0341ED3874B003ADF99 /* Zeal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CD9B04C1ED3874B003ADF99 /* Build configuration list for PBXNativeTarget "Zeal" */;
+			buildPhases = (
+				FA30D3292B74FA35A2F1F3E5 /* [CP] Check Pods Manifest.lock */,
+				6CD9B0311ED3874B003ADF99 /* Sources */,
+				6CD9B0321ED3874B003ADF99 /* Frameworks */,
+				6CD9B0331ED3874B003ADF99 /* Resources */,
+				8FD13BA422223948AFEA7C98 /* [CP] Embed Pods Frameworks */,
+				B18C13A84D3DD78EC9468D75 /* [CP] Copy Pods Resources */,
+				6CD355151EE5E2AB00D1508F /* Embed Frameworks */,
+				6CBF93AE1EEA277E0036EBA3 /* Prepare for Distribution */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Zeal;
+			productName = Zeal;
+			productReference = 6CD9B0351ED3874B003ADF99 /* Zeal.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6CD9B02D1ED3874B003ADF99 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = ZealOfCnorth2;
+				TargetAttributes = {
+					6CD9B0341ED3874B003ADF99 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = U3DJW66E3Y;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 6CD9B0301ED3874B003ADF99 /* Build configuration list for PBXProject "Zeal" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6CD9B02C1ED3874B003ADF99;
+			productRefGroup = 6CD9B0361ED3874B003ADF99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6CD9B0341ED3874B003ADF99 /* Zeal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6CD9B0331ED3874B003ADF99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CB3998D1EE0B4BB00149C5D /* CustomTableViewCell1.xib in Resources */,
+				6CB399851EDE2BA700149C5D /* MerchantHome.xib in Resources */,
+				6CB399731EDD1EEE00149C5D /* about_text.html in Resources */,
+				6CB399921EE0B4D000149C5D /* CustomTableViewCell2.xib in Resources */,
+				6CD9B0481ED3874B003ADF99 /* LaunchScreen.storyboard in Resources */,
+				6CB399801EDE2B7700149C5D /* MerchantPharmacy.xib in Resources */,
+				6C91FBAC1EDC78EA000243DA /* GoogleService-Info.plist in Resources */,
+				6CD9B0451ED3874B003ADF99 /* Assets.xcassets in Resources */,
+				6CD9B0431ED3874B003ADF99 /* Main.storyboard in Resources */,
+				6CBF93B31EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6CBF93AE1EEA277E0036EBA3 /* Prepare for Distribution */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare for Distribution";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp \"${PROJECT_DIR}\"/LinkKit.framework/prepare_for_distribution.sh \"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n\"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n";
+			showEnvVarsInLog = 0;
+		};
+		8FD13BA422223948AFEA7C98 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Zeal/Pods-Zeal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B18C13A84D3DD78EC9468D75 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Zeal/Pods-Zeal-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA30D3292B74FA35A2F1F3E5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6CD9B0311ED3874B003ADF99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CBF93F11EF2B2C80036EBA3 /* XMLParser.m in Sources */,
+				6CBF93ED1EF2B2C80036EBA3 /* CMPopTipView.m in Sources */,
+				6CBF93EA1EF2B2C80036EBA3 /* BarChartView.m in Sources */,
+				6CD3551C1EE83AB100D1508F /* PlaidAPIViewController.m in Sources */,
+				6CBF93F31EF2B2C80036EBA3 /* PlotChartView.m in Sources */,
+				6CBF93C71EEE068B0036EBA3 /* SideMenuViewController.m in Sources */,
+				6CD9B0401ED3874B003ADF99 /* HomeViewController.m in Sources */,
+				6CBF93BD1EEDFE950036EBA3 /* MFSideMenuShadow.m in Sources */,
+				6CBF93BE1EEDFE950036EBA3 /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				6CBF93EB1EF2B2C80036EBA3 /* BarLabel.m in Sources */,
+				6CB3996F1EDD0D5800149C5D /* UIViewController+Alerts.m in Sources */,
+				6CBF93EF1EF2B2C80036EBA3 /* UIViewSizeShortcuts.m in Sources */,
+				6CB3998C1EE0B4BB00149C5D /* CustomTableViewCell1.m in Sources */,
+				6CB3996C1EDD0C8700149C5D /* ToastHelper.m in Sources */,
+				6CBF93BC1EEDFE950036EBA3 /* MFSideMenuContainerViewController.m in Sources */,
+				6CBF93CB1EF097A10036EBA3 /* PlaidHTTPClient.m in Sources */,
+				6CBF93EE1EF2B2C80036EBA3 /* UIColor+i7HexColor.m in Sources */,
+				6CD3550C1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m in Sources */,
+				6CD9B03D1ED3874B003ADF99 /* AppDelegate.m in Sources */,
+				6CB399841EDE2BA700149C5D /* MerchantHome.m in Sources */,
+				6CB3997F1EDE2B7700149C5D /* MerchantPharmacy.m in Sources */,
+				6CB399911EE0B4D000149C5D /* CustomTableViewCell2.m in Sources */,
+				6CD9B03A1ED3874B003ADF99 /* main.m in Sources */,
+				6C91FBA81EDB8245000243DA /* MainViewController.m in Sources */,
+				6CD9B0541ED39178003ADF99 /* LoginViewController.m in Sources */,
+				6CBF93B21EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m in Sources */,
+				6CBF93EC1EF2B2C80036EBA3 /* BarView.m in Sources */,
+				6CD355101EE5DDB400D1508F /* HCSStarRatingView.m in Sources */,
+				6CBF93F21EF2B2C80036EBA3 /* XMLParserDelegate.m in Sources */,
+				6CBF93F01EF2B2C80036EBA3 /* XMLElement.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6CD9B0411ED3874B003ADF99 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CD9B0421ED3874B003ADF99 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6CD9B0461ED3874B003ADF99 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CD9B0471ED3874B003ADF99 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6CD9B04A1ED3874B003ADF99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6CD9B04B1ED3874B003ADF99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6CD9B04D1ED3874B003ADF99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6FBBEFEB75EBB5008300B41 /* Pods-Zeal.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = U3DJW66E3Y;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Zeal/FrameWork",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Zeal",
+				);
+				INFOPLIST_FILE = Zeal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LINK_ENV = Sandbox;
+				LINK_KEY = 667778757a11bac2a6ee9b156c914a;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Bolts/Bolts.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FBSDKCoreKit/FBSDKCoreKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FBSDKLoginKit/FBSDKLoginKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMSessionFetcher/GTMSessionFetcher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/HCSStarRatingView/HCSStarRatingView.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MBProgressHUD/MBProgressHUD.framework/Headers\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"-DUSE_CUSTOM_CONFIG",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = developer.cnorth2.Zeal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "79236fb8-1851-4053-9cc6-fc661e810702";
+				PROVISIONING_PROFILE_SPECIFIER = zealappprovisioning2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		6CD9B04E1ED3874B003ADF99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD273674B4856BFCF9D6E0AB /* Pods-Zeal.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = U3DJW66E3Y;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Zeal/FrameWork",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Zeal",
+				);
+				INFOPLIST_FILE = Zeal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LINK_ENV = Production;
+				LINK_KEY = 667778757a11bac2a6ee9b156c914a;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Bolts/Bolts.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FBSDKCoreKit/FBSDKCoreKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FBSDKLoginKit/FBSDKLoginKit.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMSessionFetcher/GTMSessionFetcher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/HCSStarRatingView/HCSStarRatingView.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MBProgressHUD/MBProgressHUD.framework/Headers\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"-DUSE_CUSTOM_CONFIG",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = developer.cnorth2.Zeal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "79236fb8-1851-4053-9cc6-fc661e810702";
+				PROVISIONING_PROFILE_SPECIFIER = zealappprovisioning2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6CD9B0301ED3874B003ADF99 /* Build configuration list for PBXProject "Zeal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CD9B04A1ED3874B003ADF99 /* Debug */,
+				6CD9B04B1ED3874B003ADF99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CD9B04C1ED3874B003ADF99 /* Build configuration list for PBXNativeTarget "Zeal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CD9B04D1ED3874B003ADF99 /* Debug */,
+				6CD9B04E1ED3874B003ADF99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6CD9B02D1ED3874B003ADF99 /* Project object */;
+}
