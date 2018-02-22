@@ -10,7 +10,7 @@
 #define AppConstant_h
 
 //
-#define TEST_MODE    0
+#define TEST_MODE    1
 #define UID @"pSc6HtBiftTDEMO9pZS703t5Ilf2"
 #define KEY(str)    [CommonUtils getString:str]
 //#define TEST_ACCESS_TOKEN @"access-development-a26e7388-b04f-43a9-aceb-842882d2f4a7" // BANK OF AMERICA
@@ -24,15 +24,24 @@
 #define PRODUCTION @"transactions" // auth, transactions, balance, identity, income
 #define TRANS_DELAY 12.0
 #define ACCESSTOKEN_SQUAREUP @"sq0atp-wXX9R-mHWTTSQtcLhwKQbw"
-#define kAccount @"accounts"
-#define kmonthly @"monthly_transaction"
+
 
 // coffeelist db
 #define kcoffeelist @"coffee_list"
+
 #define kcategoryName @"title_name"
 #define klocationID @"location_id"
 #define kImageName  @"img_name"
 #define kOrderLists @"orderlists"
+
+// financial db
+#define kFINANCIAL_DB @"financial_db"
+
+#define kAccessToken @"access_token"
+#define kAccount @"accounts"
+#define kmonthly @"monthly_transaction"
+#define kInstitutionName @"institution_name"
+#define kInstitutionID @"institution_id"
 
 /*
  username: user_good

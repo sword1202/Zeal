@@ -29,6 +29,7 @@
     NSString *sel_institution_id;
     NSString *lastMonthStartDate,* lastMonthEndDate,
             *currentYear, *currentMonth, *currentStartDate, *currentEndDate;
+    BOOL isUpdate;
 }
 @end
 
@@ -45,7 +46,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self calcDate];
     _webview.hidden = YES;
 
     [table_view registerNib: [UINib nibWithNibName: @"CustomTableFinancialAccountsTableViewCell" bundle:nil] forCellReuseIdentifier: @"cell_financial"];
@@ -54,13 +54,14 @@
 
     tableViewOfTransactions.hidden = YES;
 
-    [self retreiveDataFromDB];
-    [self createBaseLineOfButton];
-
     // initialize PlaidClientHttp to retrieve transactions
     httpClientPlaid = [PlaidHTTPClient sharedPlaidHTTPClient];
     
     [self getListsOfInstitutions];
+    isUpdate = NO;
+    [self retreiveDataFromDB];
+    [self createBaseLineOfButton];
+    
 }
 
 - (void) getListsOfInstitutions
@@ -115,7 +116,7 @@
 {
     arr_savedFinancialAccounts = [[NSMutableArray alloc] init];
     NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
-    dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"financial_db"];
+    dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: kFINANCIAL_DB];
     if (dbRef != nil) {
         
         [dbRef observeEventType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
@@ -124,6 +125,22 @@
                 for (snapshot in snapshot.children) {
                     [arr_savedFinancialAccounts addObject:[snapshot value]];
                 }
+                for (int i=0; i<arr_savedFinancialAccounts.count; i++) {
+                    NSDictionary *eachBank = [arr_savedFinancialAccounts objectAtIndex: i];
+                    
+                    // download transaction every month first day automatically
+                    
+                    saveDic = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [eachBank objectForKey: kAccessToken], kAccessToken,
+                               [eachBank objectForKey: kInstitutionName], kInstitutionName,
+                               [eachBank objectForKey: kInstitutionID], kInstitutionID, nil];
+                    
+                    [self calcDate];
+                    
+                    // store db
+                    [self downloadTransactionsAndStoreOnFirebase: saveDic startDate: lastMonthStartDate endDate: currentEndDate isCurrentMonth: 1];
+                }
+ 
                 tableViewContainer.hidden = NO;
                 [table_view reloadData];
             } else
@@ -151,6 +168,7 @@
     } else
     {
         [self initWebViewForPlaid];
+        isUpdate = NO;
     }
     
 }
@@ -266,7 +284,7 @@
 //                                    }];
     // ************** //
     
-//    [tableView deselectRowAtIndexPath: indexPath animated:YES];
+    [tableView deselectRowAtIndexPath: indexPath animated:YES];
 //
 //    if (tableView.tag == 100) {
 //        NSDictionary *sel_dic = [arr_savedFinancialAccounts objectAtIndex: indexPath.row];
@@ -420,19 +438,19 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
         hud.hidden = YES;
         if (responseCode == 200) {
             NSLog(@"%@", responseObj);
-            NSString *access_token = [responseObj objectForKey: @"access_token"];
+            NSString *access_token = [responseObj objectForKey: kAccessToken];
 //            NSString *requestID = [responseObj objectForKey: @"request_id"];
 //            NSString *item_id = [responseObj objectForKey: @"item_id"];
             
             // store access_token with institution_name
             saveDic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     access_token, @"access_token",
-                                     institution_name, @"institution_name",
-                                     institution_id, @"institution_id", nil];
+                                     access_token, kAccessToken,
+                                     institution_name, kInstitutionName,
+                                     institution_id, kInstitutionID, nil];
             
             [self showProgressBar: @"Storing access token..."];
             
-            [[dbRef child: [saveDic objectForKey: @"institution_name"]]
+            [[dbRef child: [saveDic objectForKey: kInstitutionName]]
              setValue: saveDic withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
                  
                  hud.hidden = YES;
@@ -497,7 +515,13 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 - (void) downloadTransactionsAndStoreOnFirebase: (NSDictionary *) metadata startDate: (NSString *) mStartDate endDate: (NSString *) mEndDate isCurrentMonth: (int) isNowMonth
 {
 
-    NSString *accessToken = [metadata objectForKey: @"access_token"];
+    if (isUpdate) {
+        isUpdate = NO;
+        return;
+    }
+    
+    isUpdate = YES;
+    NSString *accessToken = [metadata objectForKey: kAccessToken];
     
 //    NSString *accessToken = @"access-development-a26e7388-b04f-43a9-aceb-842882d2f4a7";
 //    NSString *startDate = [self getDateTime: pastDate];
@@ -532,8 +556,6 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                                                           oldMonthKey = monthKey;
                                                       } else if (![oldMonthKey isEqualToString: monthKey])
                                                       {
-//                                                          [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"transactions"]
-//                                                           setValue:currentMonthTransactions];
                                                           oldMonthKey = monthKey;
                                                           [oldMonthlyTransaction removeAllObjects];
                                                       } else if (i == transactions.count - 1)
@@ -543,21 +565,9 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                                                       
                                                       [oldMonthlyTransaction addObject: dic];
                                                       monthlyTransactions[oldMonthKey] = [oldMonthlyTransaction copy];
-                                                      
-//                                                      [monthlyTransactions setObject: oldMonthlyTransaction forKey: oldMonthKey];
-//                                                      if ([currentMonth isEqualToString: indexMonth]) {
-//                                                          [currentMonthTransactions addObject: dic];
-//                                                      } else if ([lastMonth isEqualToString: indexMonth])
-//                                                      {
-//                                                          [lastMonthTransactions addObject: dic];
-//                                                      }
                                                   }
                                                   
                                                   [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: kmonthly] setValue: monthlyTransactions];
-                                                  
-                                                  
-//                                                  [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"last_month_transactions"]
-//                                                   setValue:lastMonthTransactions];
                                                   
                                                   [self downloadAccountDetails: metadata];
                                               }
@@ -589,7 +599,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 - (void) downloadAccountDetails: (NSDictionary *) metadata {
     
-    NSString *accessToken = [metadata objectForKey: @"access_token"];
+    NSString *accessToken = [metadata objectForKey: kAccessToken];
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, TRANS_DELAY * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [httpClientPlaid downloadAccountDetailsForAccessToken: accessToken
@@ -597,7 +607,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                                             if (responseCode == 200) {
                                                 if (accountDetails != nil) {
                                                     
-                                                    [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: kAccount]
+                                                    [[[dbRef child: [metadata objectForKey: kInstitutionName]] child: kAccount]
                                                      setValue:accountDetails];
                                                 }
                                             }

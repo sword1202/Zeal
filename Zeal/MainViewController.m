@@ -104,7 +104,7 @@
         return;
     } else
     {
-        _chartView = [[TWRChartView alloc] initWithFrame:CGRectMake(0, 0, _chartContainerView.frame.size.width, _chartContainerView.frame.size.height)];
+        _chartView = [[TWRChartView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, _chartContainerView.frame.size.height)];
         _chartView.backgroundColor = [UIColor clearColor];
         [_chartContainerView addSubview: _chartView];
         httpClientSquareup = [SquareHttpClient sharedSquareHttpClient];
@@ -437,7 +437,7 @@
     NSString *userID;
     userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
     
-    dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"financial_db"];
+    dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: kFINANCIAL_DB];
     if (dbRef != nil) {
         [self showProgressBar: @"Retrieving Transactions..."];
         [dbRef observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
