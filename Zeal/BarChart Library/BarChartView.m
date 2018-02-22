@@ -85,7 +85,7 @@
 - (void)codeSetUp {
 	self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 	self.clipsToBounds = false;
-	self.backgroundColor = [UIColor colorWithHexString:@"e8ebee"];
+	self.backgroundColor = [UIColor colorWithHexString:@"FF0000"];
 	
 	plotChart = [[PlotChartView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.width, self.height - fontSize)];
 	plotChart.stepValueAxisY = STEP_AXIS_Y;

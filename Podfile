@@ -6,11 +6,8 @@ target 'Zeal' do
      pod 'Firebase/Core'
      pod 'Firebase/Auth'
      pod 'Firebase/Database'
-     
-     # Pods for Facebook
-     pod 'Bolts'
-     pod 'FBSDKCoreKit'
-     pod 'FBSDKLoginKit'
+     pod 'GoogleSignIn'
+
      pod 'MBProgressHUD'
      pod 'HCSStarRatingView'
      pod 'AFNetworking'

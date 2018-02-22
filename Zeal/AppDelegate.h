@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BEMLine.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -15,17 +16,22 @@
 @property (nonatomic, assign) BOOL onceInitFlag;
 @property (nonatomic, assign) int indexOfSelectedImageOfMerchantAccount;
 @property (nonatomic, strong) NSArray *menuItems;
-@property (nonatomic, strong) NSArray *arr_pharmacy_merchantAccounts;
-@property (nonatomic, strong) NSArray *arr_home_merchantAccounts;
+@property (nonatomic, strong) NSArray *arr_shops_merchantAccounts;
+@property (nonatomic, strong) NSArray *arr_eating_merchantAccounts;
+@property (nonatomic, strong) NSArray *arr_coffee_merchantAccounts;
+@property (nonatomic, strong) NSArray *arr_travel_merchantAccounts;
 @property (nonatomic, assign) int indexOfSelectedMenu;
 @property (nonatomic, retain) NSString *mUserName;
 @property (nonatomic, retain) NSString *mUserID;
 @property (nonatomic, retain) NSString *mUserEmail;
 @property (nonatomic, retain) UIImage *mFBProfile;
-@property (nonatomic, assign) BOOL isSelectedPlusButtonForHome;
+@property (nonatomic, assign) int isSelectedPlusButtonForHome;
 // optional
 @property (nonatomic, assign) BOOL showChatFlag;
-@property (nonatomic, assign) long maxAmount;
+@property (nonatomic, strong) NSMutableArray *arrForLineGraphDataLastMonth;
+@property (nonatomic, strong) NSMutableArray *arrForLineGraphDataCurrentMonth;
+@property (nonatomic, assign) BOOL isMaxInLast;
+@property (nonatomic, assign) CGFloat maxAmount;
 - (void) addMFSideMenu;
 @end
 

@@ -18,5 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *logo_img;
 @property (weak, nonatomic) IBOutlet UIImageView *logo_img_ChartView;
 @property (weak, nonatomic) IBOutlet UILabel *seperator_line;
+@property (weak, nonatomic) IBOutlet UIButton *btn_add;
+@property (weak, nonatomic) IBOutlet UIImageView *img_tick;
 
 @end

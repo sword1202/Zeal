@@ -8,23 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "BarChartView.h"
-@import FBSDKLoginKit;
-@import FBSDKCoreKit;
+#import "BEMSimpleLineGraphView.h"
+//@import FBSDKLoginKit;
+//@import FBSDKCoreKit;
 
-@interface MainViewController : UIViewController <UINavigationControllerDelegate, UIWebViewDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface MainViewController : UIViewController <UINavigationControllerDelegate, UIWebViewDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 {
     
     __weak IBOutlet UILabel *titleLabel;
     __weak IBOutlet UIWebView *webViewAbout;
     
     // profile params
-    
     __weak IBOutlet UILabel *userid;
     __weak IBOutlet UILabel *userName;
     __weak IBOutlet UILabel *userEmail;
     
     
-    __weak IBOutlet BarChartView *barChartView;
     __weak IBOutlet UITableView *table_view;
     
     // MerchantAccounts page params
@@ -35,6 +34,13 @@
     
 }
 @property (weak, nonatomic) IBOutlet UIView *profileView;
+@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *myGraph;
+@property (strong, nonatomic) NSMutableArray *arrayOfValues;
+@property (strong, nonatomic) NSMutableArray *arrayOfDates;
+
+@property (strong, nonatomic) IBOutlet UILabel *labelValues;
+@property (strong, nonatomic) IBOutlet UILabel *labelDates;
+
 @property (weak, nonatomic) IBOutlet UIView *merchantAccountsView;
 @property (weak, nonatomic) IBOutlet UIView *financialAccountsView;
 @property (weak, nonatomic) IBOutlet UIView *aboutView;

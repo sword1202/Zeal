@@ -204,33 +204,27 @@
 
 
 
-- (void)downloadAccountDetailsForAccessToken: (NSString *)accessToken
-
-                                     account: (NSString *)accountID
-                                     success: (void(^)(NSURLSessionDataTask *task, NSDictionary *accountDetails))success
-                                     failure: (void(^)(NSURLSessionDataTask *task, NSError *error))failure
+- (void) downloadAccountDetailsForAccessToken: (NSString *)accessToken
+                      withCompletionHandler: (void(^)(NSInteger responseCode, NSArray *transactions))handler
 {
-//    NSDictionary *options             = @{
-//                                          @"account" : accountID
-//                                          };
-//    NSDictionary *downloadCredentials = @{
-//                                          @"client_id": CLIENT_ID,
-//                                          @"secret"   : SECRET_KEY,
-//                                          @"access_token" : accessToken,
-//                                          @"options"      : options
-//                                          };
-//    
-//    [self GET: @"/connect"
-//   parameters: downloadCredentials
-//      success: ^(NSURLSessionDataTask *task, id responseObject)
-//               {
-//                   NSDictionary *accountDictonary = (NSDictionary *)responseObject[@"accounts"][0];
-//                   success(task, accountDictonary);
-//               }
-//      failure: ^(NSURLSessionDataTask *task, NSError *error)
-//               {
-//                   failure(task, error);
-//               }];
+    
+    NSDictionary *requestParameters = @{
+                                        @"client_id"     : CLIENT_ID,
+                                        @"secret"        : SECRET_KEY,
+                                        @"access_token"  : accessToken
+                                        };
+    
+    [self POST:@"/accounts/get" parameters:requestParameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        NSArray *accountsArray = (NSArray *)responseObject[@"accounts"];
+        handler(response.statusCode, accountsArray);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        handler(response.statusCode, nil);
+    }];
 }
 
 

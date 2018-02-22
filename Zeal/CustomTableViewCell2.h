@@ -19,9 +19,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel_noReview;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel_noReview;
 @property (weak, nonatomic) IBOutlet UIButton *plus_button;
 - (IBAction)didSelectPlusButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *ratingView;
 @property (weak, nonatomic) IBOutlet HCSStarRatingView *vipHCStarRatingView;
+@property (weak, nonatomic) IBOutlet UILabel *historyLabel;
 @property (weak, nonatomic) IBOutlet HCSStarRatingView *productHCStarRatingView;
 @end

@@ -7,18 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C229CF21F3018A9008B4850 /* expandableImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C229CEA1F3018A9008B4850 /* expandableImage.png */; };
+		6C229CF31F3018A9008B4850 /* expandableImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C229CEB1F3018A9008B4850 /* expandableImage@2x.png */; };
+		6C229CF41F3018A9008B4850 /* SKSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C229CED1F3018A9008B4850 /* SKSTableView.m */; };
+		6C229CF51F3018A9008B4850 /* SKSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C229CEF1F3018A9008B4850 /* SKSTableViewCell.m */; };
+		6C229CF61F3018A9008B4850 /* SKSTableViewCellIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C229CF11F3018A9008B4850 /* SKSTableViewCellIndicator.m */; };
+		6C42CBE61EFF1A1000DBA198 /* BEMAverageLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42CBDD1EFF1A1000DBA198 /* BEMAverageLine.m */; };
+		6C42CBE71EFF1A1000DBA198 /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42CBDF1EFF1A1000DBA198 /* BEMCircle.m */; };
+		6C42CBE81EFF1A1000DBA198 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42CBE11EFF1A1000DBA198 /* BEMLine.m */; };
+		6C42CBE91EFF1A1000DBA198 /* BEMPermanentPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42CBE31EFF1A1000DBA198 /* BEMPermanentPopupView.m */; };
+		6C42CBEA1EFF1A1000DBA198 /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42CBE51EFF1A1000DBA198 /* BEMSimpleLineGraphView.m */; };
+		6C6B95561F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6B95541F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.m */; };
+		6C6B95571F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C6B95551F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.xib */; };
 		6C91FBA81EDB8245000243DA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91FBA71EDB8245000243DA /* MainViewController.m */; };
 		6C91FBAA1EDBB301000243DA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C91FBA91EDBB301000243DA /* QuartzCore.framework */; };
 		6C91FBAC1EDC78EA000243DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C91FBAB1EDC78E9000243DA /* GoogleService-Info.plist */; };
 		6CB3996C1EDD0C8700149C5D /* ToastHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3996B1EDD0C8700149C5D /* ToastHelper.m */; };
 		6CB3996F1EDD0D5800149C5D /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3996E1EDD0D5800149C5D /* UIViewController+Alerts.m */; };
 		6CB399731EDD1EEE00149C5D /* about_text.html in Resources */ = {isa = PBXBuildFile; fileRef = 6CB399721EDD1EEE00149C5D /* about_text.html */; };
-		6CB3997F1EDE2B7700149C5D /* MerchantPharmacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3997D1EDE2B7700149C5D /* MerchantPharmacy.m */; };
-		6CB399801EDE2B7700149C5D /* MerchantPharmacy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB3997E1EDE2B7700149C5D /* MerchantPharmacy.xib */; };
-		6CB399841EDE2BA700149C5D /* MerchantHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB399821EDE2BA700149C5D /* MerchantHome.m */; };
-		6CB399851EDE2BA700149C5D /* MerchantHome.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB399831EDE2BA700149C5D /* MerchantHome.xib */; };
-		6CB3998C1EE0B4BB00149C5D /* CustomTableViewCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3998A1EE0B4BB00149C5D /* CustomTableViewCell1.m */; };
-		6CB3998D1EE0B4BB00149C5D /* CustomTableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB3998B1EE0B4BB00149C5D /* CustomTableViewCell1.xib */; };
+		6CB3997F1EDE2B7700149C5D /* MerchantShops.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3997D1EDE2B7700149C5D /* MerchantShops.m */; };
+		6CB399801EDE2B7700149C5D /* MerchantShops.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB3997E1EDE2B7700149C5D /* MerchantShops.xib */; };
+		6CB399841EDE2BA700149C5D /* MerchantEating.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB399821EDE2BA700149C5D /* MerchantEating.m */; };
+		6CB399851EDE2BA700149C5D /* MerchantEating.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB399831EDE2BA700149C5D /* MerchantEating.xib */; };
 		6CB399911EE0B4D000149C5D /* CustomTableViewCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3998F1EE0B4D000149C5D /* CustomTableViewCell2.m */; };
 		6CB399921EE0B4D000149C5D /* CustomTableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB399901EE0B4D000149C5D /* CustomTableViewCell2.xib */; };
 		6CBF93B21EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93B01EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m */; };
@@ -41,6 +51,10 @@
 		6CBF93F11EF2B2C80036EBA3 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93E51EF2B2C70036EBA3 /* XMLParser.m */; };
 		6CBF93F21EF2B2C80036EBA3 /* XMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93E71EF2B2C80036EBA3 /* XMLParserDelegate.m */; };
 		6CBF93F31EF2B2C80036EBA3 /* PlotChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93E91EF2B2C80036EBA3 /* PlotChartView.m */; };
+		6CC818A71F0B3370009AC29E /* MerchantAccountCoffee.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC818A51F0B3370009AC29E /* MerchantAccountCoffee.m */; };
+		6CC818A81F0B3370009AC29E /* MerchantAccountCoffee.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CC818A61F0B3370009AC29E /* MerchantAccountCoffee.xib */; };
+		6CCB36DE1FC6F07000EEE438 /* MerchantTravelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB36DC1FC6F07000EEE438 /* MerchantTravelViewController.m */; };
+		6CCB36E11FC7000C00EEE438 /* MerchantTravelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CCB36E01FC6FC1100EEE438 /* MerchantTravelViewController.xib */; };
 		6CD3550C1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD3550B1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m */; };
 		6CD355101EE5DDB400D1508F /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD3550F1EE5DDB400D1508F /* HCSStarRatingView.m */; };
 		6CD3551C1EE83AB100D1508F /* PlaidAPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD3551A1EE83AB100D1508F /* PlaidAPIViewController.m */; };
@@ -71,9 +85,30 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6C229CEA1F3018A9008B4850 /* expandableImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expandableImage.png; sourceTree = "<group>"; };
+		6C229CEB1F3018A9008B4850 /* expandableImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expandableImage@2x.png"; sourceTree = "<group>"; };
+		6C229CEC1F3018A9008B4850 /* SKSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSTableView.h; sourceTree = "<group>"; };
+		6C229CED1F3018A9008B4850 /* SKSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSTableView.m; sourceTree = "<group>"; };
+		6C229CEE1F3018A9008B4850 /* SKSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSTableViewCell.h; sourceTree = "<group>"; };
+		6C229CEF1F3018A9008B4850 /* SKSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSTableViewCell.m; sourceTree = "<group>"; };
+		6C229CF01F3018A9008B4850 /* SKSTableViewCellIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSTableViewCellIndicator.h; sourceTree = "<group>"; };
+		6C229CF11F3018A9008B4850 /* SKSTableViewCellIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSTableViewCellIndicator.m; sourceTree = "<group>"; };
+		6C42CBDC1EFF1A1000DBA198 /* BEMAverageLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAverageLine.h; sourceTree = "<group>"; };
+		6C42CBDD1EFF1A1000DBA198 /* BEMAverageLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAverageLine.m; sourceTree = "<group>"; };
+		6C42CBDE1EFF1A1000DBA198 /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		6C42CBDF1EFF1A1000DBA198 /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		6C42CBE01EFF1A1000DBA198 /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		6C42CBE11EFF1A1000DBA198 /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		6C42CBE21EFF1A1000DBA198 /* BEMPermanentPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPermanentPopupView.h; sourceTree = "<group>"; };
+		6C42CBE31EFF1A1000DBA198 /* BEMPermanentPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPermanentPopupView.m; sourceTree = "<group>"; };
+		6C42CBE41EFF1A1000DBA198 /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		6C42CBE51EFF1A1000DBA198 /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 		6C4F85341EF8B46D00D192F1 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		6C4F85351EF8B46D00D192F1 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		6C4F85361EF8B51D00D192F1 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		6C6B95531F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellForCoffeeTableViewCell.h; sourceTree = "<group>"; };
+		6C6B95541F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellForCoffeeTableViewCell.m; sourceTree = "<group>"; };
+		6C6B95551F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellForCoffeeTableViewCell.xib; sourceTree = "<group>"; };
 		6C91FBA61EDB8245000243DA /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		6C91FBA71EDB8245000243DA /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		6C91FBA91EDBB301000243DA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -83,15 +118,12 @@
 		6CB3996D1EDD0D5800149C5D /* UIViewController+Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Alerts.h"; path = "CustomClasses/UIViewController+Alerts.h"; sourceTree = "<group>"; };
 		6CB3996E1EDD0D5800149C5D /* UIViewController+Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Alerts.m"; path = "CustomClasses/UIViewController+Alerts.m"; sourceTree = "<group>"; };
 		6CB399721EDD1EEE00149C5D /* about_text.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about_text.html; sourceTree = "<group>"; };
-		6CB3997C1EDE2B7700149C5D /* MerchantPharmacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantPharmacy.h; sourceTree = "<group>"; };
-		6CB3997D1EDE2B7700149C5D /* MerchantPharmacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantPharmacy.m; sourceTree = "<group>"; };
-		6CB3997E1EDE2B7700149C5D /* MerchantPharmacy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MerchantPharmacy.xib; sourceTree = "<group>"; };
-		6CB399811EDE2BA700149C5D /* MerchantHome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantHome.h; sourceTree = "<group>"; };
-		6CB399821EDE2BA700149C5D /* MerchantHome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantHome.m; sourceTree = "<group>"; };
-		6CB399831EDE2BA700149C5D /* MerchantHome.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MerchantHome.xib; sourceTree = "<group>"; };
-		6CB399891EE0B4BB00149C5D /* CustomTableViewCell1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell1.h; sourceTree = "<group>"; };
-		6CB3998A1EE0B4BB00149C5D /* CustomTableViewCell1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell1.m; sourceTree = "<group>"; };
-		6CB3998B1EE0B4BB00149C5D /* CustomTableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell1.xib; sourceTree = "<group>"; };
+		6CB3997C1EDE2B7700149C5D /* MerchantShops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantShops.h; sourceTree = "<group>"; };
+		6CB3997D1EDE2B7700149C5D /* MerchantShops.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantShops.m; sourceTree = "<group>"; };
+		6CB3997E1EDE2B7700149C5D /* MerchantShops.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MerchantShops.xib; sourceTree = "<group>"; };
+		6CB399811EDE2BA700149C5D /* MerchantEating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantEating.h; sourceTree = "<group>"; };
+		6CB399821EDE2BA700149C5D /* MerchantEating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantEating.m; sourceTree = "<group>"; };
+		6CB399831EDE2BA700149C5D /* MerchantEating.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MerchantEating.xib; sourceTree = "<group>"; };
 		6CB3998E1EE0B4D000149C5D /* CustomTableViewCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell2.h; sourceTree = "<group>"; };
 		6CB3998F1EE0B4D000149C5D /* CustomTableViewCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell2.m; sourceTree = "<group>"; };
 		6CB399901EE0B4D000149C5D /* CustomTableViewCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell2.xib; sourceTree = "<group>"; };
@@ -133,6 +165,12 @@
 		6CBF93E71EF2B2C80036EBA3 /* XMLParserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserDelegate.m; sourceTree = "<group>"; };
 		6CBF93E81EF2B2C80036EBA3 /* PlotChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlotChartView.h; path = "BarChart Library/PlotChartView.h"; sourceTree = "<group>"; };
 		6CBF93E91EF2B2C80036EBA3 /* PlotChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlotChartView.m; path = "BarChart Library/PlotChartView.m"; sourceTree = "<group>"; };
+		6CC818A41F0B3370009AC29E /* MerchantAccountCoffee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantAccountCoffee.h; sourceTree = "<group>"; };
+		6CC818A51F0B3370009AC29E /* MerchantAccountCoffee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantAccountCoffee.m; sourceTree = "<group>"; wrapsLines = 0; };
+		6CC818A61F0B3370009AC29E /* MerchantAccountCoffee.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MerchantAccountCoffee.xib; sourceTree = "<group>"; };
+		6CCB36DB1FC6F07000EEE438 /* MerchantTravelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MerchantTravelViewController.h; sourceTree = "<group>"; };
+		6CCB36DC1FC6F07000EEE438 /* MerchantTravelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MerchantTravelViewController.m; sourceTree = "<group>"; };
+		6CCB36E01FC6FC1100EEE438 /* MerchantTravelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MerchantTravelViewController.xib; sourceTree = "<group>"; };
 		6CD3550A1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantAccountRateReviewsViewController.h; sourceTree = "<group>"; };
 		6CD3550B1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantAccountRateReviewsViewController.m; sourceTree = "<group>"; };
 		6CD3550E1EE5DDB400D1508F /* HCSStarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSStarRatingView.h; sourceTree = "<group>"; };
@@ -196,6 +234,38 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6C229CE91F3018A9008B4850 /* SKTableView */ = {
+			isa = PBXGroup;
+			children = (
+				6C229CEA1F3018A9008B4850 /* expandableImage.png */,
+				6C229CEB1F3018A9008B4850 /* expandableImage@2x.png */,
+				6C229CEC1F3018A9008B4850 /* SKSTableView.h */,
+				6C229CED1F3018A9008B4850 /* SKSTableView.m */,
+				6C229CEE1F3018A9008B4850 /* SKSTableViewCell.h */,
+				6C229CEF1F3018A9008B4850 /* SKSTableViewCell.m */,
+				6C229CF01F3018A9008B4850 /* SKSTableViewCellIndicator.h */,
+				6C229CF11F3018A9008B4850 /* SKSTableViewCellIndicator.m */,
+			);
+			path = SKTableView;
+			sourceTree = "<group>";
+		};
+		6C42CBDB1EFF1A1000DBA198 /* LineGraphClasses */ = {
+			isa = PBXGroup;
+			children = (
+				6C42CBDC1EFF1A1000DBA198 /* BEMAverageLine.h */,
+				6C42CBDD1EFF1A1000DBA198 /* BEMAverageLine.m */,
+				6C42CBDE1EFF1A1000DBA198 /* BEMCircle.h */,
+				6C42CBDF1EFF1A1000DBA198 /* BEMCircle.m */,
+				6C42CBE01EFF1A1000DBA198 /* BEMLine.h */,
+				6C42CBE11EFF1A1000DBA198 /* BEMLine.m */,
+				6C42CBE21EFF1A1000DBA198 /* BEMPermanentPopupView.h */,
+				6C42CBE31EFF1A1000DBA198 /* BEMPermanentPopupView.m */,
+				6C42CBE41EFF1A1000DBA198 /* BEMSimpleLineGraphView.h */,
+				6C42CBE51EFF1A1000DBA198 /* BEMSimpleLineGraphView.m */,
+			);
+			path = LineGraphClasses;
+			sourceTree = "<group>";
+		};
 		6CB399691EDD089B00149C5D /* CustomClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,15 +280,21 @@
 		6CB399931EE0D51D00149C5D /* MerchantSubViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6CB399811EDE2BA700149C5D /* MerchantHome.h */,
-				6CB399821EDE2BA700149C5D /* MerchantHome.m */,
-				6CB399831EDE2BA700149C5D /* MerchantHome.xib */,
-				6CB399891EE0B4BB00149C5D /* CustomTableViewCell1.h */,
-				6CB3998A1EE0B4BB00149C5D /* CustomTableViewCell1.m */,
-				6CB3998B1EE0B4BB00149C5D /* CustomTableViewCell1.xib */,
-				6CB3997C1EDE2B7700149C5D /* MerchantPharmacy.h */,
-				6CB3997D1EDE2B7700149C5D /* MerchantPharmacy.m */,
-				6CB3997E1EDE2B7700149C5D /* MerchantPharmacy.xib */,
+				6CC818A41F0B3370009AC29E /* MerchantAccountCoffee.h */,
+				6CC818A51F0B3370009AC29E /* MerchantAccountCoffee.m */,
+				6CC818A61F0B3370009AC29E /* MerchantAccountCoffee.xib */,
+				6C6B95531F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.h */,
+				6C6B95541F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.m */,
+				6C6B95551F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.xib */,
+				6CB3997C1EDE2B7700149C5D /* MerchantShops.h */,
+				6CB3997D1EDE2B7700149C5D /* MerchantShops.m */,
+				6CB3997E1EDE2B7700149C5D /* MerchantShops.xib */,
+				6CB399811EDE2BA700149C5D /* MerchantEating.h */,
+				6CB399821EDE2BA700149C5D /* MerchantEating.m */,
+				6CB399831EDE2BA700149C5D /* MerchantEating.xib */,
+				6CCB36DB1FC6F07000EEE438 /* MerchantTravelViewController.h */,
+				6CCB36DC1FC6F07000EEE438 /* MerchantTravelViewController.m */,
+				6CCB36E01FC6FC1100EEE438 /* MerchantTravelViewController.xib */,
 				6CB3998E1EE0B4D000149C5D /* CustomTableViewCell2.h */,
 				6CB3998F1EE0B4D000149C5D /* CustomTableViewCell2.m */,
 				6CB399901EE0B4D000149C5D /* CustomTableViewCell2.xib */,
@@ -335,7 +411,9 @@
 		6CD9B0371ED3874B003ADF99 /* Zeal */ = {
 			isa = PBXGroup;
 			children = (
+				6C42CBDB1EFF1A1000DBA198 /* LineGraphClasses */,
 				6CBF93D01EF2B2B80036EBA3 /* BarChart Library */,
+				6C229CE91F3018A9008B4850 /* SKTableView */,
 				6CBF93B41EEDFE7B0036EBA3 /* MFSideMenu */,
 				6CB399691EDD089B00149C5D /* CustomClasses */,
 				6CBF93C81EF097550036EBA3 /* PlaidHelper */,
@@ -415,6 +493,14 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = U3DJW66E3Y;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -441,15 +527,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CB3998D1EE0B4BB00149C5D /* CustomTableViewCell1.xib in Resources */,
-				6CB399851EDE2BA700149C5D /* MerchantHome.xib in Resources */,
+				6CCB36E11FC7000C00EEE438 /* MerchantTravelViewController.xib in Resources */,
+				6CB399851EDE2BA700149C5D /* MerchantEating.xib in Resources */,
+				6C229CF21F3018A9008B4850 /* expandableImage.png in Resources */,
+				6C229CF31F3018A9008B4850 /* expandableImage@2x.png in Resources */,
 				6CB399731EDD1EEE00149C5D /* about_text.html in Resources */,
 				6CB399921EE0B4D000149C5D /* CustomTableViewCell2.xib in Resources */,
 				6CD9B0481ED3874B003ADF99 /* LaunchScreen.storyboard in Resources */,
-				6CB399801EDE2B7700149C5D /* MerchantPharmacy.xib in Resources */,
+				6CB399801EDE2B7700149C5D /* MerchantShops.xib in Resources */,
+				6CC818A81F0B3370009AC29E /* MerchantAccountCoffee.xib in Resources */,
 				6C91FBAC1EDC78EA000243DA /* GoogleService-Info.plist in Resources */,
 				6CD9B0451ED3874B003ADF99 /* Assets.xcassets in Resources */,
 				6CD9B0431ED3874B003ADF99 /* Main.storyboard in Resources */,
+				6C6B95571F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.xib in Resources */,
 				6CBF93B31EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,9 +568,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Zeal/Pods-Zeal-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -493,9 +596,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Zeal/Pods-Zeal-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -508,13 +614,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Zeal-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -525,29 +634,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CBF93F11EF2B2C80036EBA3 /* XMLParser.m in Sources */,
+				6C229CF51F3018A9008B4850 /* SKSTableViewCell.m in Sources */,
+				6C229CF41F3018A9008B4850 /* SKSTableView.m in Sources */,
 				6CBF93ED1EF2B2C80036EBA3 /* CMPopTipView.m in Sources */,
 				6CBF93EA1EF2B2C80036EBA3 /* BarChartView.m in Sources */,
+				6C42CBE91EFF1A1000DBA198 /* BEMPermanentPopupView.m in Sources */,
 				6CD3551C1EE83AB100D1508F /* PlaidAPIViewController.m in Sources */,
 				6CBF93F31EF2B2C80036EBA3 /* PlotChartView.m in Sources */,
 				6CBF93C71EEE068B0036EBA3 /* SideMenuViewController.m in Sources */,
+				6C42CBEA1EFF1A1000DBA198 /* BEMSimpleLineGraphView.m in Sources */,
 				6CD9B0401ED3874B003ADF99 /* HomeViewController.m in Sources */,
+				6CC818A71F0B3370009AC29E /* MerchantAccountCoffee.m in Sources */,
 				6CBF93BD1EEDFE950036EBA3 /* MFSideMenuShadow.m in Sources */,
 				6CBF93BE1EEDFE950036EBA3 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				6CBF93EB1EF2B2C80036EBA3 /* BarLabel.m in Sources */,
 				6CB3996F1EDD0D5800149C5D /* UIViewController+Alerts.m in Sources */,
+				6C42CBE81EFF1A1000DBA198 /* BEMLine.m in Sources */,
 				6CBF93EF1EF2B2C80036EBA3 /* UIViewSizeShortcuts.m in Sources */,
-				6CB3998C1EE0B4BB00149C5D /* CustomTableViewCell1.m in Sources */,
+				6C42CBE71EFF1A1000DBA198 /* BEMCircle.m in Sources */,
 				6CB3996C1EDD0C8700149C5D /* ToastHelper.m in Sources */,
 				6CBF93BC1EEDFE950036EBA3 /* MFSideMenuContainerViewController.m in Sources */,
+				6C42CBE61EFF1A1000DBA198 /* BEMAverageLine.m in Sources */,
 				6CBF93CB1EF097A10036EBA3 /* PlaidHTTPClient.m in Sources */,
 				6CBF93EE1EF2B2C80036EBA3 /* UIColor+i7HexColor.m in Sources */,
+				6CCB36DE1FC6F07000EEE438 /* MerchantTravelViewController.m in Sources */,
 				6CD3550C1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m in Sources */,
 				6CD9B03D1ED3874B003ADF99 /* AppDelegate.m in Sources */,
-				6CB399841EDE2BA700149C5D /* MerchantHome.m in Sources */,
-				6CB3997F1EDE2B7700149C5D /* MerchantPharmacy.m in Sources */,
+				6C6B95561F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.m in Sources */,
+				6CB399841EDE2BA700149C5D /* MerchantEating.m in Sources */,
+				6CB3997F1EDE2B7700149C5D /* MerchantShops.m in Sources */,
 				6CB399911EE0B4D000149C5D /* CustomTableViewCell2.m in Sources */,
 				6CD9B03A1ED3874B003ADF99 /* main.m in Sources */,
 				6C91FBA81EDB8245000243DA /* MainViewController.m in Sources */,
+				6C229CF61F3018A9008B4850 /* SKSTableViewCellIndicator.m in Sources */,
 				6CD9B0541ED39178003ADF99 /* LoginViewController.m in Sources */,
 				6CBF93B21EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m in Sources */,
 				6CBF93EC1EF2B2C80036EBA3 /* BarView.m in Sources */,
@@ -719,8 +838,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = developer.cnorth2.Zeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "79236fb8-1851-4053-9cc6-fc661e810702";
-				PROVISIONING_PROFILE_SPECIFIER = zealappprovisioning2;
+				PROVISIONING_PROFILE = "f2a9766f-7255-4c18-92b4-85a4d05cf403";
+				PROVISIONING_PROFILE_SPECIFIER = zealappprovisioning;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -730,6 +849,7 @@
 			baseConfigurationReference = DD273674B4856BFCF9D6E0AB /* Pods-Zeal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = U3DJW66E3Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -777,8 +897,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = developer.cnorth2.Zeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "79236fb8-1851-4053-9cc6-fc661e810702";
-				PROVISIONING_PROFILE_SPECIFIER = zealappprovisioning2;
+				PROVISIONING_PROFILE = "dc3b7cf0-5839-461d-a370-8b95be0e04b5";
+				PROVISIONING_PROFILE_SPECIFIER = zeal_dis;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

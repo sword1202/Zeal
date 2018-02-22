@@ -30,4 +30,9 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)didSelectAdd:(id)sender {
+    _img_tick.hidden = NO;
+    _btn_add.hidden = YES;
+}
+
 @end

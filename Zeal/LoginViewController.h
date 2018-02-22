@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 @import Firebase;
-@import FBSDKCoreKit;
-@import FBSDKLoginKit;
+@import GoogleSignIn;
+//@import FBSDKCoreKit;
+//@import FBSDKLoginKit;
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController <GIDSignInUIDelegate, GIDSignInDelegate>
 
 - (IBAction)didSelectFacebookLogin:(id)sender;
 @end

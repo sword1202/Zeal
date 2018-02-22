@@ -41,11 +41,17 @@
     if (button.tag >= 100 && button.tag < 200) {
         // Home
         app.indexOfSelectedImageOfMerchantAccount = (int)button.tag - 100;
-        app.isSelectedPlusButtonForHome = true;
-    } else if (button.tag >= 200)
+        app.isSelectedPlusButtonForHome = 0;
+    } else if (button.tag >= 200 && button.tag < 300)
     {
+        // Pharamacy
         app.indexOfSelectedImageOfMerchantAccount = (int)button.tag - 200;
-        app.isSelectedPlusButtonForHome = false;
+        app.isSelectedPlusButtonForHome = 1;
+    } else if (button.tag >= 300)
+    {
+        // Coffee
+        app.indexOfSelectedImageOfMerchantAccount = (int)button.tag - 300;
+        app.isSelectedPlusButtonForHome = 2;
     }
     
     [[NSNotificationCenter defaultCenter] 

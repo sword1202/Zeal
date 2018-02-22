@@ -19,7 +19,7 @@
 #define ENV @"development" // production, development, sandbox
 #define CLIENT_NAME @"ZEAL"
 #define PRODUCTION @"transactions" // auth, transactions, balance, identity, income
-#define TRANS_DELAY 11.0
+#define TRANS_DELAY 12.0
 
 @interface PlaidAPIViewController ()
 {
@@ -34,6 +34,8 @@
     NSDictionary *saveDic;
     MBProgressHUD *hud;
     NSString *sel_institution_id;
+    NSString *lastYear, *lastMonth, *lastMonthStartDate,* lastMonthEndDate,
+            *currentYear, *currentMonth, *currentStartDate, *currentEndDate;
 }
 @end
 
@@ -66,21 +68,6 @@
     httpClientPlaid = [PlaidHTTPClient sharedPlaidHTTPClient];
 }
 
-- (void) gotoPrivacyPolicy
-{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.zealplatform.com/privacy"]];
-}
-
-- (void) gotoFeedback
-{
-    NSLog(@"pressed");
-}
-
-- (void) actionFaceBook
-{
-    NSLog(@"pressed");
-}
-
 - (void) createBaseLineOfButton
 {
     CALayer *border = [CALayer layer];
@@ -93,11 +80,11 @@
     
     //
     CALayer *border1 = [CALayer layer];
-    border1.borderColor = [UIColor blueColor].CGColor;
-    border.frame = CGRectMake(0, btn_linkWithPlaid.frame.size.height - borderWidth, btn_linkWithPlaid.frame.size.width, btn_linkWithPlaid.frame.size.height);
-    border.borderWidth = borderWidth;
-    [btn_linkWithPlaid.layer addSublayer: border];
-    btn_linkWithPlaid.layer.masksToBounds = YES;
+    border1.borderColor = [UIColor blackColor].CGColor;
+    border1.frame = CGRectMake(0, btn_addMoreBank.frame.size.height - borderWidth, btn_addMoreBank.frame.size.width, btn_addMoreBank.frame.size.height);
+    border1.borderWidth = borderWidth;
+    [btn_addMoreBank.layer addSublayer: border1];
+    btn_addMoreBank.layer.masksToBounds = YES;
 }
 
 - (void) retreiveDataFromDB
@@ -193,7 +180,9 @@
         cell.mLabelAccountName.text = @"Plaid";
         cell.minstitutionName.text = [dic objectForKey: @"institution_name"];
         cell.logo_img_ChartView.hidden = YES;
-        UIImage *image = [UIImage imageNamed: [dic objectForKey: @"institution_id"]];
+//        UIImage *image = [UIImage imageNamed: [dic objectForKey: @"institution_id"]];
+        //display general image
+        UIImage *image = [UIImage imageNamed: @"plaid_logo"];
         if (image != nil) {
             cell.logo_img.image = image;
         }
@@ -209,7 +198,16 @@
         } else
             cell.logo_img.hidden = YES;
         long amount = [[dic objectForKey: @"amount"] longValue];
-        cell.mAmounts.text = [NSString stringWithFormat: @"$ %lu", amount];
+        if (amount < 0) {
+            amount = 0 - amount;
+            cell.mAmounts.text = [NSString stringWithFormat: @"$ -%lu", amount];
+//            cell.mAmounts.textColor = [UIColor redColor];
+        } else
+        {
+            cell.mAmounts.text = [NSString stringWithFormat: @"$ %lu", amount];
+//            cell.mAmounts.textColor = [UIColor blackColor];
+        }
+        
         cell.mLabelAccountName.text = [dic objectForKey: @"name"];
         cell.minstitutionName.text = [dic objectForKey: @"date"];
         
@@ -402,7 +400,10 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                      
                      [self showProgressBar: @"Collecting transactions..."];
                      
-                     [self downloadTransactionsAndStoreOnFirebase:saveDic pastDate: 30];
+                     [self calcDate];
+                     
+                     // store db
+                     [self downloadTransactionsAndStoreOnFirebase: saveDic startDate: lastMonthStartDate endDate: currentEndDate isCurrentMonth: 1];
                      
                  }
              }];
@@ -415,14 +416,46 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     }];
 }
 
-- (void) downloadTransactionsAndStoreOnFirebase: (NSDictionary *) metadata pastDate: (int) pastDate
+- (void) calcDate
+{
+    // for this month
+    
+    currentYear = [self getDateTime:0 format: @"y"];
+    currentMonth = [self getDateTime:0 format: @"m"];
+    currentStartDate = [NSString stringWithFormat: @"%@-%@-01", currentYear, currentMonth];
+    currentEndDate = [self getDateTime: 0 format: nil];
+    
+    // for last month
+    int temp;
+    
+    if ([currentMonth isEqualToString: @"01"]) {
+        temp = [currentYear intValue] - 1;
+        lastYear = [NSString stringWithFormat: @"%d", temp];
+        
+        lastMonth = @"12";
+        
+    } else
+    {
+        lastYear = currentYear;
+        
+        temp = [currentMonth intValue] - 1;
+        if (temp < 10) {
+            lastMonth = [NSString stringWithFormat: @"0%d", temp];
+        } else
+            lastMonth = [NSString stringWithFormat: @"%d", temp];
+        
+    }
+    lastMonthStartDate = [NSString stringWithFormat: @"%@-%@-01", lastYear, lastMonth];
+    lastMonthEndDate = [NSString stringWithFormat: @"%@-%@-31", lastYear, lastMonth];
+}
+- (void) downloadTransactionsAndStoreOnFirebase: (NSDictionary *) metadata startDate: (NSString *) mStartDate endDate: (NSString *) mEndDate isCurrentMonth: (int) isNowMonth
 {
 
     NSString *accessToken = [metadata objectForKey: @"access_token"];
-    NSString *startDate = [self getDateTime: pastDate];
-    NSString *endDate = [self getDateTime: 0];
+//    NSString *startDate = [self getDateTime: pastDate];
+//    NSString *endDate = [self getDateTime: 0];
     
-    NSLog(@"----------%@,%@,%@", accessToken, startDate, endDate);
+//    NSLog(@"----------%@,%@,%@", accessToken, startDate, endDate);
     
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, TRANS_DELAY * NSEC_PER_SEC);
@@ -430,16 +463,33 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
         //code to be executed on the main queue after delay
         
         [httpClientPlaid downloadTransactionsForAccessToken: accessToken
-                                                   fromDate: startDate
-                                                     toDate: endDate
+                                                   fromDate: mStartDate
+                                                     toDate: mEndDate
                                       withCompletionHandler:^(NSInteger responseCode, NSArray *transactions) {
-                                          
                                           hud.hidden = YES;
-                                          
                                           if (responseCode == 200) {
                                               if (transactions != nil) {
+                                                  
+                                                  NSMutableArray *currentMonthTransactions = [[NSMutableArray alloc] init];
+                                                  NSMutableArray *lastMonthTransactions = [[NSMutableArray alloc] init];
+                                                  for (int i=0; i<transactions.count; i++) {
+                                                      NSDictionary *dic = [transactions objectAtIndex: i];
+                                                      NSString *mDateString = [dic objectForKey: @"date"];
+                                                      NSString *indexMonth = [[mDateString substringFromIndex:5] substringToIndex: 2];
+                                                      if ([currentMonth isEqualToString: indexMonth]) {
+                                                          [currentMonthTransactions addObject: dic];
+                                                      } else if ([lastMonth isEqualToString: indexMonth])
+                                                      {
+                                                          [lastMonthTransactions addObject: dic];
+                                                      }
+                                                  }
                                                   [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"transactions"]
-                                                   setValue:transactions];
+                                                   setValue:currentMonthTransactions];
+                                                  
+                                                  [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"last_month_transactions"]
+                                                   setValue:lastMonthTransactions];
+                                                  
+                                                  [self downloadAccountDetails: metadata];
                                               }
                                           } else
                                           {
@@ -452,7 +502,26 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     
 }
 
-- (NSString *) getDateTime: (int) pastDays
+- (void) downloadAccountDetails: (NSDictionary *) metadata {
+    
+    NSString *accessToken = [metadata objectForKey: @"access_token"];
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, TRANS_DELAY * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [httpClientPlaid downloadAccountDetailsForAccessToken: accessToken
+                                        withCompletionHandler:^(NSInteger responseCode, NSArray *accountDetails) {
+                                            if (responseCode == 200) {
+                                                if (accountDetails != nil) {
+                                                    [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"accounts"]
+                                                     setValue:accountDetails];
+                                                }
+                                            }
+                                        }];
+    });
+        
+    
+}
+
+- (NSString *) getDateTime: (int) pastDays format: (NSString *) mFormat
 {
     //    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
     
@@ -460,7 +529,19 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     NSTimeInterval timeInterval = -pastDays*24*60*60;
     NSDate *pastDate = [todayDate dateByAddingTimeInterval: timeInterval];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyy-MM-dd"];
+    if (mFormat == nil) {
+        [dateFormat setDateFormat:@"yyy-MM-dd"];
+    }
+    else if ([mFormat isEqualToString: @"y"]) {
+        [dateFormat setDateFormat:@"yyy"];
+    } else if ([mFormat isEqualToString: @"m"])
+    {
+        [dateFormat setDateFormat:@"MM"];
+    } else if ([mFormat isEqualToString: @"d"])
+    {
+        [dateFormat setDateFormat:@"dd"];
+    }
+    
     [dateFormat setTimeZone: [NSTimeZone localTimeZone]];
     NSString *strOfDate = [dateFormat stringFromDate:pastDate];
     return strOfDate;

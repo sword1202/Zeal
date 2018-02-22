@@ -48,9 +48,7 @@
 
 //Gets details for specific account
 - (void)downloadAccountDetailsForAccessToken: (NSString *)accessToken
-                                     account: (NSString *)accountID
-                                     success: (void(^)(NSURLSessionDataTask *task, NSDictionary *accountDetails))success
-                                     failure: (void(^)(NSURLSessionDataTask *task, NSError *error))failure;
+                       withCompletionHandler: (void(^)(NSInteger responseCode, NSArray *transactions))handler;
 
 - (void)downloadPlaidEntity: (NSString *)entityID
                     success: (void(^)(NSURLSessionDataTask *task, id plaidEntity))success
