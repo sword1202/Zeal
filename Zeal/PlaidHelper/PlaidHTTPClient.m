@@ -54,18 +54,18 @@
 
 - (void) downloadPlaidInstitutionsWithCompletionHandler: (void(^)(NSArray * institutions))handler
 {
-//    [self GET: @"/institutions"
-//   parameters: nil
-//      success: ^(NSURLSessionDataTask *task, id responseObject)
-//               {
-//                   NSArray *sortedInstitutions = [(NSArray *)responseObject sortedArrayUsingDescriptors: @[[[NSSortDescriptor alloc] initWithKey: @"name"
-//                                                                                                                                       ascending: YES]]];
-//                   handler(sortedInstitutions);
-//               }
-//      failure: ^(NSURLSessionDataTask *task, NSError *error)
-//               {
-//                   NSLog(@"Failed to retrieve Plaid institutions: %@", error.localizedDescription);
-//               }];
+    [self GET: @"/institutions"
+   parameters: nil
+      success: ^(NSURLSessionDataTask *task, id responseObject)
+               {
+                   NSArray *sortedInstitutions = [(NSArray *)responseObject sortedArrayUsingDescriptors: @[[[NSSortDescriptor alloc] initWithKey: @"name"
+                                                                                                                                       ascending: YES]]];
+                   handler(sortedInstitutions);
+               }
+      failure: ^(NSURLSessionDataTask *task, NSError *error)
+               {
+                   NSLog(@"Failed to retrieve Plaid institutions: %@", error.localizedDescription);
+               }];
 }
 
 - (void) getAccessTokenWithCompletionHandler: (NSString *)publickToken

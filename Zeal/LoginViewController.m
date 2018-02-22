@@ -81,18 +81,18 @@ static NSString * const kFirebaseURL = @"https://zeal-915b2.firebaseio.com";
         [FIRGoogleAuthProvider credentialWithIDToken:authentication.idToken
                                          accessToken:authentication.accessToken];
         
-        
-        [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+        [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable fuser, NSError * _Nullable error) {
             if (error) {
                 NSLog(@"Error %@", error.localizedDescription);
             } else
             {
                 // store the credential to remove current user later
-                
+                NSLog( @"email: %@", fuser.email);
                 NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
                 [userdefaults setObject:authentication.idToken forKey:@"authcredential_idToken"];
                 [userdefaults setObject: authentication.accessToken forKey:@"authcredential_accessToken"];
                 [userdefaults synchronize];
+                
                 [self firebaseLoginWithCredential:credential];
                 
             }
@@ -106,21 +106,29 @@ static NSString * const kFirebaseURL = @"https://zeal-915b2.firebaseio.com";
 
 - (void)firebaseLoginWithCredential:(FIRAuthCredential *)credential {
     
-    if ([FIRAuth auth].currentUser) {
+    FIRUser *user = [FIRAuth auth].currentUser;
+    if (user != nil) {
+        
+        NSString *mUserName = user.displayName;
+//        NSString *mUserEmail = user.email;
+        FIRDatabaseReference *dbRef = [[[FIRDatabase database] reference] child:@"consumers"];
+        [[[dbRef child:user.uid] child: @"name"] setValue: mUserName];
+//        [[[dbRef child:user.uid] child: @"email"] setValue: mUserEmail];
+        
         [ToastHelper hideLoading];
         [self gotoProfilePage];
         
     }
 }
 
-//- (void) signInFirebase: (NSString *) accessToken
-//{
+- (void) signInFirebase: (NSString *) accessToken
+{
 //    userDefaults = [NSUserDefaults standardUserDefaults];
 //    [userDefaults setObject: accessToken forKey: @"access_token"];
 //    [userDefaults synchronize];
 //    NSString *saved = [userDefaults objectForKey: @"access_token"];
 //    FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:accessToken];
-//    
+//
 //    //            [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
 //    //             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
 //    //
@@ -131,7 +139,7 @@ static NSString * const kFirebaseURL = @"https://zeal-915b2.firebaseio.com";
 //    //                     [self showMessagePrompt:error.localizedDescription];
 //    //                 }
 //    //             }];
-//    
+//
 //    [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
 //        [ToastHelper hideLoading];
 //        if (error) {
@@ -140,10 +148,10 @@ static NSString * const kFirebaseURL = @"https://zeal-915b2.firebaseio.com";
 //        } else
 //        {
 //            [self gotoProfilePage];
-//            
+//
 //        }
 //    }];
-//}
+}
 
 - (void) gotoProfilePage
 {

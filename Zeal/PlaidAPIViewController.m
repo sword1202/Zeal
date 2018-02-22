@@ -14,13 +14,6 @@
 #import "MBProgressHUD.h"
 @import Firebase;
 
-// Key For Plaid API Integration
-#define PLAID_PUBLIC_KEY @"667778757a11bac2a6ee9b156c914a"
-#define ENV @"development" // production, development, sandbox
-#define CLIENT_NAME @"ZEAL"
-#define PRODUCTION @"transactions" // auth, transactions, balance, identity, income
-#define TRANS_DELAY 12.0
-
 @interface PlaidAPIViewController ()
 {
     __weak IBOutlet UIButton *btn_linkWithPlaid;
@@ -31,10 +24,10 @@
     FIRDatabaseReference *dbRef;
     PlaidHTTPClient *httpClientPlaid;
     // params of Cell
-    NSDictionary *saveDic;
+    NSDictionary *saveDic, *institutionsDic;
     MBProgressHUD *hud;
     NSString *sel_institution_id;
-    NSString *lastYear, *lastMonth, *lastMonthStartDate,* lastMonthEndDate,
+    NSString *lastMonthStartDate,* lastMonthEndDate,
             *currentYear, *currentMonth, *currentStartDate, *currentEndDate;
 }
 @end
@@ -52,20 +45,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self calcDate];
     _webview.hidden = YES;
-    
+
     [table_view registerNib: [UINib nibWithNibName: @"CustomTableFinancialAccountsTableViewCell" bundle:nil] forCellReuseIdentifier: @"cell_financial"];
-    
+
     [tableViewOfTransactions registerNib: [UINib nibWithNibName: @"CustomTableFinancialAccountsTableViewCell" bundle:nil] forCellReuseIdentifier: @"cell_financial"];
-    
+
     tableViewOfTransactions.hidden = YES;
-    
+
     [self retreiveDataFromDB];
     [self createBaseLineOfButton];
-    
+
     // initialize PlaidClientHttp to retrieve transactions
     httpClientPlaid = [PlaidHTTPClient sharedPlaidHTTPClient];
+    
+    [self getListsOfInstitutions];
+}
+
+- (void) getListsOfInstitutions
+{
+//    [httpClientPlaid downloadPlaidInstitutionsWithCompletionHandler:^(NSArray *institutions) {
+//        NSLog(@"...");
+//    }];
+    institutionsDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                       @"amex",       @"ins_10",
+                       @"bbt",        @"ins_2",
+                       @"bbvac",      @"ins_23",
+                       @"bofa",       @"ins_1",
+                       @"capone",     @"ins_9",
+                       @"chase",      @"ins_3",
+                       @"citizens",   @"ins_20",
+                       @"citi",       @"ins_5",
+                       @"huntington", @"ins_21",
+                       @"keybank",    @"ins_29",
+                       @"mtb",        @"ins_27",
+                       @"nfcu",       @"ins_15",
+                       @"pnc",        @"ins_13",
+                       @"regions",    @"ins_19",
+                       @"schwab",     @"ins_11",
+                       @"simple",     @"ins_24",
+                       @"suntrust",   @"ins_16",
+                       @"td",         @"ins_14",
+                       @"us",         @"ins_6",
+                       @"usaa",       @"ins_7",
+                       @"wells",      @"ins_4", nil];
 }
 
 - (void) createBaseLineOfButton
@@ -90,8 +114,8 @@
 - (void) retreiveDataFromDB
 {
     arr_savedFinancialAccounts = [[NSMutableArray alloc] init];
-    NSString *userID = [[[FIRAuth auth] currentUser] uid];
-    dbRef = [[[[FIRDatabase database] reference] child: userID] child: @"financial_db"];
+    NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
+    dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"financial_db"];
     if (dbRef != nil) {
         
         [dbRef observeEventType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
@@ -177,20 +201,24 @@
     CustomTableFinancialAccountsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cell_financial" forIndexPath:indexPath];
     if (tableView.tag == 100) {
         NSDictionary *dic = [arr_savedFinancialAccounts objectAtIndex: indexPath.row];
-        cell.mLabelAccountName.text = @"Plaid";
-        cell.minstitutionName.text = [dic objectForKey: @"institution_name"];
+        cell.plaid_main_list_view.hidden = NO;
+        cell.plaid_title.text = @"Plaid";
+        cell.plaid_subTitle.text = [dic objectForKey: @"institution_name"];
         cell.logo_img_ChartView.hidden = YES;
-//        UIImage *image = [UIImage imageNamed: [dic objectForKey: @"institution_id"]];
+        NSString *institutionName = [institutionsDic objectForKey: [dic objectForKey: @"institution_id"]];
+        UIImage *image = [UIImage imageNamed: institutionName];
         //display general image
-        UIImage *image = [UIImage imageNamed: @"plaid_logo"];
+//        UIImage *image = [UIImage imageNamed: @"plaid_logo"];
         if (image != nil) {
-            cell.logo_img.image = image;
+            cell.plaid_institution_logo.image = image;
         }
     } else
     {
+        cell.plaid_main_list_view.hidden = YES;
         NSDictionary *dic = [arr_everyTransactionsForBank objectAtIndex: indexPath.row];
         cell.logo_img_ChartView.hidden = YES;
-        UIImage *image = [UIImage imageNamed: sel_institution_id];
+        NSString *institutionName = [institutionsDic objectForKey: sel_institution_id];
+        UIImage *image = [UIImage imageNamed: institutionName];
         
         if (image != nil && indexPath.row == 0) {
             cell.logo_img.image = image;
@@ -219,14 +247,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    NSLog( @"%d --- '%d'", (int)indexPath.row, (int)tableView.tag);
-    [tableView deselectRowAtIndexPath: indexPath animated:YES];
     
-    if (tableView.tag == 100) {
-        NSDictionary *sel_dic = [arr_savedFinancialAccounts objectAtIndex: indexPath.row];
-        sel_institution_id = [sel_dic objectForKey: @"institution_id"];
-        [self retrievTransactions: [sel_dic objectForKey: @"institution_name"]];
-        
-    }
+    
+    // test monthly transaction on the first of the month
+//    [self calcDate];
+//
+//    // store db
+//    [self downloadTransactionsAndStoreOnFirebase: saveDic startDate: lastMonthStartDate endDate: currentEndDate isCurrentMonth: 1];
+    
+    // Test Account Details
+//    [httpClientPlaid downloadAccountDetailsForAccessToken: TEST_ACCESS_TOKEN
+//                                    withCompletionHandler:^(NSInteger responseCode, NSArray *accountDetails) {
+//                                        if (responseCode == 200) {
+//                                            if (accountDetails != nil) {
+//                                                NSLog(accountDetails);
+//                                            }
+//                                        }
+//                                    }];
+    // ************** //
+    
+//    [tableView deselectRowAtIndexPath: indexPath animated:YES];
+//
+//    if (tableView.tag == 100) {
+//        NSDictionary *sel_dic = [arr_savedFinancialAccounts objectAtIndex: indexPath.row];
+//        sel_institution_id = [sel_dic objectForKey: @"institution_id"];
+//        [self retrievTransactions: [sel_dic objectForKey: @"institution_name"]];
+//
+//    }
     
 }
 
@@ -257,7 +304,7 @@
 // Helper method to generate the Link initialization URL given a dictionary of Link initialization keys and values
 // The Webview should be loaded wtuh the URL returned by this function.
 -(NSURL*)generateLinkInitializationURLWithOptions:(NSDictionary*)options {
-    // http://stackoverflow.com/questions/718429/creating-url-query-parameters-from-nsdictionary-objects-in-objectivec
+
     NSURLComponents *components = [NSURLComponents componentsWithString:[options objectForKey:@"baseUrl"]];
     NSMutableArray *queryItems = [NSMutableArray array];
     [queryItems addObject:[NSURLQueryItem queryItemWithName:@"isWebview" value:@"true"]];
@@ -426,36 +473,37 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     currentEndDate = [self getDateTime: 0 format: nil];
     
     // for last month
-    int temp;
+//    int temp;
     
     if ([currentMonth isEqualToString: @"01"]) {
-        temp = [currentYear intValue] - 1;
-        lastYear = [NSString stringWithFormat: @"%d", temp];
-        
-        lastMonth = @"12";
+//        temp = [currentYear intValue] - 1;
+//        lastYear = [NSString stringWithFormat: @"%d", temp];
+//
+//        lastMonth = @"12";
         
     } else
     {
-        lastYear = currentYear;
         
-        temp = [currentMonth intValue] - 1;
-        if (temp < 10) {
-            lastMonth = [NSString stringWithFormat: @"0%d", temp];
-        } else
-            lastMonth = [NSString stringWithFormat: @"%d", temp];
-        
+//        temp = [currentMonth intValue] - 1;
+//        if (temp < 10) {
+//            lastMonth = [NSString stringWithFormat: @"0%d", temp];
+//        } else
+//            lastMonth = [NSString stringWithFormat: @"%d", temp];
     }
-    lastMonthStartDate = [NSString stringWithFormat: @"%@-%@-01", lastYear, lastMonth];
-    lastMonthEndDate = [NSString stringWithFormat: @"%@-%@-31", lastYear, lastMonth];
+    lastMonthStartDate = [NSString stringWithFormat: @"%@-01-01", currentYear];
+    lastMonthEndDate = [NSString stringWithFormat: @"%@-01-31", currentYear];
 }
+
 - (void) downloadTransactionsAndStoreOnFirebase: (NSDictionary *) metadata startDate: (NSString *) mStartDate endDate: (NSString *) mEndDate isCurrentMonth: (int) isNowMonth
 {
 
     NSString *accessToken = [metadata objectForKey: @"access_token"];
+    
+//    NSString *accessToken = @"access-development-a26e7388-b04f-43a9-aceb-842882d2f4a7";
 //    NSString *startDate = [self getDateTime: pastDate];
 //    NSString *endDate = [self getDateTime: 0];
     
-//    NSLog(@"----------%@,%@,%@", accessToken, startDate, endDate);
+    NSLog(@"----------%@,%@,%@", accessToken, mStartDate, mEndDate);
     
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, TRANS_DELAY * NSEC_PER_SEC);
@@ -470,24 +518,46 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                                           if (responseCode == 200) {
                                               if (transactions != nil) {
                                                   
-                                                  NSMutableArray *currentMonthTransactions = [[NSMutableArray alloc] init];
-                                                  NSMutableArray *lastMonthTransactions = [[NSMutableArray alloc] init];
+//                                                  NSMutableArray *currentMonthTransactions = [[NSMutableArray alloc] init];
+//                                                  NSMutableArray *lastMonthTransactions = [[NSMutableArray alloc] init];
+                                                  NSMutableDictionary *monthlyTransactions = [[NSMutableDictionary alloc] init];
+                                                  NSString *oldMonthKey = @"";
+                                                  NSMutableArray *oldMonthlyTransaction = [[NSMutableArray alloc] init];
                                                   for (int i=0; i<transactions.count; i++) {
                                                       NSDictionary *dic = [transactions objectAtIndex: i];
                                                       NSString *mDateString = [dic objectForKey: @"date"];
                                                       NSString *indexMonth = [[mDateString substringFromIndex:5] substringToIndex: 2];
-                                                      if ([currentMonth isEqualToString: indexMonth]) {
-                                                          [currentMonthTransactions addObject: dic];
-                                                      } else if ([lastMonth isEqualToString: indexMonth])
+                                                      NSString *monthKey = [CommonUtils getMonthKey: indexMonth];
+                                                      if ([oldMonthKey isEqualToString: @""]) {
+                                                          oldMonthKey = monthKey;
+                                                      } else if (![oldMonthKey isEqualToString: monthKey])
                                                       {
-                                                          [lastMonthTransactions addObject: dic];
+//                                                          [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"transactions"]
+//                                                           setValue:currentMonthTransactions];
+                                                          oldMonthKey = monthKey;
+                                                          [oldMonthlyTransaction removeAllObjects];
+                                                      } else if (i == transactions.count - 1)
+                                                      {
+                                                          
                                                       }
+                                                      
+                                                      [oldMonthlyTransaction addObject: dic];
+                                                      monthlyTransactions[oldMonthKey] = [oldMonthlyTransaction copy];
+                                                      
+//                                                      [monthlyTransactions setObject: oldMonthlyTransaction forKey: oldMonthKey];
+//                                                      if ([currentMonth isEqualToString: indexMonth]) {
+//                                                          [currentMonthTransactions addObject: dic];
+//                                                      } else if ([lastMonth isEqualToString: indexMonth])
+//                                                      {
+//                                                          [lastMonthTransactions addObject: dic];
+//                                                      }
                                                   }
-                                                  [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"transactions"]
-                                                   setValue:currentMonthTransactions];
                                                   
-                                                  [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"last_month_transactions"]
-                                                   setValue:lastMonthTransactions];
+                                                  [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: kmonthly] setValue: monthlyTransactions];
+                                                  
+                                                  
+//                                                  [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"last_month_transactions"]
+//                                                   setValue:lastMonthTransactions];
                                                   
                                                   [self downloadAccountDetails: metadata];
                                               }
@@ -502,6 +572,21 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     
 }
 
+-(NSDictionary *)groupByKey:(NSString *) key array: (NSArray *)objectArray{
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    
+    for (id obj in objectArray) {
+        id keyValue = [obj valueForKey:key];
+        NSMutableArray *arr = dictionary[keyValue];
+        if (! arr) {
+            arr = [NSMutableArray array];
+            dictionary[keyValue] = arr;
+        }
+        [arr addObject:obj];
+    }
+    return [dictionary copy];
+}
+
 - (void) downloadAccountDetails: (NSDictionary *) metadata {
     
     NSString *accessToken = [metadata objectForKey: @"access_token"];
@@ -511,7 +596,8 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                                         withCompletionHandler:^(NSInteger responseCode, NSArray *accountDetails) {
                                             if (responseCode == 200) {
                                                 if (accountDetails != nil) {
-                                                    [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: @"accounts"]
+                                                    
+                                                    [[[dbRef child: [metadata objectForKey: @"institution_name"]] child: kAccount]
                                                      setValue:accountDetails];
                                                 }
                                             }

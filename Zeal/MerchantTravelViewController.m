@@ -83,40 +83,40 @@
         [arrForBoolHistory addObject:[NSNumber numberWithBool:NO]];
     }
     
-    NSString *userID = [[[FIRAuth auth] currentUser] uid];
-    mFirebaseDBReference = [[[[FIRDatabase database] reference] child: userID] child: @"rate_db_home"];
-    
-    if (mFirebaseDBReference != nil) {
-        
-        [mFirebaseDBReference observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
-            if ([snapshot exists]) {
-                
-                NSMutableArray *tempArray = [[NSMutableArray alloc] initWithArray: app.arr_travel_merchantAccounts];
-                for (snapshot in snapshot.children) {
-                    NSString *key = snapshot.key;
-                    
-                    for (int i = 0; i < tempArray.count; i ++) {
-                        NSDictionary *rowInArray = [tempArray objectAtIndex: i];
-                        if ([key isEqualToString: [rowInArray objectForKey: @"title_name"]]) {
-                            strRateVIP = [snapshot.value objectForKey: VIP_KEY];
-                            strRateProduct = [snapshot.value objectForKey: PRODUCT_KEY];
-                            NSString *oldLogoStr = [rowInArray objectForKey: @"img_name"];
-                            NSString *oldSubStr = [rowInArray objectForKey: @"category"];
-                            NSString *oldlink = [rowInArray objectForKey: @"link"];
-                            [tempArray replaceObjectAtIndex: i withObject:
-                             [[NSDictionary alloc] initWithObjectsAndKeys: oldLogoStr, @"img_name", key, @"title_name", oldSubStr, @"category", strRateVIP, @"rate_vip", strRateProduct, @"rate_product", oldlink, @"link", nil]];
-                        }
-                    }
-                    
-                }
-                
-                app.arr_travel_merchantAccounts = [[NSArray alloc] initWithArray: tempArray];
-                //                [table_view reloadData];
-                
-            }
-        }];
-        
-    }
+//    NSString *userID = [[[FIRAuth auth] currentUser] uid];
+//    mFirebaseDBReference = [[[[FIRDatabase database] reference] child: userID] child: @"rate_db_home"];
+//    
+//    if (mFirebaseDBReference != nil) {
+//        
+//        [mFirebaseDBReference observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
+//            if ([snapshot exists]) {
+//                
+//                NSMutableArray *tempArray = [[NSMutableArray alloc] initWithArray: app.arr_travel_merchantAccounts];
+//                for (snapshot in snapshot.children) {
+//                    NSString *key = snapshot.key;
+//                    
+//                    for (int i = 0; i < tempArray.count; i ++) {
+//                        NSDictionary *rowInArray = [tempArray objectAtIndex: i];
+//                        if ([key isEqualToString: [rowInArray objectForKey: @"title_name"]]) {
+//                            strRateVIP = [snapshot.value objectForKey: VIP_KEY];
+//                            strRateProduct = [snapshot.value objectForKey: PRODUCT_KEY];
+//                            NSString *oldLogoStr = [rowInArray objectForKey: @"img_name"];
+//                            NSString *oldSubStr = [rowInArray objectForKey: @"category"];
+//                            NSString *oldlink = [rowInArray objectForKey: @"link"];
+//                            [tempArray replaceObjectAtIndex: i withObject:
+//                             [[NSDictionary alloc] initWithObjectsAndKeys: oldLogoStr, @"img_name", key, @"title_name", oldSubStr, @"category", strRateVIP, @"rate_vip", strRateProduct, @"rate_product", oldlink, @"link", nil]];
+//                        }
+//                    }
+//                    
+//                }
+//                
+//                app.arr_travel_merchantAccounts = [[NSArray alloc] initWithArray: tempArray];
+//                //                [table_view reloadData];
+//                
+//            }
+//        }];
+//        
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -189,10 +189,9 @@
         cell.avr_spendAmount.text = @"$ 0.00";
         
         // retrieving data from Database (Plaid)
-        NSString *userID = [[[FIRAuth auth] currentUser] uid];
+        NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
         
-//        userID = @"EGSKXZWM3COl253jke9bi5eCzSI3";
-        FIRDatabaseReference *dbRef = [[[[FIRDatabase database] reference] child: userID] child: @"financial_db"];
+        FIRDatabaseReference *dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"financial_db"];
         
         if (dbRef != nil) {
             [self showProgressBar: @"Retrieving Transactions..."];

@@ -1,0 +1,23 @@
+//
+//  Zeal-Prefix.pch
+//  Zeal
+//
+//  Created by P1 on 12/27/17.
+//  Copyright © 2017 ZealOfCnorth2. All rights reserved.
+//
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#ifdef __OBJC__
+#import "AppConstant.h"
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "CommonUtils.h"
+#import "AFNetworking.h"
+#import "CoffeeObj.h"
+#endif

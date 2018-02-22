@@ -18,14 +18,11 @@
 #import "MerchantAccountCoffee.h"
 #import "MerchantAccountRateReviewsViewController.h"
 #import "MFSideMenu.h"
+#import "SquareHttpClient.h"
 #import "CustomTableFinancialAccountsTableViewCell.h"
+#import "TWRChart.h"
 //@import FBSDKCoreKit;
 @import GoogleSignIn;
-//
-//// <!-- SMARTDOWN_PROTOCOL -->
-//@interface MainViewController (PLKPlaidLinkViewDelegate) <PLKPlaidLinkViewDelegate>
-//@end
-//// <!-- SMARTDOWN_PROTOCOL -->
 
 @interface MainViewController ()
 {
@@ -38,6 +35,7 @@
     
     NSArray *shopperCategoriesAmounts;
     NSMutableArray *arrForLineGraphData, *arrForLineGraphDataLastMonth;
+    NSMutableDictionary *monthlySpendMoney, *monthlyCreditMoney;
     NSArray *arrayItems;
     __weak IBOutlet UIView *transactionView;
     
@@ -45,10 +43,13 @@
     
     // Merchant Accounts View
     
+    SquareHttpClient *httpClientSquareup;
+    NSMutableArray *currentCoffeelists;
+    NSArray *catalogItemsFromSquareup;
+    
     __weak IBOutlet UIButton *mEatingButton;
     __weak IBOutlet UIButton *mShopsButton;
     __weak IBOutlet UIButton *mCoffeeButton;
-    __weak IBOutlet UIButton *mTravelButton;
     CGFloat currentX, offSetX;
     MerchantAccountRateReviewsViewController *mFeedbackView;
     
@@ -65,6 +66,8 @@
     
     CGRect oldScrollviewFrame;
     NSData *mData;
+    
+    __weak IBOutlet UILabel *name_label;
 }
 @end
 
@@ -101,10 +104,13 @@
         return;
     } else
     {
+        _chartView = [[TWRChartView alloc] initWithFrame:CGRectMake(0, 0, _chartContainerView.frame.size.width, _chartContainerView.frame.size.height)];
+        _chartView.backgroundColor = [UIColor clearColor];
+        [_chartContainerView addSubview: _chartView];
+        httpClientSquareup = [SquareHttpClient sharedSquareHttpClient];
         
         app = (AppDelegate *) [UIApplication sharedApplication].delegate;
         [self handleWithUserLoggedInFB];
-        
         
     }
     
@@ -113,9 +119,12 @@
 - (void) handleWithUserLoggedInFB
 {
     [self.navigationController setNavigationBarHidden:NO];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-
-    [[self.navigationController navigationBar] setBarTintColor: [UIColor colorWithRed:120.0f/255.0f green:165.0f/255.0f  blue:163.0f/255.0f  alpha:1.0]];
+    
+//    [self.navigationController.navigationBar setShadowImage: [UIImage imageNamed: @"shadow_background"]];
+//    self.navigationController.navigationBar.layer.shadowColor = [[UIColor clearColor] CGColor];
+//    self.navigationController.navigationBar.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+//    self.navigationController.navigationBar.layer.shadowRadius = 3.0f;
+//    self.navigationController.navigationBar.layer.shadowOpacity = 1.0f;
     
     // add left bar button
     UIImage *myImage = [UIImage imageNamed:@"menu_icon"];
@@ -222,12 +231,8 @@
         app.mUserEmail = currentEmail;
         app.mUserID = mUserID;
         
-        // store full name on db
-        FIRDatabaseReference *dbRef = [[FIRDatabase database] reference];
-        NSString *userID = [[[FIRAuth auth] currentUser] uid];
-        //    userID = @"EGSKXZWM3COl253jke9bi5eCzSI3";
-        [[[dbRef child:userID] child: @"name"] setValue: mUserName];
-//        [userName setText: [@"Name  : " stringByAppendingString: mUserName]];
+        NSString *firstName = [[mUserName componentsSeparatedByString:@" "] objectAtIndex:0];
+        [name_label setText: [@"Hello, " stringByAppendingString: firstName]];
 //        [userid setText: [  @"UserID: " stringByAppendingString: mUserID]];
 //        [userEmail setText: [@"Email : " stringByAppendingString: currentEmail]];
         
@@ -253,16 +258,16 @@
         
 //        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
 //         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-//             
+//
 //             if (!error) {
 //                 currentEmail = [[[FIRAuth auth] currentUser] email];
 //                 NSLog(@"fetched user:%@  and Email : %@", result,result[@"email"]);
 //                 NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",result[@"id"]]];
-//                 
+//
 //                 (result[@"email"] != nil) ? mUserEmail = result[@"email"] : @"";
 //                 (result[@"id"]) ? mUserID = result[@"id"] : @"";
 //                 (result[@"name"]) ? mUserName = result[@"name"] : @"";
-//                 
+//
 //                 app.mUserName = mUserName;
 //                 app.mUserEmail = currentEmail;
 //                 app.mUserID = mUserID;
@@ -271,7 +276,7 @@
 //                 [userid setText: [  @"UserID: " stringByAppendingString: mUserID]];
 //                 [userEmail setText: [@"Email : " stringByAppendingString: currentEmail]];
 //                 
-//                 
+//
 //                 dispatch_async(dispatch_get_global_queue(0,0), ^{
 //                     NSData *data = [NSData dataWithContentsOfURL:url];
 //                     if ( data == nil )
@@ -286,16 +291,21 @@
 //                         [app addMFSideMenu];
 //                     });
 //                 });
-//                 
+//
 //             } else
 //                 [self showMessagePrompt: error.localizedDescription];
 //         }];
         
     } else
     {
+        if ([[FIRAuth auth] currentUser] != nil) {
+            mUserName = [[[FIRAuth auth] currentUser] displayName];
+            NSString *firstName = [[mUserName componentsSeparatedByString:@" "] objectAtIndex:0];
+            [name_label setText: [@"Hello, " stringByAppendingString: firstName]];
+        }
         
         app.mFBProfile = [UIImage imageWithData: mData];
-//        [userName setText: [@"Name  : " stringByAppendingString: mUserName]];
+        
 //        [userid setText: [  @"UserID: " stringByAppendingString: mUserID]];
 //        [userEmail setText: [@"Email : " stringByAppendingString: mUserEmail]];
     }
@@ -317,6 +327,7 @@
     // show TransactionView if there are data in Transactions
     
     [table_view registerNib: [UINib nibWithNibName: @"CustomTableFinancialAccountsTableViewCell" bundle:nil] forCellReuseIdentifier: @"cell_financial"];
+    
     shopperCategoriesAmounts = [[NSArray alloc] init];
     arrForLineGraphData = [[NSMutableArray alloc] init];
     arrForLineGraphDataLastMonth = [[NSMutableArray alloc] init];
@@ -339,80 +350,374 @@
 
 - (void) retrievTransactions
 {
+    
+    [self handleCoffeeLists];
+    
+    [self retrieveTransaction];
+}
+
+- (void) handleCoffeeLists
+{
+    // get catalog items from squareup
+    catalogItemsFromSquareup = [[NSArray alloc] init];
+    [httpClientSquareup downloadSquareupItemsWithCompletionHandler:^(NSArray *items) {
+        catalogItemsFromSquareup = items;
+    }];
+    
+    // add order items in categorylist
+    
+    // // first retrieve coffeelist
+    
+    FIRDatabaseReference *mCoffeeListDBReference = [[[FIRDatabase database] reference] child: kcoffeelist];
+    
+    if (mCoffeeListDBReference != nil) {
+        //        [ToastHelper showLoading: self.view message: @"Loading ..."];
+        [mCoffeeListDBReference observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
+
+            if ([snapshot exists]) {
+                
+                currentCoffeelists = [[NSMutableArray alloc] initWithArray: snapshot.value];
+                
+                // get catagory items from squareup
+                
+                [httpClientSquareup downloadSquareupCategoryWithCompletionHandler:^(NSArray *items) {
+                    for (int i = 0; i < items.count; i ++) {
+                        NSDictionary *everyCategory = [items objectAtIndex: i];
+                        NSString *categoryID = [everyCategory objectForKey: @"id"];
+                        NSDictionary *categoryDataDic = [everyCategory objectForKey: @"category_data"];
+                        NSString *categoryName = [categoryDataDic objectForKey: @"name"];
+
+                        // compare category name from firebase
+                        
+                        // get category name from firebase
+                        for (int j=0; j<[currentCoffeelists count]; j++) {
+                            NSDictionary *everyCoffeeList = [currentCoffeelists objectAtIndex: j];
+                            CoffeeObj *obj = [[CoffeeObj alloc] initWithDic: everyCoffeeList];
+                            NSMutableArray *orderlists = [NSMutableArray new];
+                            if ([categoryName isEqualToString: obj.name] && ![CommonUtils isNull: catalogItemsFromSquareup]) {
+                                // create orderlists
+                                  // find items for same category id
+                                for (int k=0; k<[catalogItemsFromSquareup count]; k++) {
+                                    NSDictionary *everyItem = [catalogItemsFromSquareup objectAtIndex: k];
+                                    NSDictionary *itemData = [everyItem objectForKey: @"item_data"];
+                                    NSString *currentCategoryID = [itemData objectForKey: @"category_id"];
+                                    if (![CommonUtils isNull: currentCategoryID] && [currentCategoryID isEqualToString: categoryID]) {
+                                        [orderlists addObject: [itemData objectForKey: @"name"]];
+                                    }
+                                }
+                                
+                                // add orderlist to currentCoffeeLists
+                                obj.orderLists = [orderlists copy];
+                                [currentCoffeelists replaceObjectAtIndex: j withObject: obj.dicObject];
+                            }
+                            
+                        }
+                        
+                        // update firebase
+                        [mCoffeeListDBReference setValue:currentCoffeelists];
+                    }
+                }];
+                
+                
+                
+                
+                
+//                [self getItemsFromSquareup];
+                
+            }
+        }];
+    }
+    
+}
+
+- (void) retrieveTransaction
+{
+    
     FIRDatabaseReference *dbRef;
-    NSString *userID = [[[FIRAuth auth] currentUser] uid];
-//    userID = @"EGSKXZWM3COl253jke9bi5eCzSI3";
-    [self showProgressBar: @"Retrieving Transactions..."];
-    dbRef = [[[[FIRDatabase database] reference] child: userID] child: @"financial_db"];
+    NSString *userID;
+    userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
+    
+    dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"financial_db"];
     if (dbRef != nil) {
-        
+        [self showProgressBar: @"Retrieving Transactions..."];
         [dbRef observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
             hud.hidden = YES;
             if ([snapshot exists]) {
-                NSMutableArray *arr_lastMonthTransactions = [[NSMutableArray alloc] init];
-                NSMutableArray *arr_currentMonthTransactions = [[NSMutableArray alloc] init];
-                for (snapshot in snapshot.children) { // loop in all institution id (bank accounts)
-                    NSDictionary *dic = snapshot.value;
-                    NSArray *lastTransactions = [dic objectForKey: @"last_month_transactions"];
-                    NSArray *currentTransactions = [dic objectForKey: @"transactions"];
-                    
-                    for (int i=0; i<lastTransactions.count; i++) {
-                        [arr_lastMonthTransactions addObject: [lastTransactions objectAtIndex: i]];
-                    }
-                    
-                    for (int i=0; i<currentTransactions.count; i++) {
-                        [arr_currentMonthTransactions addObject: [currentTransactions objectAtIndex: i]];
-                    }
-                    
-                }
                 
-                [self getMaxAmount: arr_currentMonthTransactions lastMonthArray: arr_lastMonthTransactions];
-                if (app.isMaxInLast) {
-                    if (arr_lastMonthTransactions != nil) {
-                        [self handleWithLastMonthTransactions: arr_lastMonthTransactions];
-                        double delayInSeconds = 1.5;
-                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                            if (arr_currentMonthTransactions != nil) {
-                                [self handleWithCurrentMonthTransactions: arr_currentMonthTransactions];
-                            }
-                        });
-                    }
-                } else
-                {
-                    if (arr_currentMonthTransactions != nil) {
-                        [self handleWithCurrentMonthTransactions: arr_currentMonthTransactions];
-                        double delayInSeconds = 1.5;
-                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                            if (arr_lastMonthTransactions != nil) {
-                                [self handleWithLastMonthTransactions: arr_lastMonthTransactions];
-                            }
-                        });
-                    }
-                }
+                [self handleSnapShot: snapshot];
+                [self loadLineChart];
                 
                 // show transactionView
                 transactionView.hidden = NO;
                 bottomLabelView.hidden = YES;
                 
                 
+                
+                
+                
             } else
             {
                 // hide transactionView
                 transactionView.hidden = YES;
-                bottomLabelView.hidden = NO;
+                bottomLabelView.hidden = YES;
             }
+        } withCancelBlock:^(NSError * _Nonnull error) {
+            hud.hidden = YES;
+            NSLog(@"%@", error.localizedDescription);
         }];
         
     } else
     {
         // hide transactionView
         transactionView.hidden = YES;
-        bottomLabelView.hidden = NO;
+        bottomLabelView.hidden = YES;
     }
 }
 
+- (void) handleSnapShot: (FIRDataSnapshot *_Nonnull) snapshot
+{
+    monthlySpendMoney = [[NSMutableDictionary alloc] init];
+    monthlyCreditMoney = [[NSMutableDictionary alloc] init];
+    CGFloat amountOfSameTransactions[6] = {0,0,0,0,0,0};
+    
+    NSString *currentMonthKey = [CommonUtils getMonthKey: [self getDateTime:0 format: @"m"]];
+    
+    for (snapshot in snapshot.children) { // loop in all institution id (bank accounts)
+        
+        NSDictionary *dic = snapshot.value;
+        
+        NSDictionary *monthlyTransactions = [dic objectForKey: kmonthly];
+        
+        NSArray *keys = [monthlyTransactions allKeys];
+        
+        for (int kk=0; kk<keys.count; kk++) {
+            NSString *mKey = [keys objectAtIndex: kk];
+            
+            NSArray *transactionArray = [monthlyTransactions objectForKey: mKey];
+            for (int i=0; i<transactionArray.count; i++)
+            {
+                NSDictionary *everyTransaction = [transactionArray objectAtIndex: i];
+                CGFloat transactionAmount = [[everyTransaction objectForKey: @"amount"] doubleValue];
+                CGFloat oldValue = 0;
+                
+                //                handle spend and credit money
+                if (transactionAmount > 0) {
+                    // spending money
+                    if ([monthlySpendMoney objectForKey: mKey] != nil && ![[monthlySpendMoney objectForKey: mKey] isEqual: [NSNull null]]) {
+                        oldValue = [[monthlySpendMoney objectForKey: mKey] floatValue];
+                        transactionAmount += oldValue;
+                        [monthlySpendMoney setObject: [NSNumber numberWithFloat: transactionAmount] forKey: mKey];
+                    } else
+                        [monthlySpendMoney setObject: [NSNumber numberWithFloat: transactionAmount] forKey: mKey];
+                } else
+                {
+                    // credit money
+                    if ([monthlyCreditMoney objectForKey: mKey] != nil && ![[monthlyCreditMoney objectForKey: mKey] isEqual: [NSNull null]]) {
+                        oldValue = [[monthlyCreditMoney objectForKey: mKey] floatValue];
+                        transactionAmount += oldValue;
+                        [monthlyCreditMoney setObject: [NSNumber numberWithFloat: transactionAmount] forKey: mKey];
+                    } else
+                        [monthlyCreditMoney setObject: [NSNumber numberWithFloat: transactionAmount] forKey: mKey];
+                }
+                
+                //                handle spend and credit money
+                
+                
+                
+                if (![mKey isEqualToString: currentMonthKey]) {
+                    continue;
+                }
+                
+                // handle data for tableview
+                
+                
+                //                currentMonth = @"01";
+                
+                // calculate spending money for only this month
+                NSArray *category = [everyTransaction objectForKey: @"category"];
+                NSString *storeName = [everyTransaction objectForKey: @"name"]; // sub categories in each Store(Shops, Eating)
+                // add categories for shops and eating and create DB -
+                
+                NSString *transactionName; // Stores like Shops and FoodAndDrink(Eating)
+                if (category != nil) {
+                    transactionName = [category objectAtIndex: 0];
+                } else
+                    transactionName = @"other";
+                
+                //
+                BOOL isExist = false;
+                if ([transactionName isEqualToString: @"Shops"]) {
+                    // Shops
+                    
+                    for ( int i = 0; i < app.arrMerchantShops.count; i++) {
+                        if ([storeName isEqualToString: [app.arrMerchantShops objectAtIndex:i]]) {
+                            isExist = true;
+                        }
+                    }
+                    
+                    if (!isExist) {
+                        [app.arrMerchantShops addObject: storeName];
+                    }
+                    
+                } else if ([transactionName isEqualToString: @"Food and Drink"]) {
+                    // Eating
+                    
+                    for ( int i = 0; i < app.arrMerchantEatings.count; i++) {
+                        if ([storeName isEqualToString: [app.arrMerchantEatings objectAtIndex:i]]) {
+                            isExist = true;
+                        }
+                    }
+                    if (!isExist) {
+                        [app.arrMerchantEatings addObject: storeName];
+                    }
+                    
+                }
+                
+                CGFloat amount = [[everyTransaction objectForKey: @"amount"] doubleValue];
+                
+                if (amount > 0) {
+                    if ([transactionName isEqualToString: @"Shops"]) {
+                        amountOfSameTransactions[0]+= amount;
+                    } else if ([transactionName isEqualToString: @"Food and Drink"]) {
+                        amountOfSameTransactions[1]+= amount;
+                    }else if ([transactionName isEqualToString: @"Travel"]) {
+                        amountOfSameTransactions[2]+= amount;
+                    }else if ([transactionName isEqualToString: @"Service"]) {
+                        amountOfSameTransactions[3]+= amount;
+                    } else
+                    {
+                        // other
+                        amountOfSameTransactions[4]+= amount;
+                    }
+                }
+                // handle data for tableview
+                ////////
+                
+            }
+        }
+     
+    }
+    
+    // tableview handle
+
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    
+    NSMutableArray *arr = [[NSMutableArray alloc]  init];
+    
+    NSString *formatted = [formatter stringFromNumber: [NSNumber numberWithFloat: amountOfSameTransactions[0]]];
+    [arr addObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                     @"Shops", @"category",
+                     [@"$" stringByAppendingString: formatted], @"amount", nil]];
+    
+    formatted = [formatter stringFromNumber: [NSNumber numberWithFloat: amountOfSameTransactions[1]]];
+    [arr addObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                     @"Food and Drink", @"category",
+                     [@"$" stringByAppendingString: formatted], @"amount", nil]];
+    
+    formatted = [formatter stringFromNumber: [NSNumber numberWithFloat: amountOfSameTransactions[2]]];
+    [arr addObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                     @"Travel", @"category",
+                     [@"$" stringByAppendingString: formatted], @"amount", nil]];
+    
+    formatted = [formatter stringFromNumber: [NSNumber numberWithFloat: amountOfSameTransactions[3]]];
+    [arr addObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                     @"Service", @"category",
+                     [@"$" stringByAppendingString: formatted], @"amount", nil]];
+    
+    formatted = [formatter stringFromNumber: [NSNumber numberWithFloat: amountOfSameTransactions[4]]];
+    [arr addObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                     @"Other", @"category",
+                     [@"$" stringByAppendingString: formatted], @"amount", nil]];
+    
+
+    shopperCategoriesAmounts = [[NSArray alloc] initWithArray: arr];
+    
+    [table_view reloadData];
+}
+
+- (void)loadLineChart {
+    
+    NSString *currentMonth = [self getDateTime:0 format: @"m"];
+//    currentMonth = @"01";
+    CGFloat sendingAmount = [[monthlySpendMoney objectForKey: [CommonUtils getMonthKey: currentMonth]] doubleValue];
+    CGFloat creditAmount = [[monthlyCreditMoney objectForKey: [CommonUtils getMonthKey: currentMonth]] doubleValue];
+    
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    NSString *formatted = [formatter stringFromNumber: [NSNumber numberWithFloat: sendingAmount]];
+    
+    if (sendingAmount == 0) {
+        _monthlySendAmountLabel.text = @"$0.00";
+    } else
+        _monthlySendAmountLabel.text =[@"$" stringByAppendingString: formatted];
+    
+    
+    if (creditAmount == 0) {
+        _monthlyCreditAmountLabel.text = @"$0.00";
+    } else
+    {
+        NSString *formatted = [formatter stringFromNumber: [NSNumber numberWithFloat: -1*creditAmount]];
+        _monthlyCreditAmountLabel.text = [@"$" stringByAppendingString: formatted];
+    }
+    
+    NSMutableArray *spendMoneyDataPoints = [[NSMutableArray alloc] init];
+    
+    // Build chart data
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Jan"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Feb"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Mar"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Apr"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"May"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Jun"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Jul"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Aug"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Sep"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Oct"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Nov"]];
+    [spendMoneyDataPoints addObject: [CommonUtils getAmountFromDic:monthlySpendMoney key:@"Dec"]];
+  
+    TWRDataSet *moneyValues = [[TWRDataSet alloc] initWithDataPoints: spendMoneyDataPoints fillColor: [UIColor clearColor] strokeColor: [UIColor whiteColor] pointColor: [UIColor whiteColor] pointStrokeColor: [UIColor clearColor]];
+    
+    NSArray *labels = @[@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun",
+                        @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec"];
+    
+    TWRLineChart *line = [[TWRLineChart alloc] initWithLabels:labels
+                                                     dataSets:@[moneyValues]
+                                                     animated: YES];
+    // Load data
+    [_chartView loadLineChart:line];
+
+}
+
+- (NSString *) getDateTime: (int) pastDays format: (NSString *) mFormat
+{
+    //    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+    
+    NSDate *todayDate = [NSDate date];
+    NSTimeInterval timeInterval = -pastDays*24*60*60;
+    NSDate *pastDate = [todayDate dateByAddingTimeInterval: timeInterval];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    if (mFormat == nil) {
+        [dateFormat setDateFormat:@"yyy-MM-dd"];
+    }
+    else if ([mFormat isEqualToString: @"y"]) {
+        [dateFormat setDateFormat:@"yyy"];
+    } else if ([mFormat isEqualToString: @"m"])
+    {
+        [dateFormat setDateFormat:@"MM"];
+    } else if ([mFormat isEqualToString: @"d"])
+    {
+        [dateFormat setDateFormat:@"dd"];
+    }
+    
+    [dateFormat setTimeZone: [NSTimeZone localTimeZone]];
+    NSString *strOfDate = [dateFormat stringFromDate:pastDate];
+    return strOfDate;
+}
+
+/*
+ 
 - (void) getMaxAmount: (NSArray *) currentMonthTransactions lastMonthArray: (NSArray *) lastMonthTransactions
 {
     CGFloat tempAmount = 0;
@@ -540,6 +845,8 @@
     NSLog(@"Max Amount in Categories : %.1f", app.maxAmount);
 }
 
+
+
 - (void) handleWithCurrentMonthTransactions:(NSArray *) arr
 {
     // handle with current month transactions
@@ -551,11 +858,43 @@
         NSDictionary *everyTransaction = [arr objectAtIndex:i];
         
         NSArray *category = [everyTransaction objectForKey: @"category"];
-        NSString *transactionName;
+        NSString *storeName = [everyTransaction objectForKey: @"name"]; // sub categories in each Store(Shops, Eating)
+        // add categories for shops and eating and create DB -
+        
+        NSString *transactionName; // Stores like Shops and FoodAndDrink(Eating)
         if (category != nil) {
             transactionName = [category objectAtIndex: 0];
         } else
             transactionName = @"other";
+        
+        //
+        BOOL isExist = false;
+        if ([transactionName isEqualToString: @"Shops"]) {
+            // Shops
+            
+            for ( int i = 0; i < app.arrMerchantShops.count; i++) {
+                if ([storeName isEqualToString: [app.arrMerchantShops objectAtIndex:i]]) {
+                    isExist = true;
+                }
+            }
+            if (!isExist) {
+                [app.arrMerchantShops addObject: storeName];
+            }
+            
+        } else if ([transactionName isEqualToString: @"Food and Drink"]) {
+            // Eating
+            
+            for ( int i = 0; i < app.arrMerchantEatings.count; i++) {
+                if ([storeName isEqualToString: [app.arrMerchantEatings objectAtIndex:i]]) {
+                    isExist = true;
+                }
+            }
+            if (!isExist) {
+                [app.arrMerchantEatings addObject: storeName];
+            }
+            
+        }
+        //
         CGFloat transactionAmount = [[everyTransaction objectForKey: @"amount"] floatValue];
         //                            NSString *transactionDate = [everyTransaction objectForKey: @"date"];
         if (transactionAmount <= 0) {
@@ -735,7 +1074,7 @@
     [self initLineGraph];
     [table_view reloadData];
     // draw bar chart
-    /*
+    /* -------
      arrayItems = [barChartView createChartDataWithTitles:[NSArray arrayWithObjects:@"Pharmacy", @"Home", @"Travel", @"Entertainment", @"Other", nil]
      values:[NSArray arrayWithObjects:
      amountForChart1,
@@ -745,8 +1084,8 @@
      amountForChart5, nil]
      colors:[NSArray arrayWithObjects:colorChart1, colorChart2, colorChart3, colorChart4, colorChart5, nil]
      labelColors:[NSArray arrayWithObjects:@"000000", @"000000", @"000000", @"000000", @"000000", nil]];
-     
-     // qsort amounts
+ 
+      qsort amounts
      long maxAmount = 0;
      for (int i=0; i<4; i++) {
      for (int j=i; j<5; j++) {
@@ -758,22 +1097,22 @@
      }
      }
      app.maxAmount = amountOfSameTransactions[0];
-     // draw chat
-     //Set the Shape of the Bars (Rounded or Squared) - Rounded is default
+      draw chat
+     Set the Shape of the Bars (Rounded or Squared) - Rounded is default
      [barChartView setupBarViewShape:BarShapeSquared];
-     
-     //Set the Style of the Bars (Glossy, Matte, or Flat) - Glossy is default
+ 
+     Set the Style of the Bars (Glossy, Matte, or Flat) - Glossy is default
      [barChartView setupBarViewStyle:BarStyleGlossy];
-     
-     //Set the Drop Shadow of the Bars (Light, Heavy, or None) - Light is default
+ 
+     Set the Drop Shadow of the Bars (Light, Heavy, or None) - Light is default
      [barChartView setupBarViewShadow:BarShadowLight];
-     
-     //Generate the bar chart using the formatted data
+ 
+     Generate the bar chart using the formatted data
      [barChartView setDataWithArray:arrayItems
      showAxis:DisplayBothAxes
      withColor:[UIColor whiteColor]
-     shouldPlotVerticalLines:YES];*/
-    
+     shouldPlotVerticalLines:YES];
+ /* -------
 }
 
 - (void) handleWithLastMonthTransactions:(NSArray *) arr
@@ -933,7 +1272,6 @@
     {
         [arrForLineGraphDataLastMonth addObject: [NSDictionary dictionaryWithObjectsAndKeys: @"Other", @"category", @"0", @"amount", nil]];
     }
-    
     
     if (!app.isMaxInLast) {
         // reset array
@@ -1114,10 +1452,6 @@
     //    self.labelDates.text = [self labelForDateAtIndex:self.arrayOfDates.count - 1];
 }
 
-/* - (void)lineGraphDidFinishDrawing:(BEMSimpleLineGraphView *)graph {
- // Use this method for tasks after the graph has finished drawing
- } */
-
 //- (NSString *)popUpSuffixForlineGraph:(BEMSimpleLineGraphView *)graph {
 //    return @" people";
 //}
@@ -1126,7 +1460,7 @@
     return @"$ ";
 }
 
-
+*/
 
 - (void) showProgressBar: (NSString *) message
 {
@@ -1153,35 +1487,22 @@
     CustomTableFinancialAccountsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cell_financial" forIndexPath:indexPath];
     NSDictionary *dic = [shopperCategoriesAmounts objectAtIndex: indexPath.row];
     
+    cell.plaid_main_list_view.hidden = YES;
     cell.logo_img.hidden = YES;
-    cell.logo_img_ChartView.image = [UIImage imageNamed: [dic objectForKey: @"icon"]];
-    cell.mLabelAccountName.text = [dic objectForKey: @"category"];
-    cell.minstitutionName.text = [dic objectForKey: @"counts"];
-    
-    char negativeS = [[dic objectForKey: @"amount"] characterAtIndex:0];
-//    if (negativeS == '-') {
-////        cell.mAmounts.textColor = [UIColor redColor];
-//    } else
-////        cell.mAmounts.textColor = [UIColor blackColor];
-    NSString *amountString = [dic objectForKey: @"amount"];
-    float mFloatValue;
-    if ([amountString hasPrefix: @"-"]) {
-        amountString = [amountString substringWithRange: NSMakeRange(1, [amountString length] - 1)];
-        mFloatValue = 0 - [amountString floatValue];
-    } else
-        mFloatValue = [amountString floatValue];
+    CGRect rect = cell.logo_img.frame;
+    rect.size.width = 0;
+    cell.logo_img.frame = rect;
+//    cell.logo_img_ChartView.image = [UIImage imageNamed: [dic objectForKey: @"icon"]];
+    cell.logo_img_ChartView.hidden = YES;
+    cell.minstitutionName.text = [dic objectForKey: @"category"];
+//    cell.minstitutionName.text = [dic objectForKey: @"counts"];
+    [self createBaseLineOfButton: cell.btn_add];
+    cell.mLabelAccountName.text = [dic objectForKey: @"amount"];
+    cell.mLabelAccountName.textColor = [UIColor whiteColor];
+    cell.mAmounts.hidden = YES;
     cell.btn_add.hidden = NO;
-    NSLog(@"%d -- tableviewCounts", shopperCategoriesAmounts.count);
-    NSLog(@"table %d : ok ok ok", indexPath.row);
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    
-    NSString *formatted = [formatter stringFromNumber: [NSNumber numberWithFloat: mFloatValue]];
-    cell.mAmounts.text =[@"$ " stringByAppendingString: formatted];
-//    if (indexPath.row == 0) {
-//        cell.mAmounts.text =[@"$ " stringByAppendingString: formatted];
-//    } else
-//        cell.mAmounts.text = [@"$ " stringByAppendingString: [dic objectForKey: @"amount"]];
+    cell.backgroundColor = [UIColor clearColor];
+
     return cell;
 }
 
@@ -1190,6 +1511,18 @@
     //    NSLog( @"%d --- '%d'", (int)indexPath.row, (int)tableView.tag);
     [tableView deselectRowAtIndexPath: indexPath animated:YES];
     
+}
+
+- (void) createBaseLineOfButton: (UIButton *) button
+{
+    CALayer *border = [CALayer layer];
+    CGFloat borderWidth = 1;
+    border.borderColor = [UIColor whiteColor].CGColor;
+    border.frame = CGRectMake(0, button.frame.size.height - borderWidth, button.frame.size.width, button.frame.size.height);
+    border.borderWidth = borderWidth;
+    [button.layer addSublayer: border];
+    button.layer.masksToBounds = YES;
+
 }
 
 - (void) labelBaseLineCreate
@@ -1208,7 +1541,6 @@
                                    action:@selector(gotoPrivacyPolicy)];
     [privacyPolicyLabel addGestureRecognizer:tap];
     
-    
     CALayer *border2 = [CALayer layer];
     border2.frame = CGRectMake(0, feedbackLabel.frame.size.height - borderWidth, feedbackLabel.frame.size.width, feedbackLabel.frame.size.height);
     border2.borderWidth = borderWidth;
@@ -1226,7 +1558,7 @@
     
     if (app.feedbackAddButtonAndBackButtonFlag) {
         // close FeedbackView        
-        bottomLabelView.hidden = NO;
+        bottomLabelView.hidden = YES;
         mScrollViewMerchantAccounts.hidden = NO;
         oldScrollviewFrame = mScrollViewMerchantAccounts.frame;
         if (app.isSelectedPlusButtonForHome == 0) {
@@ -1279,6 +1611,7 @@
 
 - (void) initMerchantAccountsScrollView
 {
+    [self addMerchantCategories];
 //    mFeedbackView = [self.storyboard instantiateViewControllerWithIdentifier:@"feedbackView"];
 //
 //    [self addChildViewController: mFeedbackView];
@@ -1331,16 +1664,91 @@
 //    [mMerchantTravel didMoveToParentViewController: self];
     
     
-    offSetX = self.view.frame.size.width-2;
+    offSetX = self.view.frame.size.width;
     mScrollViewMerchantAccounts.contentSize = CGSizeMake(self.view.frame.size.width * 3,  100);
-    mScrollViewMerchantAccounts.pagingEnabled = YES;
 //    mScrollViewMerchantAccounts.autoresizesSubviews = YES;
     mScrollViewMerchantAccounts.contentMode = UIViewContentModeScaleToFill;
     
     [mEatingButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
     [mShopsButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
-    [mCoffeeButton setTitleColor: [UIColor blackColor] forState: UIControlStateNormal];
+    [mCoffeeButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
 //    [mTravelButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
+}
+
+- (void) addMerchantCategories
+{
+    // Shops Items
+    
+    if (app.arrMerchantShops.count > 0) {
+        [self updateDBForStores: @"Shops" categoryName: app.arrMerchantShops];
+    }
+    
+    // Eating Items
+    if (app.arrMerchantEatings.count > 0) {
+        [self updateDBForStores: @"Eating" categoryName: app.arrMerchantEatings];
+    }
+    
+}
+
+- (void) updateDBForStores: (NSString *)mStoreName categoryName: (NSArray *) newCategories
+{
+    
+    FIRDatabaseReference *dbRef;
+    NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
+    
+    dbRef = [[[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"stores_db"] child: mStoreName];
+    if (dbRef != nil) {
+        
+        [dbRef observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
+            if ([snapshot exists]) {
+                NSMutableArray *existCategories = snapshot.value;
+                BOOL isExist = false;
+                for (int i = 0; i < newCategories.count; i++) { // new 1, 2, 3   exist: 2, 3 , 5
+                    for (int j = 0; j < existCategories.count; j ++) {
+                        if ([[newCategories objectAtIndex: i] isEqualToString: [existCategories objectAtIndex: j]]) {
+                            // if categories already exists...
+                            isExist = true;
+                            j = (int)existCategories.count - 1;
+                        }
+                        
+                        if ( j == existCategories.count - 1 && !isExist) {
+                            [existCategories addObject: [newCategories objectAtIndex: i]];
+                        } else
+                        {
+                            isExist = false;
+                            
+                        }
+                    }
+                    
+                }
+                
+                [dbRef setValue: existCategories];
+                [self initMerchantArray: mStoreName];
+                
+            } else
+            {
+                [dbRef setValue: newCategories];
+                [self initMerchantArray: mStoreName];
+            }
+        }];
+        
+    } else
+    {
+        [dbRef setValue: newCategories];
+        [self initMerchantArray: mStoreName];
+        
+    }
+    
+}
+
+- (void) initMerchantArray: (NSString *) storeName
+{
+    if ([storeName isEqualToString: @"Shops"]) {
+        app.arrMerchantShops = [[NSMutableArray alloc] initWithCapacity: 30];
+    } else
+    {
+        app.arrMerchantEatings = [[NSMutableArray alloc] initWithCapacity: 30];
+    }
 }
 
 - (IBAction)didSelectPhamacy:(id)sender {
@@ -1354,7 +1762,7 @@
         
         [mEatingButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
         [mShopsButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
-        [mCoffeeButton setTitleColor: [UIColor blackColor] forState: UIControlStateNormal];
+        [mCoffeeButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
 //        [mTravelButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
     } else if (selectedButton.tag == 20) // tapped Shops
     {
@@ -1367,7 +1775,7 @@
         
         
         [mEatingButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
-        [mShopsButton setTitleColor: [UIColor blackColor] forState: UIControlStateNormal];
+        [mShopsButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
         [mCoffeeButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
 //        [mTravelButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
     } else if (selectedButton.tag == 30) // Eating
@@ -1378,7 +1786,7 @@
             currentX = 2*offSetX;
         }
         
-        [mEatingButton setTitleColor: [UIColor blackColor] forState: UIControlStateNormal];
+        [mEatingButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
         [mShopsButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
         [mCoffeeButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
 //        [mTravelButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
@@ -1399,25 +1807,26 @@
 
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+
     currentX = mScrollViewMerchantAccounts.contentOffset.x;
     NSLog( @"OFFSETX----- %f", offSetX);
     if (currentX == 0) {
         [mEatingButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
         [mShopsButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
-        [mCoffeeButton setTitleColor: [UIColor blackColor] forState: UIControlStateNormal];
+        [mCoffeeButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
 //        [mTravelButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
         
     } else if (currentX == offSetX)
     {
         [mEatingButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
-        [mShopsButton setTitleColor: [UIColor blackColor] forState: UIControlStateNormal];
+        [mShopsButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
         [mCoffeeButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
 //        [mTravelButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
 //        offSetX = currentX;
         
     } else if (currentX == 2*offSetX)
     {
-        [mEatingButton setTitleColor: [UIColor blackColor] forState: UIControlStateNormal];
+        [mEatingButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
         [mShopsButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
         [mCoffeeButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];
 //        [mTravelButton setTitleColor: [UIColor grayColor] forState: UIControlStateNormal];

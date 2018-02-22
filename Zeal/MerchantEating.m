@@ -27,6 +27,8 @@
     AppDelegate *app;
     MBProgressHUD *hud;
     NSString *selectedSectionName;
+    NSString *userID;
+    NSDictionary *eatingDic;
 }
 @end
 
@@ -49,8 +51,32 @@
     hud.label.text = message;
 }
 
+- (void) getEatingItems
+{
+    eatingDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                 @"dick_drive_In_logo_v1", @"DICK'S DRIVE-IN WALLINGFO",
+                 @"cruisers_pizza_logo_v1", @"CRUISER`S PIZZA",
+                 @"phobac_image_V1", @"PHO BAC RESTAURANT",
+                 @"than_Brothers_Image_v1", @"THAN BROTHERS WALLINGSeattle",
+                 @"", @"CONTINENTAL STORES LONDON",
+                 @"jamie's italian_v1", @"JAMIES ITALIAN COVENT GARDEN",
+                 @"peyton & Bryne_v1", @"PEYTON & BYRNE COVENT GARDEN",
+                 @"the_ten_bell_image_v1", @"THE TEN BELLS LONDON",
+                 @"tnt_taqueria_v1", @"TNT Taqueria",
+                 @"", @"THE RED DOOR",
+                 @"", @"BOB KOREAN BBQ",
+                 @"local_360_image_v1", @"Local 360",
+                 @"mean_sandwich_image_v1", @"MEAN SANDWICH",
+                 @"yoroshiku_image_v1", @"YOROSHIKU",
+                 @"", @"CAFE 26 18027102",
+                 @"masala-zone_v1", @"MASALA ZONE - COVENT GARDEN",
+                 @"ThuysPho_v1", @"THUY S PHO", nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self getEatingItems];
     
     arrayForBoolOrder = [[NSMutableArray alloc] init];
     arrForBoolHistory = [[NSMutableArray alloc] init];
@@ -76,46 +102,50 @@
     strRateVIP = @"null";
     strRateProduct = @"null";
     
-    arrOfTableView = [[NSMutableArray alloc] initWithArray: app.arr_eating_merchantAccounts];
-    for (int i=0; i<[arrOfTableView count]; i++) {
-        [arrayForBoolOrder addObject:[NSNumber numberWithBool:NO]];
-        [arrForBoolHistory addObject:[NSNumber numberWithBool:NO]];
-    }
-    
-    NSString *userID = [[[FIRAuth auth] currentUser] uid];
-    mFirebaseDBReference = [[[[FIRDatabase database] reference] child: userID] child: @"rate_db_home"];
-    
-    if (mFirebaseDBReference != nil) {
-        
-        [mFirebaseDBReference observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
-            if ([snapshot exists]) {
-                
-                NSMutableArray *tempArray = [[NSMutableArray alloc] initWithArray: app.arr_eating_merchantAccounts];
-                for (snapshot in snapshot.children) {
-                    NSString *key = snapshot.key;
-                    
-                    for (int i = 0; i < tempArray.count; i ++) {
-                        NSDictionary *rowInArray = [tempArray objectAtIndex: i];
-                        if ([key isEqualToString: [rowInArray objectForKey: @"title_name"]]) {
-                            strRateVIP = [snapshot.value objectForKey: VIP_KEY];
-                            strRateProduct = [snapshot.value objectForKey: PRODUCT_KEY];
-                            NSString *oldLogoStr = [rowInArray objectForKey: @"img_name"];
-                            NSString *oldSubStr = [rowInArray objectForKey: @"category"];
-                            NSString *oldlink = [rowInArray objectForKey: @"link"];
-                            [tempArray replaceObjectAtIndex: i withObject:
-                             [[NSDictionary alloc] initWithObjectsAndKeys: oldLogoStr, @"img_name", key, @"title_name", oldSubStr, @"category", strRateVIP, @"rate_vip", strRateProduct, @"rate_product", oldlink, @"link", nil]];
-                        }
-                    }
-                    
-                }
-                
-                app.arr_eating_merchantAccounts = [[NSArray alloc] initWithArray: tempArray];
-//                [table_view reloadData];
-                
+    userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
+    mFirebaseDBReference = [[[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"stores_db"] child: @"Eating"];
+    [mFirebaseDBReference observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        if (snapshot.exists) {
+            arrOfTableView = snapshot.value;
+            for (int i=0; i<[arrOfTableView count]; i++) {
+                [arrayForBoolOrder addObject:[NSNumber numberWithBool:NO]];
+                [arrForBoolHistory addObject:[NSNumber numberWithBool:NO]];
             }
-        }];
-        
-    }
+            [table_view reloadData];
+        }
+    }];
+    
+//    if (mFirebaseDBReference != nil) {
+//
+//        [mFirebaseDBReference observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
+//            if ([snapshot exists]) {
+//
+//                NSMutableArray *tempArray = [[NSMutableArray alloc] initWithArray: app.arr_eating_merchantAccounts];
+//                for (snapshot in snapshot.children) {
+//                    NSString *key = snapshot.key;
+//
+//                    for (int i = 0; i < tempArray.count; i ++) {
+//                        NSDictionary *rowInArray = [tempArray objectAtIndex: i];
+//                        if ([key isEqualToString: [rowInArray objectForKey: @"title_name"]]) {
+//                            strRateVIP = [snapshot.value objectForKey: VIP_KEY];
+//                            strRateProduct = [snapshot.value objectForKey: PRODUCT_KEY];
+//                            NSString *oldLogoStr = [rowInArray objectForKey: @"img_name"];
+//                            NSString *oldSubStr = [rowInArray objectForKey: @"category"];
+//                            NSString *oldlink = [rowInArray objectForKey: @"link"];
+//                            [tempArray replaceObjectAtIndex: i withObject:
+//                             [[NSDictionary alloc] initWithObjectsAndKeys: oldLogoStr, @"img_name", key, @"title_name", oldSubStr, @"category", strRateVIP, @"rate_vip", strRateProduct, @"rate_product", oldlink, @"link", nil]];
+//                        }
+//                    }
+//
+//                }
+//
+//                app.arr_eating_merchantAccounts = [[NSArray alloc] initWithArray: tempArray];
+////                [table_view reloadData];
+//
+//            }
+//        }];
+//
+//    }
     
 }
 
@@ -160,9 +190,10 @@
     
     /********** If the section supposed to be closed *******************/
     cell.orderView.hidden = YES;
+    cell.backgroundColor=[UIColor clearColor];
     if(!manyCellsWhenOrder && !manyCellsWhenHistory)
     {
-        cell.backgroundColor=[UIColor clearColor];
+        
         
         cell.titleLabel.text=@"";
         
@@ -175,13 +206,11 @@
         cell.layer.cornerRadius = 10;
         cell.layer.masksToBounds = true;
         if (indexPath.row == 0) {
-            cell.orderView2.backgroundColor=[UIColor whiteColor];
             cell.order2_title.text = @"The Order feature is currently unavailable";
             cell.order2_detail.hidden = YES;
         } else
         {
             cell.order2_detail.hidden = NO;
-            cell.orderView2.backgroundColor=[UIColor groupTableViewBackgroundColor];
             cell.order2_title.text = @"Zeal Users often save on average $00.00";
             cell.order2_detail.text = @"Sales often happen in September";
         }
@@ -192,10 +221,9 @@
         cell.avr_spendAmount.text = @"$ 0.00";
         
         // retrieving data from Database (Plaid)
-        NSString *userID = [[[FIRAuth auth] currentUser] uid];
+        NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
         
-//        userID = @"EGSKXZWM3COl253jke9bi5eCzSI3";
-        FIRDatabaseReference *dbRef = [[[[FIRDatabase database] reference] child: userID] child: @"financial_db"];
+        FIRDatabaseReference *dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"financial_db"];
         
         if (dbRef != nil) {
             [self showProgressBar: @"Retrieving Transactions..."];
@@ -234,21 +262,18 @@
                         }
                         cell.orderView2.hidden = YES;
                         cell.historyView.hidden = NO;
-                        cell.backgroundColor=[UIColor whiteColor];
                     }
                 } else
                 {
                     
                     cell.orderView2.hidden = YES;
                     cell.historyView.hidden = NO;
-                    cell.backgroundColor=[UIColor whiteColor];
                 }
             }];
         } else
         {
             cell.orderView2.hidden = YES;
             cell.historyView.hidden = NO;
-            cell.backgroundColor=[UIColor whiteColor];
         }
         
     }
@@ -342,20 +367,26 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, table_view.frame.size.width-20,DESIRED_HEADER_HEIGHT)];
+    UIView *sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, table_view.frame.size.width-10,DESIRED_HEADER_HEIGHT)];
     
-    UILabel *viewLabel=[[UILabel alloc]initWithFrame:CGRectMake(DESIRED_HEADER_HEIGHT, 10, table_view.frame.size.width-20, DESIRED_HEADER_HEIGHT-30)];
+    UILabel *viewLabel=[[UILabel alloc]initWithFrame:CGRectMake(55, 10, table_view.frame.size.width-2*55, DESIRED_HEADER_HEIGHT-30)];
+    NSArray *fontFamilies = [UIFont familyNames];
+    
     viewLabel.backgroundColor=[UIColor clearColor];
-    viewLabel.textColor=[UIColor blackColor];
+    viewLabel.textColor=[UIColor whiteColor];
+    viewLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    viewLabel.numberOfLines = 0;
     viewLabel.font=[UIFont fontWithName: @"Roboto-Bold" size:16];
-    viewLabel.text=[[arrOfTableView objectAtIndex: section] objectForKey:@"title_name"];
+//    viewLabel.text=[[arrOfTableView objectAtIndex: section] objectForKey:@"title_name"];
+    NSString *eatingName =[arrOfTableView objectAtIndex: section];
+    viewLabel.text = eatingName;
     [sectionView addSubview:viewLabel];
     
     /********** Add "Order" Label *******************/
-    UILabel *orderLabel=[[UILabel alloc]initWithFrame:CGRectMake(DESIRED_HEADER_HEIGHT, DESIRED_HEADER_HEIGHT-20, 100, 20)];
+    UILabel *orderLabel=[[UILabel alloc]initWithFrame:CGRectMake(55, DESIRED_HEADER_HEIGHT-20, 100, 20)];
     orderLabel.backgroundColor=[UIColor clearColor];
     
-    orderLabel.textColor=[UIColor grayColor];
+    orderLabel.textColor=[UIColor blackColor];
     orderLabel.font=[UIFont systemFontOfSize:13];
     orderLabel.tag=section;
     orderLabel.userInteractionEnabled = YES;
@@ -373,8 +404,8 @@
     UILabel *historyLabel=[[UILabel alloc]initWithFrame:CGRectMake(table_view.frame.size.width - DESIRED_HEADER_HEIGHT, DESIRED_HEADER_HEIGHT-20, 100, 20)];
     historyLabel.backgroundColor=[UIColor clearColor];
     
-    historyLabel.textColor=[UIColor grayColor];
-    historyLabel.font=[UIFont systemFontOfSize:13];
+    historyLabel.textColor=[UIColor blackColor];
+    historyLabel.font=[UIFont systemFontOfSize:12];
     historyLabel.tag=section;
     historyLabel.userInteractionEnabled = YES;
     historyLabel.text= @"History";
@@ -387,8 +418,8 @@
     [sectionView addSubview:historyLabel];
     
     /********** Add a custom Separator with Section view *******************/
-    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(10, DESIRED_HEADER_HEIGHT, table_view.frame.size.width-20, 1)];
-    separatorLineView.backgroundColor = [UIColor grayColor];
+    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(5, DESIRED_HEADER_HEIGHT, table_view.frame.size.width-10, 1)];
+    separatorLineView.backgroundColor = [UIColor whiteColor];
     [sectionView addSubview:separatorLineView];
     
     /********** Add UITapGestureRecognizer to SectionView   **************/
@@ -398,18 +429,54 @@
     
     UITapGestureRecognizer  *historyLabelTapped   = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectHistoryLabel:)];
     [historyLabel addGestureRecognizer:historyLabelTapped];
-    
-    UIImage *image = [UIImage imageNamed: [[arrOfTableView objectAtIndex: section] objectForKey:@"img_name"]];
+
+    // add logo
+    UIImage *image = [UIImage imageNamed: @"food_and_drinks_icon"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     
-    imageView.backgroundColor = [UIColor redColor];
-    imageView.frame = CGRectMake(10, 10, 50, 50);
+//    NSString *imgName = [eatingDic objectForKey: eatingName];
+//    if (image != nil && ![imgName isEqualToString: @""]) {
+//        imageView.image = [UIImage imageNamed: imgName];
+//    }
+    
+    imageView.backgroundColor = [UIColor clearColor];
+    imageView.frame = CGRectMake(0, 10, 50, 50);
     [self drawCircleIcon: imageView];
     [sectionView addSubview: imageView];
+    
+    // add deleteButton
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button.tag = section + 1000;
+//    button.frame = CGRectMake(table_view.frame.size.width-50, (DESIRED_HEADER_HEIGHT-20)/2, 40, 20);
+//    [button setImage:[UIImage imageNamed:@"delete-button-hi"] forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    [sectionView addSubview:button];
     
     return  sectionView;
     
     
+}
+
+- (IBAction)deleteButtonPressed:(UIButton *)sender {
+    NSInteger section = sender.tag - 1000;
+    
+    [arrOfTableView removeObjectAtIndex: section];
+    [mFirebaseDBReference setValue: arrOfTableView];
+    
+    arrayForBoolOrder = [[NSMutableArray alloc] init];
+    arrForBoolHistory = [[NSMutableArray alloc] init];
+    for (int i=0; i<[arrOfTableView count]; i++) {
+        [arrayForBoolOrder addObject:[NSNumber numberWithBool:NO]];
+        [arrForBoolHistory addObject:[NSNumber numberWithBool:NO]];
+    }
+    [table_view reloadData];
+    
+//    [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    // reload sections to get the new titles and tags
+//    NSInteger sectionCount = [self.objects count];
+//    NSIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(0, sectionCount)];
+//    [self.table_view reloadSections:indexes withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
@@ -441,7 +508,7 @@
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:gestureRecognizer.view.tag];
     int mTag = (int)gestureRecognizer.view.tag;
-    selectedSectionName = [[arrOfTableView objectAtIndex: mTag] objectForKey:@"title_name"];
+    selectedSectionName = [arrOfTableView objectAtIndex: mTag];
     if (indexPath.row == 0) {
         BOOL collapsed  = [[arrForBoolHistory objectAtIndex:indexPath.section] boolValue];
         for (int i=0; i<[arrOfTableView count]; i++) {

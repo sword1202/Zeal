@@ -14,7 +14,6 @@
 
 @interface PlaidHTTPClient : AFHTTPSessionManager
 
-#define kPlaidBaseURL @"https://development.plaid.com"//sandbox (tartan, development, production)
 
 + (PlaidHTTPClient *)sharedPlaidHTTPClient;
 

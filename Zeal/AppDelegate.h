@@ -18,8 +18,9 @@
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) NSArray *arr_shops_merchantAccounts;
 @property (nonatomic, strong) NSArray *arr_eating_merchantAccounts;
-@property (nonatomic, strong) NSArray *arr_coffee_merchantAccounts;
 @property (nonatomic, strong) NSArray *arr_travel_merchantAccounts;
+@property (nonatomic, strong) NSMutableArray *arrMerchantShops;
+@property (nonatomic, strong) NSMutableArray *arrMerchantEatings;
 @property (nonatomic, assign) int indexOfSelectedMenu;
 @property (nonatomic, retain) NSString *mUserName;
 @property (nonatomic, retain) NSString *mUserID;

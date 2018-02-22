@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C1A3A65203BD01300D6D165 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A3A64203BD01300D6D165 /* CommonUtils.m */; };
 		6C229CF21F3018A9008B4850 /* expandableImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C229CEA1F3018A9008B4850 /* expandableImage.png */; };
 		6C229CF31F3018A9008B4850 /* expandableImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C229CEB1F3018A9008B4850 /* expandableImage@2x.png */; };
 		6C229CF41F3018A9008B4850 /* SKSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C229CED1F3018A9008B4850 /* SKSTableView.m */; };
 		6C229CF51F3018A9008B4850 /* SKSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C229CEF1F3018A9008B4850 /* SKSTableViewCell.m */; };
 		6C229CF61F3018A9008B4850 /* SKSTableViewCellIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C229CF11F3018A9008B4850 /* SKSTableViewCellIndicator.m */; };
+		6C24732B2027E8FB0034C497 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C24732A2027E8FB0034C497 /* Assets.xcassets */; };
 		6C42CBE61EFF1A1000DBA198 /* BEMAverageLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42CBDD1EFF1A1000DBA198 /* BEMAverageLine.m */; };
 		6C42CBE71EFF1A1000DBA198 /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42CBDF1EFF1A1000DBA198 /* BEMCircle.m */; };
 		6C42CBE81EFF1A1000DBA198 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42CBE11EFF1A1000DBA198 /* BEMLine.m */; };
@@ -31,6 +33,16 @@
 		6CB399851EDE2BA700149C5D /* MerchantEating.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB399831EDE2BA700149C5D /* MerchantEating.xib */; };
 		6CB399911EE0B4D000149C5D /* CustomTableViewCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3998F1EE0B4D000149C5D /* CustomTableViewCell2.m */; };
 		6CB399921EE0B4D000149C5D /* CustomTableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB399901EE0B4D000149C5D /* CustomTableViewCell2.xib */; };
+		6CBAB6CD2023869F00E46A6B /* TWRBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBAB6BC2023869C00E46A6B /* TWRBarChart.m */; };
+		6CBAB6CE2023869F00E46A6B /* TWRCircularChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBAB6BD2023869D00E46A6B /* TWRCircularChart.m */; };
+		6CBAB6CF2023869F00E46A6B /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBAB6C22023869D00E46A6B /* UIColor+HexString.m */; };
+		6CBAB6D02023869F00E46A6B /* TWRChartBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBAB6C32023869D00E46A6B /* TWRChartBuilder.m */; };
+		6CBAB6D12023869F00E46A6B /* TWRDataSet+Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBAB6C62023869E00E46A6B /* TWRDataSet+Strings.m */; };
+		6CBAB6D22023869F00E46A6B /* TWRLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBAB6C72023869E00E46A6B /* TWRLineChart.m */; };
+		6CBAB6D32023869F00E46A6B /* TWRChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBAB6C92023869E00E46A6B /* TWRChartView.m */; };
+		6CBAB6D42023869F00E46A6B /* TWRDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBAB6CB2023869E00E46A6B /* TWRDataSet.m */; };
+		6CBAB6D72023EAAC00E46A6B /* ChartNew.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 6CBAB6D52023EAAC00E46A6B /* ChartNew.min.js */; };
+		6CBAB6D82023EAAC00E46A6B /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 6CBAB6D62023EAAC00E46A6B /* index.html */; };
 		6CBF93B21EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93B01EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m */; };
 		6CBF93B31EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CBF93B11EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib */; };
 		6CBF93BC1EEDFE950036EBA3 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBF93B71EEDFE950036EBA3 /* MFSideMenuContainerViewController.m */; };
@@ -64,9 +76,10 @@
 		6CD9B03D1ED3874B003ADF99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD9B03C1ED3874B003ADF99 /* AppDelegate.m */; };
 		6CD9B0401ED3874B003ADF99 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD9B03F1ED3874B003ADF99 /* HomeViewController.m */; };
 		6CD9B0431ED3874B003ADF99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CD9B0411ED3874B003ADF99 /* Main.storyboard */; };
-		6CD9B0451ED3874B003ADF99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CD9B0441ED3874B003ADF99 /* Assets.xcassets */; };
 		6CD9B0481ED3874B003ADF99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CD9B0461ED3874B003ADF99 /* LaunchScreen.storyboard */; };
 		6CD9B0541ED39178003ADF99 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD9B0531ED39178003ADF99 /* LoginViewController.m */; };
+		6CDB4ADF203D09860051113D /* SquareHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB4ADE203D09860051113D /* SquareHttpClient.m */; };
+		6CDB4AE3203D8B070051113D /* CoffeeObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB4AE2203D8B070051113D /* CoffeeObj.m */; };
 		F7364C240F2CDE19B79C865E /* Pods_Zeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3CCF38D5C1C19A98F1DAAE /* Pods_Zeal.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +98,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6C1A3A63203BD01300D6D165 /* CommonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
+		6C1A3A64203BD01300D6D165 /* CommonUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
 		6C229CEA1F3018A9008B4850 /* expandableImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expandableImage.png; sourceTree = "<group>"; };
 		6C229CEB1F3018A9008B4850 /* expandableImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expandableImage@2x.png"; sourceTree = "<group>"; };
 		6C229CEC1F3018A9008B4850 /* SKSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSTableView.h; sourceTree = "<group>"; };
@@ -93,6 +108,7 @@
 		6C229CEF1F3018A9008B4850 /* SKSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSTableViewCell.m; sourceTree = "<group>"; };
 		6C229CF01F3018A9008B4850 /* SKSTableViewCellIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSTableViewCellIndicator.h; sourceTree = "<group>"; };
 		6C229CF11F3018A9008B4850 /* SKSTableViewCellIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSTableViewCellIndicator.m; sourceTree = "<group>"; };
+		6C24732A2027E8FB0034C497 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C42CBDC1EFF1A1000DBA198 /* BEMAverageLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAverageLine.h; sourceTree = "<group>"; };
 		6C42CBDD1EFF1A1000DBA198 /* BEMAverageLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAverageLine.m; sourceTree = "<group>"; };
 		6C42CBDE1EFF1A1000DBA198 /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
@@ -106,6 +122,9 @@
 		6C4F85341EF8B46D00D192F1 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		6C4F85351EF8B46D00D192F1 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		6C4F85361EF8B51D00D192F1 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		6C5C9864201BE1C200BF64FF /* Zeal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Zeal-Bridging-Header.h"; sourceTree = "<group>"; };
+		6C6102551FF49BE80081CA6B /* AppConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConstant.h; sourceTree = "<group>"; };
+		6C61025C1FF49DE50081CA6B /* Zeal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Zeal-Prefix.pch"; sourceTree = "<group>"; };
 		6C6B95531F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellForCoffeeTableViewCell.h; sourceTree = "<group>"; };
 		6C6B95541F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellForCoffeeTableViewCell.m; sourceTree = "<group>"; };
 		6C6B95551F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellForCoffeeTableViewCell.xib; sourceTree = "<group>"; };
@@ -127,6 +146,25 @@
 		6CB3998E1EE0B4D000149C5D /* CustomTableViewCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell2.h; sourceTree = "<group>"; };
 		6CB3998F1EE0B4D000149C5D /* CustomTableViewCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell2.m; sourceTree = "<group>"; };
 		6CB399901EE0B4D000149C5D /* CustomTableViewCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell2.xib; sourceTree = "<group>"; };
+		6CBAB6BC2023869C00E46A6B /* TWRBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWRBarChart.m; sourceTree = "<group>"; };
+		6CBAB6BD2023869D00E46A6B /* TWRCircularChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWRCircularChart.m; sourceTree = "<group>"; };
+		6CBAB6BE2023869D00E46A6B /* TWRBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWRBarChart.h; sourceTree = "<group>"; };
+		6CBAB6BF2023869D00E46A6B /* TWRDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWRDataSet.h; sourceTree = "<group>"; };
+		6CBAB6C02023869D00E46A6B /* TWRLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWRLineChart.h; sourceTree = "<group>"; };
+		6CBAB6C12023869D00E46A6B /* TWRChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWRChart.h; sourceTree = "<group>"; };
+		6CBAB6C22023869D00E46A6B /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
+		6CBAB6C32023869D00E46A6B /* TWRChartBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWRChartBuilder.m; sourceTree = "<group>"; };
+		6CBAB6C42023869D00E46A6B /* TWRChartBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWRChartBuilder.h; sourceTree = "<group>"; };
+		6CBAB6C52023869E00E46A6B /* TWRDataSet+Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TWRDataSet+Strings.h"; sourceTree = "<group>"; };
+		6CBAB6C62023869E00E46A6B /* TWRDataSet+Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TWRDataSet+Strings.m"; sourceTree = "<group>"; };
+		6CBAB6C72023869E00E46A6B /* TWRLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWRLineChart.m; sourceTree = "<group>"; };
+		6CBAB6C82023869E00E46A6B /* TWRChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWRChartView.h; sourceTree = "<group>"; };
+		6CBAB6C92023869E00E46A6B /* TWRChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWRChartView.m; sourceTree = "<group>"; };
+		6CBAB6CA2023869E00E46A6B /* TWRCircularChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWRCircularChart.h; sourceTree = "<group>"; };
+		6CBAB6CB2023869E00E46A6B /* TWRDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWRDataSet.m; sourceTree = "<group>"; };
+		6CBAB6CC2023869E00E46A6B /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
+		6CBAB6D52023EAAC00E46A6B /* ChartNew.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ChartNew.min.js; sourceTree = "<group>"; };
+		6CBAB6D62023EAAC00E46A6B /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		6CBF93AF1EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableFinancialAccountsTableViewCell.h; sourceTree = "<group>"; };
 		6CBF93B01EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableFinancialAccountsTableViewCell.m; sourceTree = "<group>"; };
 		6CBF93B11EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableFinancialAccountsTableViewCell.xib; sourceTree = "<group>"; };
@@ -171,6 +209,7 @@
 		6CCB36DB1FC6F07000EEE438 /* MerchantTravelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MerchantTravelViewController.h; sourceTree = "<group>"; };
 		6CCB36DC1FC6F07000EEE438 /* MerchantTravelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MerchantTravelViewController.m; sourceTree = "<group>"; };
 		6CCB36E01FC6FC1100EEE438 /* MerchantTravelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MerchantTravelViewController.xib; sourceTree = "<group>"; };
+		6CCF2FBF1FFE6CBF006DAB76 /* Zeal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Zeal.entitlements; sourceTree = "<group>"; };
 		6CD3550A1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantAccountRateReviewsViewController.h; sourceTree = "<group>"; };
 		6CD3550B1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantAccountRateReviewsViewController.m; sourceTree = "<group>"; };
 		6CD3550E1EE5DDB400D1508F /* HCSStarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSStarRatingView.h; sourceTree = "<group>"; };
@@ -185,11 +224,14 @@
 		6CD9B03E1ED3874B003ADF99 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6CD9B03F1ED3874B003ADF99 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		6CD9B0421ED3874B003ADF99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6CD9B0441ED3874B003ADF99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CD9B0471ED3874B003ADF99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CD9B0491ED3874B003ADF99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CD9B0521ED39178003ADF99 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6CD9B0531ED39178003ADF99 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6CDB4ADD203D09860051113D /* SquareHttpClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquareHttpClient.h; sourceTree = "<group>"; };
+		6CDB4ADE203D09860051113D /* SquareHttpClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SquareHttpClient.m; sourceTree = "<group>"; };
+		6CDB4AE1203D8B070051113D /* CoffeeObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoffeeObj.h; sourceTree = "<group>"; };
+		6CDB4AE2203D8B070051113D /* CoffeeObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoffeeObj.m; sourceTree = "<group>"; };
 		7F3CCF38D5C1C19A98F1DAAE /* Pods_Zeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6FBBEFEB75EBB5008300B41 /* Pods-Zeal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeal/Pods-Zeal.debug.xcconfig"; sourceTree = "<group>"; };
 		DD273674B4856BFCF9D6E0AB /* Pods-Zeal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zeal/Pods-Zeal.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +276,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6C1A3A62203BCFF100D6D165 /* CommonUtils */ = {
+			isa = PBXGroup;
+			children = (
+				6C1A3A63203BD01300D6D165 /* CommonUtils.h */,
+				6C1A3A64203BD01300D6D165 /* CommonUtils.m */,
+			);
+			name = CommonUtils;
+			sourceTree = "<group>";
+		};
 		6C229CE91F3018A9008B4850 /* SKTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +315,36 @@
 				6C42CBE51EFF1A1000DBA198 /* BEMSimpleLineGraphView.m */,
 			);
 			path = LineGraphClasses;
+			sourceTree = "<group>";
+		};
+		6C61025A1FF49D7C0081CA6B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6CD9B03E1ED3874B003ADF99 /* HomeViewController.h */,
+				6CD9B03F1ED3874B003ADF99 /* HomeViewController.m */,
+				6CD9B0521ED39178003ADF99 /* LoginViewController.h */,
+				6CD9B0531ED39178003ADF99 /* LoginViewController.m */,
+				6C91FBA61EDB8245000243DA /* MainViewController.h */,
+				6C91FBA71EDB8245000243DA /* MainViewController.m */,
+				6CBF93C51EEE068B0036EBA3 /* SideMenuViewController.h */,
+				6CBF93C61EEE068B0036EBA3 /* SideMenuViewController.m */,
+				6CB399931EE0D51D00149C5D /* MerchantSubViewControllers */,
+				6CD355191EE83AB100D1508F /* PlaidAPIViewController.h */,
+				6CD3551A1EE83AB100D1508F /* PlaidAPIViewController.m */,
+				6CBF93AF1EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.h */,
+				6CBF93B01EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m */,
+				6CBF93B11EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6C61025B1FF49DA30081CA6B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6C6102551FF49BE80081CA6B /* AppConstant.h */,
+				6C61025C1FF49DE50081CA6B /* Zeal-Prefix.pch */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		6CB399691EDD089B00149C5D /* CustomClasses */ = {
@@ -304,6 +385,32 @@
 				6CD3550F1EE5DDB400D1508F /* HCSStarRatingView.m */,
 			);
 			name = MerchantSubViewControllers;
+			sourceTree = "<group>";
+		};
+		6CBAB6BB2023865600E46A6B /* ChartControlls */ = {
+			isa = PBXGroup;
+			children = (
+				6CBAB6D52023EAAC00E46A6B /* ChartNew.min.js */,
+				6CBAB6D62023EAAC00E46A6B /* index.html */,
+				6CBAB6BE2023869D00E46A6B /* TWRBarChart.h */,
+				6CBAB6BC2023869C00E46A6B /* TWRBarChart.m */,
+				6CBAB6C12023869D00E46A6B /* TWRChart.h */,
+				6CBAB6C42023869D00E46A6B /* TWRChartBuilder.h */,
+				6CBAB6C32023869D00E46A6B /* TWRChartBuilder.m */,
+				6CBAB6C82023869E00E46A6B /* TWRChartView.h */,
+				6CBAB6C92023869E00E46A6B /* TWRChartView.m */,
+				6CBAB6CA2023869E00E46A6B /* TWRCircularChart.h */,
+				6CBAB6BD2023869D00E46A6B /* TWRCircularChart.m */,
+				6CBAB6BF2023869D00E46A6B /* TWRDataSet.h */,
+				6CBAB6CB2023869E00E46A6B /* TWRDataSet.m */,
+				6CBAB6C52023869E00E46A6B /* TWRDataSet+Strings.h */,
+				6CBAB6C62023869E00E46A6B /* TWRDataSet+Strings.m */,
+				6CBAB6C02023869D00E46A6B /* TWRLineChart.h */,
+				6CBAB6C72023869E00E46A6B /* TWRLineChart.m */,
+				6CBAB6CC2023869E00E46A6B /* UIColor+HexString.h */,
+				6CBAB6C22023869D00E46A6B /* UIColor+HexString.m */,
+			);
+			name = ChartControlls;
 			sourceTree = "<group>";
 		};
 		6CBF93B41EEDFE7B0036EBA3 /* MFSideMenu */ = {
@@ -411,29 +518,22 @@
 		6CD9B0371ED3874B003ADF99 /* Zeal */ = {
 			isa = PBXGroup;
 			children = (
+				6CCF2FBF1FFE6CBF006DAB76 /* Zeal.entitlements */,
+				6CBAB6BB2023865600E46A6B /* ChartControlls */,
 				6C42CBDB1EFF1A1000DBA198 /* LineGraphClasses */,
 				6CBF93D01EF2B2B80036EBA3 /* BarChart Library */,
 				6C229CE91F3018A9008B4850 /* SKTableView */,
 				6CBF93B41EEDFE7B0036EBA3 /* MFSideMenu */,
 				6CB399691EDD089B00149C5D /* CustomClasses */,
 				6CBF93C81EF097550036EBA3 /* PlaidHelper */,
+				6CDB4ADC203D095C0051113D /* SquareHttpClient */,
+				6CDB4AE0203D8ADF0051113D /* Models */,
+				6C61025B1FF49DA30081CA6B /* Utilities */,
+				6C1A3A62203BCFF100D6D165 /* CommonUtils */,
 				6CD9B03B1ED3874B003ADF99 /* AppDelegate.h */,
 				6CD9B03C1ED3874B003ADF99 /* AppDelegate.m */,
-				6CD9B03E1ED3874B003ADF99 /* HomeViewController.h */,
-				6CD9B03F1ED3874B003ADF99 /* HomeViewController.m */,
-				6CD9B0521ED39178003ADF99 /* LoginViewController.h */,
-				6CD9B0531ED39178003ADF99 /* LoginViewController.m */,
-				6C91FBA61EDB8245000243DA /* MainViewController.h */,
-				6C91FBA71EDB8245000243DA /* MainViewController.m */,
-				6CBF93C51EEE068B0036EBA3 /* SideMenuViewController.h */,
-				6CBF93C61EEE068B0036EBA3 /* SideMenuViewController.m */,
-				6CB399931EE0D51D00149C5D /* MerchantSubViewControllers */,
-				6CD355191EE83AB100D1508F /* PlaidAPIViewController.h */,
-				6CD3551A1EE83AB100D1508F /* PlaidAPIViewController.m */,
-				6CBF93AF1EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.h */,
-				6CBF93B01EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m */,
-				6CBF93B11EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib */,
-				6CD9B0441ED3874B003ADF99 /* Assets.xcassets */,
+				6C5C9864201BE1C200BF64FF /* Zeal-Bridging-Header.h */,
+				6C61025A1FF49D7C0081CA6B /* ViewControllers */,
 				6CD9B0491ED3874B003ADF99 /* Info.plist */,
 				6CD9B0381ED3874B003ADF99 /* Supporting Files */,
 			);
@@ -443,6 +543,7 @@
 		6CD9B0381ED3874B003ADF99 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C24732A2027E8FB0034C497 /* Assets.xcassets */,
 				6CD9B0411ED3874B003ADF99 /* Main.storyboard */,
 				6CD9B0461ED3874B003ADF99 /* LaunchScreen.storyboard */,
 				6C91FBAB1EDC78E9000243DA /* GoogleService-Info.plist */,
@@ -453,6 +554,24 @@
 				6CD9B0391ED3874B003ADF99 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6CDB4ADC203D095C0051113D /* SquareHttpClient */ = {
+			isa = PBXGroup;
+			children = (
+				6CDB4ADD203D09860051113D /* SquareHttpClient.h */,
+				6CDB4ADE203D09860051113D /* SquareHttpClient.m */,
+			);
+			name = SquareHttpClient;
+			sourceTree = "<group>";
+		};
+		6CDB4AE0203D8ADF0051113D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6CDB4AE1203D8B070051113D /* CoffeeObj.h */,
+				6CDB4AE2203D8B070051113D /* CoffeeObj.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -497,6 +616,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
 							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 0;
 							};
@@ -532,15 +654,17 @@
 				6C229CF21F3018A9008B4850 /* expandableImage.png in Resources */,
 				6C229CF31F3018A9008B4850 /* expandableImage@2x.png in Resources */,
 				6CB399731EDD1EEE00149C5D /* about_text.html in Resources */,
+				6CBAB6D82023EAAC00E46A6B /* index.html in Resources */,
 				6CB399921EE0B4D000149C5D /* CustomTableViewCell2.xib in Resources */,
 				6CD9B0481ED3874B003ADF99 /* LaunchScreen.storyboard in Resources */,
 				6CB399801EDE2B7700149C5D /* MerchantShops.xib in Resources */,
 				6CC818A81F0B3370009AC29E /* MerchantAccountCoffee.xib in Resources */,
 				6C91FBAC1EDC78EA000243DA /* GoogleService-Info.plist in Resources */,
-				6CD9B0451ED3874B003ADF99 /* Assets.xcassets in Resources */,
 				6CD9B0431ED3874B003ADF99 /* Main.storyboard in Resources */,
 				6C6B95571F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.xib in Resources */,
 				6CBF93B31EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib in Resources */,
+				6C24732B2027E8FB0034C497 /* Assets.xcassets in Resources */,
+				6CBAB6D72023EAAC00E46A6B /* ChartNew.min.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +699,8 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -584,6 +710,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -601,7 +729,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -634,14 +762,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CBF93F11EF2B2C80036EBA3 /* XMLParser.m in Sources */,
+				6CBAB6CD2023869F00E46A6B /* TWRBarChart.m in Sources */,
 				6C229CF51F3018A9008B4850 /* SKSTableViewCell.m in Sources */,
 				6C229CF41F3018A9008B4850 /* SKSTableView.m in Sources */,
 				6CBF93ED1EF2B2C80036EBA3 /* CMPopTipView.m in Sources */,
+				6CDB4AE3203D8B070051113D /* CoffeeObj.m in Sources */,
 				6CBF93EA1EF2B2C80036EBA3 /* BarChartView.m in Sources */,
 				6C42CBE91EFF1A1000DBA198 /* BEMPermanentPopupView.m in Sources */,
 				6CD3551C1EE83AB100D1508F /* PlaidAPIViewController.m in Sources */,
 				6CBF93F31EF2B2C80036EBA3 /* PlotChartView.m in Sources */,
 				6CBF93C71EEE068B0036EBA3 /* SideMenuViewController.m in Sources */,
+				6CBAB6D42023869F00E46A6B /* TWRDataSet.m in Sources */,
 				6C42CBEA1EFF1A1000DBA198 /* BEMSimpleLineGraphView.m in Sources */,
 				6CD9B0401ED3874B003ADF99 /* HomeViewController.m in Sources */,
 				6CC818A71F0B3370009AC29E /* MerchantAccountCoffee.m in Sources */,
@@ -649,23 +780,31 @@
 				6CBF93BE1EEDFE950036EBA3 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				6CBF93EB1EF2B2C80036EBA3 /* BarLabel.m in Sources */,
 				6CB3996F1EDD0D5800149C5D /* UIViewController+Alerts.m in Sources */,
+				6CBAB6CE2023869F00E46A6B /* TWRCircularChart.m in Sources */,
 				6C42CBE81EFF1A1000DBA198 /* BEMLine.m in Sources */,
 				6CBF93EF1EF2B2C80036EBA3 /* UIViewSizeShortcuts.m in Sources */,
 				6C42CBE71EFF1A1000DBA198 /* BEMCircle.m in Sources */,
+				6CBAB6CF2023869F00E46A6B /* UIColor+HexString.m in Sources */,
 				6CB3996C1EDD0C8700149C5D /* ToastHelper.m in Sources */,
+				6CBAB6D12023869F00E46A6B /* TWRDataSet+Strings.m in Sources */,
 				6CBF93BC1EEDFE950036EBA3 /* MFSideMenuContainerViewController.m in Sources */,
 				6C42CBE61EFF1A1000DBA198 /* BEMAverageLine.m in Sources */,
 				6CBF93CB1EF097A10036EBA3 /* PlaidHTTPClient.m in Sources */,
+				6CBAB6D02023869F00E46A6B /* TWRChartBuilder.m in Sources */,
+				6C1A3A65203BD01300D6D165 /* CommonUtils.m in Sources */,
 				6CBF93EE1EF2B2C80036EBA3 /* UIColor+i7HexColor.m in Sources */,
+				6CDB4ADF203D09860051113D /* SquareHttpClient.m in Sources */,
 				6CCB36DE1FC6F07000EEE438 /* MerchantTravelViewController.m in Sources */,
 				6CD3550C1EE5093C00D1508F /* MerchantAccountRateReviewsViewController.m in Sources */,
 				6CD9B03D1ED3874B003ADF99 /* AppDelegate.m in Sources */,
 				6C6B95561F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.m in Sources */,
+				6CBAB6D32023869F00E46A6B /* TWRChartView.m in Sources */,
 				6CB399841EDE2BA700149C5D /* MerchantEating.m in Sources */,
 				6CB3997F1EDE2B7700149C5D /* MerchantShops.m in Sources */,
 				6CB399911EE0B4D000149C5D /* CustomTableViewCell2.m in Sources */,
 				6CD9B03A1ED3874B003ADF99 /* main.m in Sources */,
 				6C91FBA81EDB8245000243DA /* MainViewController.m in Sources */,
+				6CBAB6D22023869F00E46A6B /* TWRLineChart.m in Sources */,
 				6C229CF61F3018A9008B4850 /* SKSTableViewCellIndicator.m in Sources */,
 				6CD9B0541ED39178003ADF99 /* LoginViewController.m in Sources */,
 				6CBF93B21EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m in Sources */,
@@ -791,6 +930,7 @@
 			baseConfigurationReference = A6FBBEFEB75EBB5008300B41 /* Pods-Zeal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Zeal/Zeal.entitlements;
 				DEVELOPMENT_TEAM = U3DJW66E3Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -799,6 +939,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Zeal",
 				);
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Zeal-Prefix.pch";
 				INFOPLIST_FILE = Zeal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -838,7 +979,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = developer.cnorth2.Zeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f2a9766f-7255-4c18-92b4-85a4d05cf403";
+				PROVISIONING_PROFILE = "fd9653c4-7054-4423-b324-1477a8b2aed9";
 				PROVISIONING_PROFILE_SPECIFIER = zealappprovisioning;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -849,6 +990,7 @@
 			baseConfigurationReference = DD273674B4856BFCF9D6E0AB /* Pods-Zeal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Zeal/Zeal.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = U3DJW66E3Y;
 				ENABLE_BITCODE = NO;
@@ -858,6 +1000,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Zeal",
 				);
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Zeal-Prefix.pch";
 				INFOPLIST_FILE = Zeal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -897,7 +1040,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = developer.cnorth2.Zeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dc3b7cf0-5839-461d-a370-8b95be0e04b5";
+				PROVISIONING_PROFILE = "b25ca851-c087-4c72-b1f6-489f95549111";
 				PROVISIONING_PROFILE_SPECIFIER = zeal_dis;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

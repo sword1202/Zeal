@@ -11,4 +11,5 @@ target 'Zeal' do
      pod 'MBProgressHUD'
      pod 'HCSStarRatingView'
      pod 'AFNetworking'
+
 end

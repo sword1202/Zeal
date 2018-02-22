@@ -52,27 +52,27 @@
     
     if (self.app.isSelectedPlusButtonForHome == 1) {
         // Eating
-        selectedAccounts = [self.app.arr_eating_merchantAccounts objectAtIndex: self.app.indexOfSelectedImageOfMerchantAccount];
-        iv_merchantAccountsLogo.image = [UIImage imageNamed: [selectedAccounts objectForKey: @"img_name"]];
-        lb_title.text = [selectedAccounts objectForKey: @"title_name"];
-        mFirebaseDBReference = [[[[[FIRDatabase database] reference] child: userID] child: @"rate_db_pharmacy"] child:lb_title.text];
-        subtitleNameLabel.text = @"Pharmacy";
+//        selectedAccounts = [self.app.arr_eating_merchantAccounts objectAtIndex: self.app.indexOfSelectedImageOfMerchantAccount];
+//        iv_merchantAccountsLogo.image = [UIImage imageNamed: [selectedAccounts objectForKey: @"img_name"]];
+//        lb_title.text = [selectedAccounts objectForKey: @"title_name"];
+//        mFirebaseDBReference = [[[[[FIRDatabase database] reference] child: userID] child: @"rate_db_pharmacy"] child:lb_title.text];
+//        subtitleNameLabel.text = @"Pharmacy";
     } else if (self.app.isSelectedPlusButtonForHome == 0)
     {
         // Shops
-        selectedAccounts = [self.app.arr_shops_merchantAccounts objectAtIndex: self.app.indexOfSelectedImageOfMerchantAccount];
-        iv_merchantAccountsLogo.image = [UIImage imageNamed: [selectedAccounts objectForKey: @"img_name"]];
-        lb_title.text = [selectedAccounts objectForKey: @"title_name"];
-        mFirebaseDBReference = [[[[[FIRDatabase database] reference] child: userID] child: @"rate_db_home"] child:lb_title.text];
-        subtitleNameLabel.text = @"Home";
+//        selectedAccounts = [self.app.arr_shops_merchantAccounts objectAtIndex: self.app.indexOfSelectedImageOfMerchantAccount];
+//        iv_merchantAccountsLogo.image = [UIImage imageNamed: [selectedAccounts objectForKey: @"img_name"]];
+//        lb_title.text = [selectedAccounts objectForKey: @"title_name"];
+//        mFirebaseDBReference = [[[[[FIRDatabase database] reference] child: userID] child: @"rate_db_home"] child:lb_title.text];
+//        subtitleNameLabel.text = @"Home";
     } else
     {
         // Coffee
-        selectedAccounts = [self.app.arr_coffee_merchantAccounts objectAtIndex: self.app.indexOfSelectedImageOfMerchantAccount];
-        iv_merchantAccountsLogo.image = [UIImage imageNamed: [selectedAccounts objectForKey: @"img_name"]];
-        lb_title.text = [selectedAccounts objectForKey: @"title_name"];
-        mFirebaseDBReference = [[[[[FIRDatabase database] reference] child: userID] child: @"rate_db_coffee"] child:lb_title.text];
-        subtitleNameLabel.text = @"Coffee";
+//        selectedAccounts = [self.app.arr_coffee_merchantAccounts objectAtIndex: self.app.indexOfSelectedImageOfMerchantAccount];
+//        iv_merchantAccountsLogo.image = [UIImage imageNamed: [selectedAccounts objectForKey: @"img_name"]];
+//        lb_title.text = [selectedAccounts objectForKey: @"title_name"];
+//        mFirebaseDBReference = [[[[[FIRDatabase database] reference] child: userID] child: @"rate_db_coffee"] child:lb_title.text];
+//        subtitleNameLabel.text = @"Coffee";
     }
     
     [self retrieveDB];

@@ -17,7 +17,7 @@
 @end
 
 @implementation AppDelegate
-@synthesize feedbackAddButtonAndBackButtonFlag, indexOfSelectedImageOfMerchantAccount, onceInitFlag, menuItems, indexOfSelectedMenu, mUserID, mUserName, mUserEmail, mFBProfile, showChatFlag, arr_shops_merchantAccounts, maxAmount,arr_eating_merchantAccounts, arr_travel_merchantAccounts, isSelectedPlusButtonForHome, arrForLineGraphDataLastMonth, arrForLineGraphDataCurrentMonth, isMaxInLast, arr_coffee_merchantAccounts;
+@synthesize feedbackAddButtonAndBackButtonFlag, indexOfSelectedImageOfMerchantAccount, onceInitFlag, menuItems, indexOfSelectedMenu, mUserID, mUserName, mUserEmail, mFBProfile, showChatFlag, arr_shops_merchantAccounts, maxAmount,arr_eating_merchantAccounts, arr_travel_merchantAccounts, isSelectedPlusButtonForHome, arrForLineGraphDataLastMonth, arrForLineGraphDataCurrentMonth, isMaxInLast, arrMerchantShops, arrMerchantEatings;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -29,6 +29,18 @@
 //    [self setupPlaidLinkWithSharedConfiguration];
     
     // initialize variables;
+    [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    [[UINavigationBar appearance] setBackgroundImage: [UIImage imageNamed: @"header_background"] forBarMetrics: UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTranslucent: NO];
+    
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+//
+//    [[self.navigationController navigationBar] setBackgroundImage: [UIImage imageNamed: @"header_background"] forBarMetrics: UIBarMetricsDefault];
+//
+//    [self.navigationController.navigationBar setTranslucent: NO];
+//    [[UINavigationBar appearance] setShadowImage: [[UIImage alloc] init]];
+//    [self.navigationController.navigationBar setValue:@(YES) forKeyPath:@"hidesShadow"];
     
     [self initializeOfVar];
     
@@ -76,7 +88,7 @@
                                    [[NSDictionary alloc] initWithObjectsAndKeys: @"gnc", @"img_name", @"GNC", @"title_name", @"null", @"rate_vip", @"null", @"rate_product", @"Home", @"category", @"http://mygncrewards.com/Enrollment/Enrollment/Enrollment", @"link", nil],
                                    [[NSDictionary alloc] initWithObjectsAndKeys: @"rite_aid", @"img_name", @"Rite Aid", @"title_name", @"null", @"rate_vip", @"null", @"rate_product", @"Pharmacy", @"category", @"http://www.riteaid.com/login", @"link", nil],nil];
     
-    // Pharmacy Items
+    // Shops Items
       // set the value of Rates @"null"
     arr_shops_merchantAccounts = [[NSArray alloc] initWithObjects:
                                      [[NSDictionary alloc] initWithObjectsAndKeys: @"wallgreens_logo", @"img_name", @"Walgreens", @"title_name", @"null", @"rate_vip", @"null", @"rate_product", @"http://www.walgreens.com/register/regOptions.jsp", @"link", nil],
@@ -86,32 +98,11 @@
                                      [[NSDictionary alloc] initWithObjectsAndKeys: @"bartels_logo", @"img_name", @"Bartels", @"title_name", @"null", @"rate_vip", @"null", @"rate_product", @"http://www.bartelldrugs.com/", @"link", nil],
                                      [[NSDictionary alloc] initWithObjectsAndKeys: @"safe_way", @"img_name", @"Safeway", @"title_name", @"null", @"rate_vip", @"null", @"rate_product", @"http://www.safeway.com/CMS/account/register/?bannerId=safeway&FullSite=Y&goto=http:%2F%2Fwww.safeway.com%2F", @"link", nil], nil];
     
-    // Coffee Items
-    
-    arr_coffee_merchantAccounts = [[NSArray alloc] initWithObjects:
-                                    [[NSDictionary alloc] initWithObjectsAndKeys: @"zoka", @"img_name", @"Browsly", @"title_name", @"F3EX7FBKDMY0E", @"location_id", nil],
-                                     [[NSDictionary alloc] initWithObjectsAndKeys: @"zoka", @"img_name", @"Zoka", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.zokacoffee.com/", @"link", nil],
-                                     [[NSDictionary alloc] initWithObjectsAndKeys: @"ecr", @"img_name", @"Elm Coffee Roasters", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://elmcoffeeroasters.com/", @"link", nil],
-                                     [[NSDictionary alloc] initWithObjectsAndKeys: @"csph", @"img_name", @"Cherry Street Public House", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.cherryst.com/", @"link", nil],
-                                     [[NSDictionary alloc] initWithObjectsAndKeys: @"milstead", @"img_name", @"Milstead & Co", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://milsteadandco.com/", @"link", nil],
-                                     [[NSDictionary alloc] initWithObjectsAndKeys: @"seattle", @"img_name", @"Seattle Coffee Works", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.seattlecoffeeworks.com/", @"link", nil],
-                                     [[NSDictionary alloc] initWithObjectsAndKeys: @"story", @"img_name", @"Storyville Coffee", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.storyville.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"lamarzocco_logo", @"img_name", @"La Marzocco Cafe", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"slate_coffee", @"img_name", @"Slate Coffee Co", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"tuego_coffee", @"img_name", @"Tougo Coffee Co", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"qed_coffee", @"img_name", @"QED Coffee", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"royal_drummer_black", @"img_name", @"Royal Drummer", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"metier", @"img_name", @"Metier Coffee", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"anchorhead_coffee", @"img_name", @"Anchorhead Coffee", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"general_purpoise_logo", @"img_name", @"General Porpoise Coffee", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"mr_west_cafe_bar", @"img_name", @"Mr West Cafe Bar", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"craft_works_coffee_logo", @"img_name", @"Craft Works Coffee", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"bellden_logo", @"img_name", @"Bellden Cafe", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],
-                                   [[NSDictionary alloc] initWithObjectsAndKeys: @"mango_ladro", @"img_name", @"Ladro Coffee", @"title_name", @"null", @"location_id", @"null", @"rate_product", @"http://www.starbucks.com/https://www.starbucks.com/", @"link", nil],nil];
+
     
     
     [FIRApp configure];
-    [[[[FIRDatabase database] reference] child: @"coffee_list"] setValue: arr_coffee_merchantAccounts];
+    
 //    [[FBSDKApplicationDelegate sharedInstance] application:application
 //                             didFinishLaunchingWithOptions:launchOptions];
 
@@ -137,6 +128,8 @@
     isSelectedPlusButtonForHome = 0;
     maxAmount = 0.0;
     isMaxInLast = false;
+    arrMerchantShops = [[NSMutableArray alloc] initWithCapacity: 30];
+    arrMerchantEatings = [[NSMutableArray alloc] initWithCapacity: 30];
 }
 
 - (void) addMFSideMenu

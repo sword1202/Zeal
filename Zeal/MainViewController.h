@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "BarChartView.h"
 #import "BEMSimpleLineGraphView.h"
+#import "TWRChartView.h"
 //@import FBSDKLoginKit;
 //@import FBSDKCoreKit;
 
-@interface MainViewController : UIViewController <UINavigationControllerDelegate, UIWebViewDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
+@interface MainViewController : UIViewController <UINavigationControllerDelegate, UIWebViewDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     
     __weak IBOutlet UILabel *titleLabel;
@@ -34,12 +35,15 @@
     
 }
 @property (weak, nonatomic) IBOutlet UIView *profileView;
-@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *myGraph;
 @property (strong, nonatomic) NSMutableArray *arrayOfValues;
 @property (strong, nonatomic) NSMutableArray *arrayOfDates;
+@property(strong, nonatomic) TWRChartView *chartView;
+@property (weak, nonatomic) IBOutlet UIView *chartContainerView;
 
 @property (strong, nonatomic) IBOutlet UILabel *labelValues;
 @property (strong, nonatomic) IBOutlet UILabel *labelDates;
+@property (weak, nonatomic) IBOutlet UILabel *monthlySendAmountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *monthlyCreditAmountLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *merchantAccountsView;
 @property (weak, nonatomic) IBOutlet UIView *financialAccountsView;
