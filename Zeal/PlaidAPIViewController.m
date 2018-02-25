@@ -116,7 +116,7 @@
 {
     arr_savedFinancialAccounts = [[NSMutableArray alloc] init];
     NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
-    dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: kFINANCIAL_DB];
+    dbRef = [[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: kFINANCIAL_DB];
     if (dbRef != nil) {
         
         [dbRef observeEventType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
@@ -125,6 +125,9 @@
                 for (snapshot in snapshot.children) {
                     [arr_savedFinancialAccounts addObject:[snapshot value]];
                 }
+                
+                NSMutableArray *cardNumbersArray = [NSMutableArray new];
+                
                 for (int i=0; i<arr_savedFinancialAccounts.count; i++) {
                     NSDictionary *eachBank = [arr_savedFinancialAccounts objectAtIndex: i];
                     
@@ -139,7 +142,20 @@
                     
                     // store db
                     [self downloadTransactionsAndStoreOnFirebase: saveDic startDate: lastMonthStartDate endDate: currentEndDate isCurrentMonth: 1];
+                    
+                    // update card numbers
+                    
+                    
+                    NSArray *accounts = [eachBank objectForKey: kAccount];
+                    for (int j = 0; j < accounts.count; j ++) {
+                        NSDictionary *eachAccountsinBank = [accounts objectAtIndex: j];
+                        
+                        [cardNumbersArray addObject: [eachAccountsinBank objectForKey: @"mask"]];
+                        
+                    }
                 }
+                
+                [[[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: klinked_cards] setValue: cardNumbersArray];
  
                 tableViewContainer.hidden = NO;
                 [table_view reloadData];

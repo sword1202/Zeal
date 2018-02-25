@@ -14,7 +14,7 @@ enum {
     LARGE,
 };
 
-@interface MerchantAccountCoffee : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MerchantAccountCoffee : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 {
     NSMutableArray  *arrayForBoolOrder, *arrForBoolHistory;
     NSArray *cellNameArrayOfOrder, *cellNameArrayOfHistory;

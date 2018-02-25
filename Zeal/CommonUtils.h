@@ -13,4 +13,6 @@
 +(BOOL)isNull:(id )value;
 +(NSString *)getAmountFromDic:(NSDictionary *) object key: (NSString *) key;
 + (NSString *) getMonthKey: (NSString *) mString;
++ (NSString *) randomString;
+
 @end

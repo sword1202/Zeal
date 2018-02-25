@@ -62,4 +62,17 @@
     return str;
 }
 
++ (NSString *) randomString {
+    
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: 40];
+    
+    for (int i=0; i<40; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform((int) [letters length])]];
+    }
+    
+    return randomString;
+}
+
 @end

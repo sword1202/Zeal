@@ -28,12 +28,12 @@
    parameters: nil
       success: ^(NSURLSessionDataTask *task, id responseObject)
      {
-         NSArray *sortedCatalogs = [(NSDictionary *)responseObject objectForKey: @"objects"];
-         handler(sortedCatalogs);
+         NSArray *sortedItems = [(NSDictionary *)responseObject objectForKey: @"objects"];
+         handler(sortedItems);
      }
       failure: ^(NSURLSessionDataTask *task, NSError *error)
      {
-         NSLog(@"Failed to retrieve Square Catalogs: %@", error.localizedDescription);
+         NSLog(@"Failed to retrieve Square Items: %@", error.localizedDescription);
      }];
 }
 
@@ -50,6 +50,61 @@
      {
          NSLog(@"Failed to retrieve Square Catalogs: %@", error.localizedDescription);
      }];
+}
+
+- (void) getLocationsFromSquareup: (void(^)(NSArray * items))handler
+{
+    [self GET: @"/v2/locations"
+   parameters: nil
+      success: ^(NSURLSessionDataTask *task, id responseObject)
+     {
+         NSArray *sortedLocations = [(NSDictionary *)responseObject objectForKey: @"locations"];
+         handler(sortedLocations);
+     }
+      failure: ^(NSURLSessionDataTask *task, NSError *error)
+     {
+         NSLog(@"Failed to retrieve Square Locations: %@", error.localizedDescription);
+     }];
+}
+
+- (void) createOrderwithlocationid: (NSString *) location_id catalog_obj_id: (NSString *) catalog_obj_id
+                        withCompletionHandler: (void(^)(NSInteger responseCode, NSArray *transactions))handler
+{
+    NSDictionary *variationItem = @{
+                                    @"catalog_object_id": catalog_obj_id,
+                                    @"quantity"        : @"2"
+                                    };
+    
+    NSDictionary *requestParameters = @{
+                                        @"idempotency_key"     : [CommonUtils randomString],
+                                        @"line_items"          : [NSArray arrayWithObjects: variationItem, nil]
+                                        };
+    
+    [self POST:[NSString stringWithFormat: @"/v2/locations/%@/orders", location_id] parameters:requestParameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        NSArray *accountsArray = (NSArray *)responseObject[@"order"];
+        handler(response.statusCode, accountsArray);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        handler(response.statusCode, nil);
+    }];
+}
+
+#pragma mark - Private Methods
+
+- (instancetype)initWithBaseURL:(NSURL *)url
+{
+    self = [super initWithBaseURL: url];
+    
+    if (self)
+    {
+        self.responseSerializer = [AFJSONResponseSerializer serializer];
+        self.requestSerializer  = [AFJSONRequestSerializer serializer];
+    }
+    return self;
 }
 
 @end

@@ -12,10 +12,17 @@
 
 + (SquareHttpClient *)sharedSquareHttpClient;
 
+- (instancetype)initWithBaseURL:(NSURL *)url;
+
 // download item of catalog
 - (void) downloadSquareupItemsWithCompletionHandler: (void(^)(NSArray * items))handler;
 
 // download category of catalog
 - (void) downloadSquareupCategoryWithCompletionHandler: (void(^)(NSArray * items))handler;
+
+- (void) getLocationsFromSquareup: (void(^)(NSArray * items))handler;
+
+- (void) createOrderwithlocationid: (NSString *) location_id catalog_obj_id: (NSString *) catalog_obj_id
+             withCompletionHandler: (void(^)(NSInteger responseCode, NSArray *transactions))handler;
 
 @end

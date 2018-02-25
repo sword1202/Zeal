@@ -111,7 +111,7 @@ static NSString * const kFirebaseURL = @"https://zeal-915b2.firebaseio.com";
         
         NSString *mUserName = user.displayName;
 //        NSString *mUserEmail = user.email;
-        FIRDatabaseReference *dbRef = [[[FIRDatabase database] reference] child:@"consumers"];
+        FIRDatabaseReference *dbRef = [[[FIRDatabase database] reference] child:kconsumers];
         [[[dbRef child:user.uid] child: @"name"] setValue: mUserName];
 //        [[[dbRef child:user.uid] child: @"email"] setValue: mUserEmail];
         

@@ -14,7 +14,7 @@
 #define UID @"pSc6HtBiftTDEMO9pZS703t5Ilf2"
 #define KEY(str)    [CommonUtils getString:str]
 //#define TEST_ACCESS_TOKEN @"access-development-a26e7388-b04f-43a9-aceb-842882d2f4a7" // BANK OF AMERICA
-#define TEST_ACCESS_TOKEN @"access-development-29f1bca3-2886-4097-8aff-7c7e966c9777" // American Express
+#define TEST_ACCESS_TOKEN @"access-development-624a0d39-c649-4346-b327-ac4a1fa19da8" // Bank of America
 // Key For Plaid API Integration
 #define PLAID_PUBLIC_KEY @"667778757a11bac2a6ee9b156c914a"
 // production, development, sandbox
@@ -25,11 +25,11 @@
 #define TRANS_DELAY 12.0
 #define ACCESSTOKEN_SQUAREUP @"sq0atp-wXX9R-mHWTTSQtcLhwKQbw"
 
-
+#define kconsumers @"consumers"
 // coffeelist db
 #define kcoffeelist @"coffee_list"
 
-#define kcategoryName @"title_name"
+#define klocationName @"title_name"
 #define klocationID @"location_id"
 #define kImageName  @"img_name"
 #define kOrderLists @"orderlists"
@@ -42,6 +42,7 @@
 #define kmonthly @"monthly_transaction"
 #define kInstitutionName @"institution_name"
 #define kInstitutionID @"institution_id"
+#define klinked_cards @"linked_cards"
 
 /*
  username: user_good

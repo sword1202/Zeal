@@ -45,7 +45,8 @@
     
     SquareHttpClient *httpClientSquareup;
     NSMutableArray *currentCoffeelists;
-    NSArray *catalogItemsFromSquareup;
+    NSArray *catalogItemsFromSquareup, *locations, *categories;
+    FIRDatabaseReference *mCoffeeListDBReference;
     
     __weak IBOutlet UIButton *mEatingButton;
     __weak IBOutlet UIButton *mShopsButton;
@@ -256,46 +257,6 @@
             
         }
         
-//        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
-//         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-//
-//             if (!error) {
-//                 currentEmail = [[[FIRAuth auth] currentUser] email];
-//                 NSLog(@"fetched user:%@  and Email : %@", result,result[@"email"]);
-//                 NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",result[@"id"]]];
-//
-//                 (result[@"email"] != nil) ? mUserEmail = result[@"email"] : @"";
-//                 (result[@"id"]) ? mUserID = result[@"id"] : @"";
-//                 (result[@"name"]) ? mUserName = result[@"name"] : @"";
-//
-//                 app.mUserName = mUserName;
-//                 app.mUserEmail = currentEmail;
-//                 app.mUserID = mUserID;
-//                 
-//                 [userName setText: [@"Name  : " stringByAppendingString: mUserName]];
-//                 [userid setText: [  @"UserID: " stringByAppendingString: mUserID]];
-//                 [userEmail setText: [@"Email : " stringByAppendingString: currentEmail]];
-//                 
-//
-//                 dispatch_async(dispatch_get_global_queue(0,0), ^{
-//                     NSData *data = [NSData dataWithContentsOfURL:url];
-//                     if ( data == nil )
-//                         return;
-//                     dispatch_async(dispatch_get_main_queue(), ^{
-//                         // WARNING: is the cell still using the same data by this point??
-//                         app.mFBProfile = [UIImage imageWithData: data];
-//                         hud.hidden = YES;
-//                         [userDefaults setObject: data forKey: @"facebook_logo_data"];
-//                         [userDefaults synchronize];
-//                         // loading Left Side Menu once again
-//                         [app addMFSideMenu];
-//                     });
-//                 });
-//
-//             } else
-//                 [self showMessagePrompt: error.localizedDescription];
-//         }];
-        
     } else
     {
         if ([[FIRAuth auth] currentUser] != nil) {
@@ -306,8 +267,6 @@
         
         app.mFBProfile = [UIImage imageWithData: mData];
         
-//        [userid setText: [  @"UserID: " stringByAppendingString: mUserID]];
-//        [userEmail setText: [@"Email : " stringByAppendingString: mUserEmail]];
     }
     
     
@@ -360,74 +319,117 @@
 {
     // get catalog items from squareup
     catalogItemsFromSquareup = [[NSArray alloc] init];
+    categories = [[NSArray alloc] init];
     [httpClientSquareup downloadSquareupItemsWithCompletionHandler:^(NSArray *items) {
         catalogItemsFromSquareup = items;
     }];
     
-    // add order items in categorylist
+    [httpClientSquareup downloadSquareupCategoryWithCompletionHandler:^(NSArray *items) {
+        categories = items;
+    }];
     
-    // // first retrieve coffeelist
     
-    FIRDatabaseReference *mCoffeeListDBReference = [[[FIRDatabase database] reference] child: kcoffeelist];
     
-    if (mCoffeeListDBReference != nil) {
-        //        [ToastHelper showLoading: self.view message: @"Loading ..."];
-        [mCoffeeListDBReference observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
-
-            if ([snapshot exists]) {
+    // get locations from squareup
+    [httpClientSquareup getLocationsFromSquareup:^(NSArray *items) {
+        locations = items;
+        for (int i = 0; i < locations.count; i ++) {
+            NSDictionary *everyLocation = [locations objectAtIndex: i];
+            NSString *locationID = [everyLocation objectForKey: @"id"];
+            
+            mCoffeeListDBReference = [[[FIRDatabase database] reference] child: kcoffeelist];
+            
+            [mCoffeeListDBReference observeSingleEventOfType: (FIRDataEventTypeValue) withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
                 
                 currentCoffeelists = [[NSMutableArray alloc] initWithArray: snapshot.value];
                 
-                // get catagory items from squareup
-                
-                [httpClientSquareup downloadSquareupCategoryWithCompletionHandler:^(NSArray *items) {
-                    for (int i = 0; i < items.count; i ++) {
-                        NSDictionary *everyCategory = [items objectAtIndex: i];
-                        NSString *categoryID = [everyCategory objectForKey: @"id"];
-                        NSDictionary *categoryDataDic = [everyCategory objectForKey: @"category_data"];
-                        NSString *categoryName = [categoryDataDic objectForKey: @"name"];
+                [[[mCoffeeListDBReference queryOrderedByChild: klocationID] queryEqualToValue: locationID]
+                 observeSingleEventOfType: (FIRDataEventTypeValue) withBlock:^(FIRDataSnapshot * _Nonnull snapshot1) {
+                     
+                     [self handleFirebaseCoffeelist: snapshot1 locationDic: everyLocation];
+                 }];
+            }];
+            
+            
+        }
+    }];
+    
+}
 
-                        // compare category name from firebase
-                        
-                        // get category name from firebase
-                        for (int j=0; j<[currentCoffeelists count]; j++) {
-                            NSDictionary *everyCoffeeList = [currentCoffeelists objectAtIndex: j];
-                            CoffeeObj *obj = [[CoffeeObj alloc] initWithDic: everyCoffeeList];
-                            NSMutableArray *orderlists = [NSMutableArray new];
-                            if ([categoryName isEqualToString: obj.name] && ![CommonUtils isNull: catalogItemsFromSquareup]) {
-                                // create orderlists
-                                  // find items for same category id
-                                for (int k=0; k<[catalogItemsFromSquareup count]; k++) {
-                                    NSDictionary *everyItem = [catalogItemsFromSquareup objectAtIndex: k];
-                                    NSDictionary *itemData = [everyItem objectForKey: @"item_data"];
-                                    NSString *currentCategoryID = [itemData objectForKey: @"category_id"];
-                                    if (![CommonUtils isNull: currentCategoryID] && [currentCategoryID isEqualToString: categoryID]) {
-                                        [orderlists addObject: [itemData objectForKey: @"name"]];
-                                    }
-                                }
-                                
-                                // add orderlist to currentCoffeeLists
-                                obj.orderLists = [orderlists copy];
-                                [currentCoffeelists replaceObjectAtIndex: j withObject: obj.dicObject];
-                            }
-                            
-                        }
-                        
-                        // update firebase
-                        [mCoffeeListDBReference setValue:currentCoffeelists];
-                    }
-                }];
-                
-                
-                
-                
-                
-//                [self getItemsFromSquareup];
-                
-            }
-        }];
+- (void) handleFirebaseCoffeelist: (FIRDataSnapshot * _Nonnull) snapshot locationDic: (NSDictionary *) locationDic
+{
+    NSString *locationID = [locationDic objectForKey: @"id"];
+    NSString *locationName = [locationDic objectForKey: @"name"];
+    for (int i=0; i<currentCoffeelists.count; i++) {
+        if ([CommonUtils isNull: [currentCoffeelists objectAtIndex: i]]) {
+            [currentCoffeelists removeObjectAtIndex: i];
+        }
     }
     
+    NSMutableArray *orderlists = [NSMutableArray new];
+    
+    for (int i=0; i<[catalogItemsFromSquareup count]; i++) {
+        NSDictionary *everyItem = [catalogItemsFromSquareup objectAtIndex: i];
+        
+        NSDictionary *itemData = [everyItem objectForKey: @"item_data"];
+        NSDictionary *variationsDic = [[itemData objectForKey: @"variations"] objectAtIndex: 0];
+        NSString *variationID = [variationsDic objectForKey: @"id"];
+        
+        NSString *catalogName = [itemData objectForKey: @"name"];
+        
+        BOOL presentAtAllLocaitons = [[everyItem objectForKey: @"present_at_all_locations"] boolValue];
+        if (presentAtAllLocaitons || [self isExist:locationID at:[everyItem objectForKey: @"present_at_location_ids"]]) {
+            // if available for all locations
+            [orderlists addObject: @{variationID: catalogName}]; // variationid is used to make order
+        }
+        
+    }
+    
+    if ([CommonUtils isNull: snapshot.value]) {
+        // add newly
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"logo1", kImageName,
+                             locationID, klocationID,
+                             [orderlists copy], kOrderLists,
+                             locationName, klocationName, nil];
+        [currentCoffeelists insertObject:dic atIndex: 0];
+        [mCoffeeListDBReference setValue:currentCoffeelists];
+    } else
+    {
+        // update
+        // add orderlist to currentCoffeeLists
+//        for (NSDictionary *snap in [snapshot.value allValues]) {
+//
+//        }
+//        NSArray *arr = [snapshot.value objectAtIndex: 0];
+        CoffeeObj *obj = [[CoffeeObj alloc] initWithDic: [snapshot.value objectAtIndex: 0]];
+        
+        for (int i=0; i<currentCoffeelists.count; i++) {
+            if ([obj.dicObject isEqualToDictionary: [currentCoffeelists objectAtIndex: i]]) {
+                obj.orderLists = [orderlists copy];
+                [currentCoffeelists replaceObjectAtIndex: i withObject: obj.dicObject];
+                [mCoffeeListDBReference setValue:currentCoffeelists];
+                break;
+            }
+        }
+        
+    }
+    
+}
+
+- (BOOL) isExist:(NSString *) locationID at: (NSArray *) array
+{
+    BOOL is_exist = NO;
+    if (array == nil) {
+        return NO;
+    }
+    for (int i=0; i<array.count; i++) {
+        if ([locationID isEqualToString: [array objectAtIndex: i]]) {
+            is_exist = YES;
+            break;
+        }
+    }
+    return is_exist;
 }
 
 - (void) retrieveTransaction
@@ -437,7 +439,7 @@
     NSString *userID;
     userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
     
-    dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: kFINANCIAL_DB];
+    dbRef = [[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: kFINANCIAL_DB];
     if (dbRef != nil) {
         [self showProgressBar: @"Retrieving Transactions..."];
         [dbRef observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
@@ -1696,7 +1698,7 @@
     FIRDatabaseReference *dbRef;
     NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
     
-    dbRef = [[[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"stores_db"] child: mStoreName];
+    dbRef = [[[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: @"stores_db"] child: mStoreName];
     if (dbRef != nil) {
         
         [dbRef observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {

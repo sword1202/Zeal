@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "ToastHelper.h"
 #import "AFHTTPSessionManager.h"
+#import "SquareHttpClient.h"
 
 @import Firebase;
 
@@ -29,6 +30,8 @@
     MBProgressHUD *hud;
     NSString *selectedSectionName;
     NSMutableDictionary *catalogItemsDic;
+    NSString *selectedLocationID, *selectedCatalogObjID;
+    SquareHttpClient *httpClientSquareup;
 }
 @end
 
@@ -54,6 +57,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    httpClientSquareup = [SquareHttpClient sharedSquareHttpClient];
     
     arrayForBoolOrder = [[NSMutableArray alloc] init];
     arrForBoolHistory = [[NSMutableArray alloc] init];
@@ -165,7 +170,7 @@
         NSArray *orderLists = obj.orderLists;
         if (orderLists.count <= 0) {
             // there is no orderlist
-            return 0;
+            return 2;
         } else
             return [orderLists count];
         
@@ -192,72 +197,88 @@
     BOOL manyCellsWhenHistory  = [[arrForBoolHistory objectAtIndex:indexPath.section] boolValue];
     
     cell.orderView2.hidden = YES;
-    
+    cell.backgroundColor=[UIColor clearColor];
     /********** If the section supposed to be closed *******************/
     if(!manyCellsWhenOrder && !manyCellsWhenHistory)
     {
-        cell.backgroundColor=[UIColor clearColor];
-        
         cell.titleLabel.text=@"";
         
     }
     /********** If the section supposed to be Opened *******************/
     else if (manyCellsWhenOrder)
     {
-        cell.orderView.hidden = NO;
-        cell.historyView.hidden = YES;
-        
         CoffeeObj *obj = [[CoffeeObj alloc] initWithDic:[arrOfTableView objectAtIndex: indexPath.section]];
         
-        cell.titleLabel.text= [obj.orderLists objectAtIndex: indexPath.row];
-        cell.titleLabel.textColor = [UIColor whiteColor];
-        cell.backgroundColor=[UIColor clearColor];
-        
-        // add tags for every order's section (sectionx100: 0, 100, 200...),
-        // 5 items(40, 140, ...), small/medium/large (42, 142, 242, ...)
-        
-        cell.smallImageView.hidden = YES;
-        cell.mediumImageView.hidden = YES;
-        cell.largeImageView.hidden = YES;
-        
-        UITapGestureRecognizer  *orderCellIconTapped   =
-        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectOrderCellLogo:)];
-        [cell.smallImageView removeGestureRecognizer: orderCellIconTapped];
-        [cell.mediumImageView removeGestureRecognizer: orderCellIconTapped];
-        [cell.largeImageView removeGestureRecognizer: orderCellIconTapped];
-        cell.img_tickOfOrder.hidden = YES;
-        cell.icon_detali_label.hidden = YES;
-        switch (logoState) {
-            case SMALL:
-                cell.smallImageView.tag = indexPath.section*100+indexPath.row*10;
-                cell.smallImageView.hidden = NO;
-                cell.icon_detali_label.text = @"Small";
-                
-                cell.smallImageView.image=[UIImage imageNamed:@"coffee_order_image"];
-                [cell.smallImageView addGestureRecognizer:orderCellIconTapped];
-                break;
-            case MEDIUM:
-                cell.mediumImageView.tag = indexPath.section*100+indexPath.row*10+1;
-                cell.mediumImageView.hidden = NO;
-                cell.icon_detali_label.text = @"Medium";
-                cell.img_tickOfOrder.hidden = NO;
-                cell.mediumImageView.image=[UIImage imageNamed:@"coffee_order_image"];
-                [cell.mediumImageView addGestureRecognizer:orderCellIconTapped];
-                break;
-            case LARGE:
-                cell.largeImageView.tag = indexPath.section*100+indexPath.row*10+2;
-                cell.largeImageView.hidden = NO;
-                cell.icon_detali_label.text = @"Large";
-                cell.img_tickOfOrder.hidden = NO;
-                cell.largeImageView.image=[UIImage imageNamed:@"coffee_order_image"];
-                [cell.largeImageView addGestureRecognizer:orderCellIconTapped];
-                break;
-                
-            default:
-                break;
+        if (obj.orderLists.count <= 0) {
+            cell.orderView.hidden = YES;
+            cell.orderView2.hidden = NO;
+            cell.historyView.hidden = YES;
+            cell.layer.cornerRadius = 10;
+            cell.layer.masksToBounds = true;
+            if (indexPath.row == 0) {
+                cell.order2_title.text = @"The Order feature is currently unavailable";
+                cell.order2_detail.hidden = YES;
+            } else
+            {
+                cell.order2_detail.hidden = NO;
+                cell.order2_title.text = @"Zeal Users often save on average $00.00";
+                cell.order2_detail.text = @"Sales often happen in September";
+            }
+            
+        } else
+        {
+            
+            cell.orderView.hidden = NO;
+            cell.historyView.hidden = YES;
+            NSDictionary *dic = [obj.orderLists objectAtIndex: indexPath.row];
+            cell.titleLabel.text= [[dic allValues] objectAtIndex: 0];
+            cell.titleLabel.textColor = [UIColor whiteColor];
+            cell.backgroundColor=[UIColor clearColor];
+            
+            // add tags for every order's section (sectionx100: 0, 100, 200...),
+            // 5 items(40, 140, ...), small/medium/large (42, 142, 242, ...)
+            
+            cell.smallImageView.hidden = YES;
+            cell.mediumImageView.hidden = YES;
+            cell.largeImageView.hidden = YES;
+            
+            UITapGestureRecognizer  *orderCellIconTapped   =
+            [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectOrderCellLogo:)];
+            [cell.smallImageView removeGestureRecognizer: orderCellIconTapped];
+            [cell.mediumImageView removeGestureRecognizer: orderCellIconTapped];
+            [cell.largeImageView removeGestureRecognizer: orderCellIconTapped];
+            cell.img_tickOfOrder.hidden = YES;
+            cell.icon_detali_label.hidden = YES;
+            switch (logoState) {
+                case SMALL:
+                    cell.smallImageView.tag = indexPath.section*100+indexPath.row*10;
+                    cell.smallImageView.hidden = NO;
+                    cell.icon_detali_label.text = @"Small";
+                    
+                    cell.smallImageView.image=[UIImage imageNamed:@"coffee_order_image"];
+                    [cell.smallImageView addGestureRecognizer:orderCellIconTapped];
+                    break;
+                case MEDIUM:
+                    cell.mediumImageView.tag = indexPath.section*100+indexPath.row*10+1;
+                    cell.mediumImageView.hidden = NO;
+                    cell.icon_detali_label.text = @"Medium";
+                    cell.img_tickOfOrder.hidden = NO;
+                    cell.mediumImageView.image=[UIImage imageNamed:@"coffee_order_image"];
+                    [cell.mediumImageView addGestureRecognizer:orderCellIconTapped];
+                    break;
+                case LARGE:
+                    cell.largeImageView.tag = indexPath.section*100+indexPath.row*10+2;
+                    cell.largeImageView.hidden = NO;
+                    cell.icon_detali_label.text = @"Large";
+                    cell.img_tickOfOrder.hidden = NO;
+                    cell.largeImageView.image=[UIImage imageNamed:@"coffee_order_image"];
+                    [cell.largeImageView addGestureRecognizer:orderCellIconTapped];
+                    break;
+                    
+                default:
+                    break;
+            }
         }
-        
-        
         
     } else
     {
@@ -267,7 +288,7 @@
         // retrieving data from Database (Plaid)
         NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
 
-        FIRDatabaseReference *dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: kFINANCIAL_DB];
+        FIRDatabaseReference *dbRef = [[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: kFINANCIAL_DB];
         
         if (dbRef != nil) {
             [self showProgressBar: @"Retrieving Transactions..."];
@@ -519,7 +540,6 @@
 
 - (void)didSelectOrderCellLogo:(UITapGestureRecognizer *)gestureRecognizer{
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:gestureRecognizer.view.tag];
     int mTag = (int)gestureRecognizer.view.tag;
     int currentState = mTag%10; // small, medium, large
     int currentSection = mTag/100; // 0, 1, 2, ...
@@ -527,10 +547,26 @@
     NSLog(@"Current Selected TAG : %d", mTag);
     NSIndexPath *indexPathToReload = [NSIndexPath indexPathForRow:currentRow inSection:currentSection];
     
+    CoffeeObj *selectedObj = [[CoffeeObj alloc] initWithDic:[arrOfTableView objectAtIndex: currentSection]];
+    
     switch (currentState) {
         case 0:
+        {
             // if small
             logoState = MEDIUM;
+            
+            // create order for catalog items
+            NSDictionary *selectedCatalogItemDic = [selectedObj.orderLists objectAtIndex: currentRow];
+            NSString *itemName = [[selectedCatalogItemDic allValues] objectAtIndex: 0];
+            selectedCatalogObjID = [selectedCatalogItemDic];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Order Confirmation"
+                                                            message:[NSString stringWithFormat: @"Are you sure you want to order '%@'?", itemName]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Yes"
+                                                  otherButtonTitles:@"No", nil];
+            [alert show];
+        }
+            
             break;
             
         case 1:
@@ -549,6 +585,32 @@
     
     [table_view reloadRowsAtIndexPaths: [NSArray arrayWithObjects: indexPathToReload, nil] withRowAnimation:UITableViewRowAnimationAutomatic];
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //Code for Yes button
+        if ([CommonUtils isNull: selectedLocationID] || [CommonUtils isNull: selectedCatalogObjID]) {
+            return;
+        }
+        
+        [self createOrder];
+    }
+    if (buttonIndex == 1)
+    {
+        //Code for No button
+    }
+}
+
+- (void) createOrder
+{
+    [httpClientSquareup createOrderwithlocationid: selectedLocationID catalog_obj_id: selectedCatalogObjID withCompletionHandler:^(NSInteger responseCode, NSArray *transactions) {
+        if (responseCode == 200) {
+            
+        }
+    }];
 }
 
 @end

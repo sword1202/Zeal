@@ -17,7 +17,7 @@
         if (dic == nil) {
             return [[CoffeeObj alloc] init];
         }
-        self.name = dic[kcategoryName];
+        self.name = dic[klocationName];
         self.location_id = [CommonUtils isNull: dic[klocationID]] ? @"":dic[klocationID];
         self.imgName = dic[kImageName];
         self.orderLists = [CommonUtils isNull: dic[kOrderLists]] ? [[NSArray alloc] init]:dic[kOrderLists];
@@ -29,7 +29,7 @@
 
 -(NSDictionary *)dicObject {
     NSDictionary * dic = @{
-                           kcategoryName:self.name,
+                           klocationName:self.name,
                            klocationID:self.location_id,
                            kImageName:self.imgName,
                            kOrderLists:self.orderLists

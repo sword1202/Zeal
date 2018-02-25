@@ -81,7 +81,7 @@
     
     [super viewDidLoad];
     
-    [self getShopsItems];
+//    [self getShopsItems];
     
     arrayForBoolOrder = [[NSMutableArray alloc] init];
     arrForBoolHistory = [[NSMutableArray alloc] init];
@@ -98,7 +98,7 @@
     strRateProduct = @"null";
     
     userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
-    mFirebaseDBReference = [[[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: @"stores_db"] child: @"Shops"];
+    mFirebaseDBReference = [[[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: @"stores_db"] child: @"Shops"];
     [mFirebaseDBReference observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         if (snapshot.exists) {
             arrOfTableView = snapshot.value;
@@ -217,7 +217,7 @@
         // retrieving data from Database (Plaid)
         NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
 
-        FIRDatabaseReference *dbRef = [[[[[FIRDatabase database] reference] child:@"consumers"] child: userID] child: kFINANCIAL_DB];
+        FIRDatabaseReference *dbRef = [[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: kFINANCIAL_DB];
         
         if (dbRef != nil) {
             [self showProgressBar: @"Retrieving Transactions..."];
