@@ -83,7 +83,7 @@
     table_view.dataSource = self;
     [table_view registerNib: [UINib nibWithNibName: @"CustomCellForCoffeeTableViewCell" bundle:nil] forCellReuseIdentifier: @"cell_coffee"];
     
-    mFirebaseDBReference = [[[FIRDatabase database] reference] child: kcoffeelist];
+    mFirebaseDBReference = [baseDBRef child: kcoffeelist];
     
     if (mFirebaseDBReference != nil) {
 //        [ToastHelper showLoading: self.view message: @"Loading ..."];
@@ -288,7 +288,7 @@
         // retrieving data from Database (Plaid)
         NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
 
-        FIRDatabaseReference *dbRef = [[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: kFINANCIAL_DB];
+        FIRDatabaseReference *dbRef = [[[baseDBRef child:kconsumers] child: userID] child: kFINANCIAL_DB];
         
         if (dbRef != nil) {
             [self showProgressBar: @"Retrieving Transactions..."];
@@ -558,7 +558,8 @@
             // create order for catalog items
             NSDictionary *selectedCatalogItemDic = [selectedObj.orderLists objectAtIndex: currentRow];
             NSString *itemName = [[selectedCatalogItemDic allValues] objectAtIndex: 0];
-            selectedCatalogObjID = [selectedCatalogItemDic];
+            selectedLocationID = selectedObj.location_id;
+            selectedCatalogObjID = [[selectedCatalogItemDic allKeys]  objectAtIndex: 0];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Order Confirmation"
                                                             message:[NSString stringWithFormat: @"Are you sure you want to order '%@'?", itemName]
                                                            delegate:self
@@ -606,9 +607,9 @@
 
 - (void) createOrder
 {
-    [httpClientSquareup createOrderwithlocationid: selectedLocationID catalog_obj_id: selectedCatalogObjID withCompletionHandler:^(NSInteger responseCode, NSArray *transactions) {
+    [httpClientSquareup createOrderwithlocationid: selectedLocationID catalog_obj_id: selectedCatalogObjID withCompletionHandler:^(NSInteger responseCode, NSArray *order) {
         if (responseCode == 200) {
-            
+            [[baseDBRef child: kOrders] setValue: order];
         }
     }];
 }

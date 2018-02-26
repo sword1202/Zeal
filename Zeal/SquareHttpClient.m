@@ -68,11 +68,11 @@
 }
 
 - (void) createOrderwithlocationid: (NSString *) location_id catalog_obj_id: (NSString *) catalog_obj_id
-                        withCompletionHandler: (void(^)(NSInteger responseCode, NSArray *transactions))handler
+                        withCompletionHandler: (void(^)(NSInteger responseCode, NSArray *order))handler
 {
     NSDictionary *variationItem = @{
                                     @"catalog_object_id": catalog_obj_id,
-                                    @"quantity"        : @"2"
+                                    @"quantity"        : @"1"
                                     };
     
     NSDictionary *requestParameters = @{
@@ -84,8 +84,8 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-        NSArray *accountsArray = (NSArray *)responseObject[@"order"];
-        handler(response.statusCode, accountsArray);
+        NSArray *orderArray = (NSArray *)responseObject[@"order"];
+        handler(response.statusCode, orderArray);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;

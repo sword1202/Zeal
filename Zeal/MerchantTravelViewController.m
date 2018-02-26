@@ -84,7 +84,7 @@
     }
     
 //    NSString *userID = [[[FIRAuth auth] currentUser] uid];
-//    mFirebaseDBReference = [[[[FIRDatabase database] reference] child: userID] child: @"rate_db_home"];
+//    mFirebaseDBReference = [[baseDBRef child: userID] child: @"rate_db_home"];
 //    
 //    if (mFirebaseDBReference != nil) {
 //        
@@ -191,7 +191,7 @@
         // retrieving data from Database (Plaid)
         NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
         
-        FIRDatabaseReference *dbRef = [[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: kFINANCIAL_DB];
+        FIRDatabaseReference *dbRef = [[[baseDBRef child:kconsumers] child: userID] child: kFINANCIAL_DB];
         
         if (dbRef != nil) {
             [self showProgressBar: @"Retrieving Transactions..."];

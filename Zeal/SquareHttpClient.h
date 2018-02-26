@@ -23,6 +23,6 @@
 - (void) getLocationsFromSquareup: (void(^)(NSArray * items))handler;
 
 - (void) createOrderwithlocationid: (NSString *) location_id catalog_obj_id: (NSString *) catalog_obj_id
-             withCompletionHandler: (void(^)(NSInteger responseCode, NSArray *transactions))handler;
+             withCompletionHandler: (void(^)(NSInteger responseCode, NSArray *order))handler;
 
 @end

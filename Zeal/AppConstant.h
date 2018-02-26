@@ -25,6 +25,9 @@
 #define TRANS_DELAY 12.0
 #define ACCESSTOKEN_SQUAREUP @"sq0atp-wXX9R-mHWTTSQtcLhwKQbw"
 
+#define baseDBRef [[FIRDatabase database] reference]
+#define kOrders @"orders"
+
 #define kconsumers @"consumers"
 // coffeelist db
 #define kcoffeelist @"coffee_list"

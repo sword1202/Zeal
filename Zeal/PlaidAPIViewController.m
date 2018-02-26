@@ -116,7 +116,7 @@
 {
     arr_savedFinancialAccounts = [[NSMutableArray alloc] init];
     NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
-    dbRef = [[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: kFINANCIAL_DB];
+    dbRef = [[[baseDBRef child:kconsumers] child: userID] child: kFINANCIAL_DB];
     if (dbRef != nil) {
         
         [dbRef observeEventType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
@@ -155,7 +155,7 @@
                     }
                 }
                 
-                [[[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: klinked_cards] setValue: cardNumbersArray];
+                [[[[baseDBRef child:kconsumers] child: userID] child: klinked_cards] setValue: cardNumbersArray];
  
                 tableViewContainer.hidden = NO;
                 [table_view reloadData];

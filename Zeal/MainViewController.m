@@ -337,7 +337,7 @@
             NSDictionary *everyLocation = [locations objectAtIndex: i];
             NSString *locationID = [everyLocation objectForKey: @"id"];
             
-            mCoffeeListDBReference = [[[FIRDatabase database] reference] child: kcoffeelist];
+            mCoffeeListDBReference = [baseDBRef child: kcoffeelist];
             
             [mCoffeeListDBReference observeSingleEventOfType: (FIRDataEventTypeValue) withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
                 
@@ -439,7 +439,7 @@
     NSString *userID;
     userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
     
-    dbRef = [[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: kFINANCIAL_DB];
+    dbRef = [[[baseDBRef child:kconsumers] child: userID] child: kFINANCIAL_DB];
     if (dbRef != nil) {
         [self showProgressBar: @"Retrieving Transactions..."];
         [dbRef observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
@@ -1698,7 +1698,7 @@
     FIRDatabaseReference *dbRef;
     NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
     
-    dbRef = [[[[[[FIRDatabase database] reference] child:kconsumers] child: userID] child: @"stores_db"] child: mStoreName];
+    dbRef = [[[[baseDBRef child:kconsumers] child: userID] child: @"stores_db"] child: mStoreName];
     if (dbRef != nil) {
         
         [dbRef observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
