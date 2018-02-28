@@ -75,4 +75,21 @@
     return randomString;
 }
 
++ (BOOL) compare2Arrays: (NSArray *) array1 array2: (NSArray *) array2
+{
+    int similarObjects = 0;
+    
+    for (int i=0;i < array1.count;i++)
+    {
+        if ([array2 containsObject:array1[i]])
+        {
+            NSLog(@"both contains:%@", array1[i]);
+            
+            similarObjects++;
+        }
+    }
+    
+    return similarObjects==0 ? NO : YES;
+}
+
 @end

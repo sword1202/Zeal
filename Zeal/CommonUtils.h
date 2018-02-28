@@ -14,5 +14,6 @@
 +(NSString *)getAmountFromDic:(NSDictionary *) object key: (NSString *) key;
 + (NSString *) getMonthKey: (NSString *) mString;
 + (NSString *) randomString;
++ (BOOL) compare2Arrays: (NSArray *) array1 array2: (NSArray *) array2;
 
 @end

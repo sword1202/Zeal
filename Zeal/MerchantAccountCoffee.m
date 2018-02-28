@@ -22,7 +22,7 @@
 #define DESIRED_HEADER_HEIGHT 70
 #define CELL_HEIGHT 50
 
-@interface MerchantAccountCoffee ()
+@interface MerchantAccountCoffee () <UIPickerViewDelegate, UIPickerViewDataSource>
 {
     FIRDatabaseReference *mFirebaseDBReference;
     NSMutableArray *arrOfTableView;
@@ -32,6 +32,11 @@
     NSMutableDictionary *catalogItemsDic;
     NSString *selectedLocationID, *selectedCatalogObjID;
     SquareHttpClient *httpClientSquareup;
+    NSMutableArray *ordersArr;
+    __weak IBOutlet UIPickerView *cardPickerView;
+    __weak IBOutlet UIView *cardPickerViewContainer;
+    NSArray *linkedCards;
+    NSString *selectedCardsStr;
 }
 @end
 
@@ -59,6 +64,8 @@
     [super viewDidLoad];
     
     httpClientSquareup = [SquareHttpClient sharedSquareHttpClient];
+    
+    [self getCardsArray];
     
     arrayForBoolOrder = [[NSMutableArray alloc] init];
     arrForBoolHistory = [[NSMutableArray alloc] init];
@@ -108,6 +115,26 @@
         }];
 
     }
+}
+
+- (void) getCardsArray
+{
+    NSString *userID;
+    userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
+    
+    [[[[baseDBRef child: kconsumers] child: userID] child: klinked_cards]
+     observeSingleEventOfType: (FIRDataEventTypeValue) withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+         if ([CommonUtils isNull: snapshot.value]) {
+             return ;
+         }
+         
+         linkedCards = snapshot.value;
+         
+         cardPickerView.delegate = self;
+         cardPickerView.dataSource = self;
+         
+         selectedCardsStr = [linkedCards objectAtIndex: 0];
+     }];
 }
 
 - (void) getItemsFromSquareup
@@ -607,11 +634,91 @@
 
 - (void) createOrder
 {
-    [httpClientSquareup createOrderwithlocationid: selectedLocationID catalog_obj_id: selectedCatalogObjID withCompletionHandler:^(NSInteger responseCode, NSArray *order) {
-        if (responseCode == 200) {
-            [[baseDBRef child: kOrders] setValue: order];
-        }
-    }];
+    cardPickerViewContainer.hidden = false;
+    
 }
+
+- (IBAction)didSelectCard:(id)sender {
+    
+    FIRDatabaseReference *ordersRef = [[baseDBRef child: kOrders] child: selectedCardsStr];
+    ordersArr = [NSMutableArray new];
+    if (![CommonUtils isNull: selectedCardsStr]) {
+        cardPickerViewContainer.hidden = YES;
+        
+        [self showProgressBar: @"Creating Order..."];
+        
+        [httpClientSquareup createOrderwithlocationid: selectedLocationID catalog_obj_id: selectedCatalogObjID
+                                withCompletionHandler:^(NSInteger responseCode, NSDictionary *order) {
+            if (responseCode == 200) {
+                
+                [ordersRef observeSingleEventOfType: (FIRDataEventTypeValue) withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                    if ([CommonUtils isNull: snapshot.value]) {
+                        
+                        [ordersArr addObject:order];
+                        [ordersRef setValue: ordersArr];
+                        
+                    } else
+                    {
+                        ordersArr = snapshot.value;
+                        
+                        for (int i=0; i<ordersArr.count; i++) {
+                            NSDictionary *everyOrder = [ordersArr objectAtIndex: i];
+                            NSArray *lineItems = [everyOrder objectForKey: @"line_items"];
+                            
+                            NSArray *newlineItems = [order objectForKey: @"line_items"];
+                            
+                            if ([CommonUtils compare2Arrays:lineItems array2:newlineItems]) {
+                                // same order
+                                [ordersArr removeObjectAtIndex: i];
+                                break;
+                            }
+                        }
+                        
+                        [ordersArr addObject:order];
+                        [ordersRef setValue: ordersArr];
+                    }
+                    
+                    
+                    hud.hidden = YES;
+                    
+                    [ToastHelper showToast: @"Order has been created successfully."];
+                }];
+                
+            } else
+            {
+                hud.hidden = YES;
+                [ToastHelper showToast: @"Something went wrong."];
+            }
+        }];
+    }
+}
+
+#pragma mark PickerView Delegate and DataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    
+    return 1;
+}
+
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    
+    return linkedCards.count;
+}
+
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = [linkedCards objectAtIndex:row];
+    return title;
+}
+
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    selectedCardsStr = [linkedCards objectAtIndex:row];
+}
+
 
 @end

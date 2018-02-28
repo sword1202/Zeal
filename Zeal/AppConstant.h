@@ -10,7 +10,7 @@
 #define AppConstant_h
 
 //
-#define TEST_MODE    1
+#define TEST_MODE    0
 #define UID @"pSc6HtBiftTDEMO9pZS703t5Ilf2"
 #define KEY(str)    [CommonUtils getString:str]
 //#define TEST_ACCESS_TOKEN @"access-development-a26e7388-b04f-43a9-aceb-842882d2f4a7" // BANK OF AMERICA
