@@ -619,7 +619,7 @@
 {
     if (buttonIndex == 0)
     {
-        //Code for Yes button
+        //Code for Yes button in order confirmation
         if ([CommonUtils isNull: selectedLocationID] || [CommonUtils isNull: selectedCatalogObjID]) {
             return;
         }

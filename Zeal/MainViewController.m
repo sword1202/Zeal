@@ -259,10 +259,15 @@
         
     } else
     {
-        if ([[FIRAuth auth] currentUser] != nil) {
-            mUserName = [[[FIRAuth auth] currentUser] displayName];
+        FIRUser *user = [[FIRAuth auth] currentUser];
+        if (user != nil) {
+            mUserName = [user displayName];
             NSString *firstName = [[mUserName componentsSeparatedByString:@" "] objectAtIndex:0];
             [name_label setText: [@"Hello, " stringByAppendingString: firstName]];
+            
+//            FIRDatabaseReference *dbRef = [baseDBRef child:kconsumers];
+//            NSString *mEmail = [user email];
+//            [[[dbRef child:user.uid] child: @"email"] setValue: mEmail];
         }
         
         app.mFBProfile = [UIImage imageWithData: mData];
@@ -405,7 +410,11 @@
         CoffeeObj *obj = [[CoffeeObj alloc] initWithDic: [snapshot.value objectAtIndex: 0]];
         
         for (int i=0; i<currentCoffeelists.count; i++) {
-            if ([obj.dicObject isEqualToDictionary: [currentCoffeelists objectAtIndex: i]]) {
+            NSDictionary *objDic = obj.dicObject;
+            NSDictionary *currentObjDic = [currentCoffeelists  objectAtIndex: i];
+            
+            if ([objDic[klocationName] isEqualToString: currentObjDic[klocationName]]
+                && [objDic[klocationID] isEqualToString: currentObjDic[klocationID]]) {
                 obj.orderLists = [orderlists copy];
                 [currentCoffeelists replaceObjectAtIndex: i withObject: obj.dicObject];
                 [mCoffeeListDBReference setValue:currentCoffeelists];
