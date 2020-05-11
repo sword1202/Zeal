@@ -539,7 +539,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     isUpdate = YES;
     NSString *accessToken = [metadata objectForKey: kAccessToken];
     
-//    NSString *accessToken = @"access-development-a26e7388-b04f-43a9-aceb-842882d2f4a7";
+//    accessToken = @"access-development-a26e7388-b04f-43a9-aceb-842882d2f4a7";
 //    NSString *startDate = [self getDateTime: pastDate];
 //    NSString *endDate = [self getDateTime: 0];
     

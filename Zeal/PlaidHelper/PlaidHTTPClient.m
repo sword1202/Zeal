@@ -9,6 +9,7 @@
 #import "PlaidHTTPClient.h"
 #define CLIENT_ID @"58d1aeaebdc6a40edcf7d6a2"
 #define SECRET_KEY @"aac96375598281ae37438360142b74"
+#define header @{@"Content-Type":@"application/json"}
 
 @interface PlaidHTTPClient ()
 
@@ -19,6 +20,7 @@
 
 
 @implementation PlaidHTTPClient
+
 
 #pragma mark - Setters & Getters
 
@@ -54,7 +56,7 @@
 
 - (void) downloadPlaidInstitutionsWithCompletionHandler: (void(^)(NSArray * institutions))handler
 {
-    [self GET:@"/institutions" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject)
+    [self GET:@"/institutions" parameters:nil headers:header progress:nil success:^(NSURLSessionDataTask *task, id responseObject)
     {
         NSArray *sortedInstitutions = [(NSArray *)responseObject sortedArrayUsingDescriptors: @[[[NSSortDescriptor alloc] initWithKey: @"name"
                                                                                                                             ascending: YES]]];
@@ -71,7 +73,8 @@
     NSDictionary *requestParameters = @{@"client_id"  : CLIENT_ID,
                                       @"secret"     : SECRET_KEY,
                                       @"public_token": publickToken};
-    [self POST:@"/item/public_token/exchange" parameters:requestParameters headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject)
+    
+    [self POST:@"/item/public_token/exchange" parameters:requestParameters headers: header progress:nil success:^(NSURLSessionDataTask *task, id responseObject)
     {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         
@@ -182,7 +185,7 @@
 //         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
 //         handler(response.statusCode, nil);
 //     }];
-    [self POST:@"/transactions/get" parameters:requestParameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self POST:@"/transactions/get" parameters:requestParameters headers:header progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         NSArray *transactionsArray = (NSArray *)responseObject[@"transactions"];
         handler(response.statusCode, transactionsArray);
@@ -204,7 +207,7 @@
                                         @"secret"        : SECRET_KEY,
                                         @"access_token"  : accessToken
                                         };
-    [self POST:@"/accounts/get" parameters:requestParameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self POST:@"/accounts/get" parameters:requestParameters headers:header progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         NSArray *accountsArray = (NSArray *)responseObject[@"accounts"];
         handler(response.statusCode, accountsArray);

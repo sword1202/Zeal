@@ -67,7 +67,7 @@ static NSString * const kFirebaseURL = @"https://zeal-915b2.firebaseio.com";
 //            
 //        }
 //    }];
-    
+    [GIDSignIn sharedInstance].presentingViewController = self;
     [[GIDSignIn sharedInstance] signIn];
 }
 
