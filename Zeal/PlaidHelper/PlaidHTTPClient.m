@@ -54,18 +54,15 @@
 
 - (void) downloadPlaidInstitutionsWithCompletionHandler: (void(^)(NSArray * institutions))handler
 {
-    [self GET: @"/institutions"
-   parameters: nil
-      success: ^(NSURLSessionDataTask *task, id responseObject)
-               {
-                   NSArray *sortedInstitutions = [(NSArray *)responseObject sortedArrayUsingDescriptors: @[[[NSSortDescriptor alloc] initWithKey: @"name"
-                                                                                                                                       ascending: YES]]];
-                   handler(sortedInstitutions);
-               }
-      failure: ^(NSURLSessionDataTask *task, NSError *error)
-               {
-                   NSLog(@"Failed to retrieve Plaid institutions: %@", error.localizedDescription);
-               }];
+    [self GET:@"/institutions" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSArray *sortedInstitutions = [(NSArray *)responseObject sortedArrayUsingDescriptors: @[[[NSSortDescriptor alloc] initWithKey: @"name"
+                                                                                                                            ascending: YES]]];
+        handler(sortedInstitutions);
+    } failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        NSLog(@"Failed to retrieve Plaid institutions: %@", error.localizedDescription);
+    }];
 }
 
 - (void) getAccessTokenWithCompletionHandler: (NSString *)publickToken
@@ -74,23 +71,19 @@
     NSDictionary *requestParameters = @{@"client_id"  : CLIENT_ID,
                                       @"secret"     : SECRET_KEY,
                                       @"public_token": publickToken};
-    
-    [self POST:@"/item/public_token/exchange"
-    parameters: requestParameters
-    success: ^(NSURLSessionDataTask *task, id responseObject)
-     {
-         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-         
-         handler(response.statusCode, responseObject);
-         
-     }
-       failure: ^(NSURLSessionDataTask *task, NSError *error)
-     {
-         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-         NSLog(@"Failed to retrieve AccessToken Response: %@", error.localizedDescription);
-         
-         handler(response.statusCode, nil);
-     }];
+    [self POST:@"/item/public_token/exchange" parameters:requestParameters headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        
+        handler(response.statusCode, responseObject);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        NSLog(@"Failed to retrieve AccessToken Response: %@", error.localizedDescription);
+        
+        handler(response.statusCode, nil);
+    }];
 }
 
 
@@ -189,9 +182,7 @@
 //         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
 //         handler(response.statusCode, nil);
 //     }];
-    [self POST:@"/transactions/get" parameters:requestParameters progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self POST:@"/transactions/get" parameters:requestParameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         NSArray *transactionsArray = (NSArray *)responseObject[@"transactions"];
         handler(response.statusCode, transactionsArray);
@@ -213,10 +204,7 @@
                                         @"secret"        : SECRET_KEY,
                                         @"access_token"  : accessToken
                                         };
-    
-    [self POST:@"/accounts/get" parameters:requestParameters progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self POST:@"/accounts/get" parameters:requestParameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         NSArray *accountsArray = (NSArray *)responseObject[@"accounts"];
         handler(response.statusCode, accountsArray);

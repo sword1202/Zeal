@@ -24,47 +24,34 @@
 
 - (void) downloadSquareupItemsWithCompletionHandler: (void(^)(NSArray * items))handler
 {
-    [self GET: @"/v2/catalog/list?types=item"
-   parameters: nil
-      success: ^(NSURLSessionDataTask *task, id responseObject)
-     {
-         NSArray *sortedItems = [(NSDictionary *)responseObject objectForKey: @"objects"];
-         handler(sortedItems);
-     }
-      failure: ^(NSURLSessionDataTask *task, NSError *error)
-     {
-         NSLog(@"Failed to retrieve Square Items: %@", error.localizedDescription);
-     }];
+    [self GET:@"/v2/catalog/list?types=item" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *sortedItems = [(NSDictionary *)responseObject objectForKey: @"objects"];
+        handler(sortedItems);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Failed to retrieve Square Items: %@", error.localizedDescription);
+    }];
 }
 
 - (void) downloadSquareupCategoryWithCompletionHandler: (void(^)(NSArray * items))handler
 {
-    [self GET: @"/v2/catalog/list?types=category"
-   parameters: nil
-      success: ^(NSURLSessionDataTask *task, id responseObject)
-     {
-         NSArray *sortedCatalogs = [(NSDictionary *)responseObject objectForKey: @"objects"];
-         handler(sortedCatalogs);
-     }
-      failure: ^(NSURLSessionDataTask *task, NSError *error)
-     {
-         NSLog(@"Failed to retrieve Square Catalogs: %@", error.localizedDescription);
-     }];
+    [self GET:@"/v2/catalog/list?types=category" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *sortedCatalogs = [(NSDictionary *)responseObject objectForKey: @"objects"];
+        handler(sortedCatalogs);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Failed to retrieve Square Catalogs: %@", error.localizedDescription);
+    }];
+    
 }
 
 - (void) getLocationsFromSquareup: (void(^)(NSArray * items))handler
 {
-    [self GET: @"/v2/locations"
-   parameters: nil
-      success: ^(NSURLSessionDataTask *task, id responseObject)
-     {
-         NSArray *sortedLocations = [(NSDictionary *)responseObject objectForKey: @"locations"];
-         handler(sortedLocations);
-     }
-      failure: ^(NSURLSessionDataTask *task, NSError *error)
-     {
-         NSLog(@"Failed to retrieve Square Locations: %@", error.localizedDescription);
-     }];
+    [self GET:@"/v2/locations" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *sortedLocations = [(NSDictionary *)responseObject objectForKey: @"locations"];
+        handler(sortedLocations);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Failed to retrieve Square Locations: %@", error.localizedDescription);
+    }];
+   
 }
 
 - (void) createOrderwithlocationid: (NSString *) location_id catalog_obj_id: (NSString *) catalog_obj_id
@@ -80,7 +67,7 @@
                                         @"line_items"          : [NSArray arrayWithObjects: variationItem, nil]
                                         };
     
-    [self POST:[NSString stringWithFormat: @"/v2/locations/%@/orders", location_id] parameters:requestParameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    [self POST:[NSString stringWithFormat: @"/v2/locations/%@/orders", location_id] parameters:requestParameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;

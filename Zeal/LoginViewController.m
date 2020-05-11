@@ -31,7 +31,7 @@ static NSString * const kFirebaseURL = @"https://zeal-915b2.firebaseio.com";
     [super viewDidLoad];
 //    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.navigationController setNavigationBarHidden:YES];
-    [GIDSignIn sharedInstance].uiDelegate = self;
+//    [GIDSignIn sharedInstance].uiDelegate = self;
     [GIDSignIn sharedInstance].delegate = self;
 }
 
@@ -81,13 +81,14 @@ static NSString * const kFirebaseURL = @"https://zeal-915b2.firebaseio.com";
         [FIRGoogleAuthProvider credentialWithIDToken:authentication.idToken
                                          accessToken:authentication.accessToken];
         
-        [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable fuser, NSError * _Nullable error) {
+        
+        [[FIRAuth auth] signInWithCredential:credential completion:^(FIRAuthDataResult * _Nullable fDataResult, NSError * _Nullable error) {
             if (error) {
                 NSLog(@"Error %@", error.localizedDescription);
             } else
             {
                 // store the credential to remove current user later
-                NSLog( @"email: %@", fuser.email);
+//                NSLog( @"email: %@", fDataResult.credential.);
                 NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
                 [userdefaults setObject:authentication.idToken forKey:@"authcredential_idToken"];
                 [userdefaults setObject: authentication.accessToken forKey:@"authcredential_accessToken"];
