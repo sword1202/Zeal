@@ -13,7 +13,7 @@
 #define TEST_MODE    0
 #define UID @"F0fIUs7z30ZVkBDz1B07rprRC5w1"
 #define KEY(str)    [CommonUtils getString:str]
-//#define TEST_ACCESS_TOKEN @"access-development-a26e7388-b04f-43a9-aceb-842882d2f4a7" // BANK OF AMERICA
+
 #define TEST_ACCESS_TOKEN @"access-development-624a0d39-c649-4346-b327-ac4a1fa19da8" // Bank of America
 // Key For Plaid API Integration
 #define PLAID_PUBLIC_KEY @"667778757a11bac2a6ee9b156c914a"
