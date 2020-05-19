@@ -1,62 +1,62 @@
 {
   "images" : [
     {
-      "size" : "20x20",
+      "filename" : "iphone_notification20x20@2x.png",
       "idiom" : "iphone",
-      "filename" : "icon_40.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "20x20"
     },
     {
-      "size" : "20x20",
+      "filename" : "iphone_notification20x20@3x.png",
       "idiom" : "iphone",
-      "filename" : "icon_60.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "20x20"
     },
     {
-      "size" : "29x29",
+      "filename" : "iphone_settings29x29@2x.png",
       "idiom" : "iphone",
-      "filename" : "icon_58.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "29x29"
     },
     {
-      "size" : "29x29",
+      "filename" : "iphone_settings29x29@3x.png",
       "idiom" : "iphone",
-      "filename" : "icon_87.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "29x29"
     },
     {
-      "size" : "40x40",
+      "filename" : "iphone_spotlight40x40@2x.png",
       "idiom" : "iphone",
-      "filename" : "icon_80.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "40x40"
     },
     {
-      "size" : "40x40",
+      "filename" : "iphone_spotlight40x40@3x.png",
       "idiom" : "iphone",
-      "filename" : "icon_120.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "40x40"
     },
     {
-      "size" : "60x60",
+      "filename" : "iphone_app60x60@2x.png",
       "idiom" : "iphone",
-      "filename" : "icon_120-1.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "60x60"
     },
     {
-      "size" : "60x60",
+      "filename" : "iphone_app60x60@3x.png",
       "idiom" : "iphone",
-      "filename" : "icon_180.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "60x60"
     },
     {
-      "size" : "1024x1024",
+      "filename" : "ios_marketing1024x1024.png",
       "idiom" : "ios-marketing",
-      "filename" : "icon_1024.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "1024x1024"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

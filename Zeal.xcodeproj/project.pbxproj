@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49CDE1D02473BA240018A0D0 /* TransactionsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDE1CF2473BA240018A0D0 /* TransactionsCellTableViewCell.xib */; };
+		49CDE1D32473BA6E0018A0D0 /* TransactionsCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDE1D22473BA6E0018A0D0 /* TransactionsCellTableViewCell.m */; };
+		49CDE1D72473CDD80018A0D0 /* ReorderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDE1D52473CDD80018A0D0 /* ReorderTableCell.m */; };
+		49CDE1D82473CDD80018A0D0 /* ReorderTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDE1D62473CDD80018A0D0 /* ReorderTableCell.xib */; };
 		6C1A3A65203BD01300D6D165 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A3A64203BD01300D6D165 /* CommonUtils.m */; };
 		6C229CF21F3018A9008B4850 /* expandableImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C229CEA1F3018A9008B4850 /* expandableImage.png */; };
 		6C229CF31F3018A9008B4850 /* expandableImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C229CEB1F3018A9008B4850 /* expandableImage@2x.png */; };
@@ -98,6 +102,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		49CDE1CF2473BA240018A0D0 /* TransactionsCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsCellTableViewCell.xib; sourceTree = "<group>"; };
+		49CDE1D12473BA6E0018A0D0 /* TransactionsCellTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransactionsCellTableViewCell.h; sourceTree = "<group>"; };
+		49CDE1D22473BA6E0018A0D0 /* TransactionsCellTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransactionsCellTableViewCell.m; sourceTree = "<group>"; };
+		49CDE1D42473CDD80018A0D0 /* ReorderTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReorderTableCell.h; sourceTree = "<group>"; };
+		49CDE1D52473CDD80018A0D0 /* ReorderTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReorderTableCell.m; sourceTree = "<group>"; };
+		49CDE1D62473CDD80018A0D0 /* ReorderTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReorderTableCell.xib; sourceTree = "<group>"; };
 		6C1A3A63203BD01300D6D165 /* CommonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
 		6C1A3A64203BD01300D6D165 /* CommonUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
 		6C229CEA1F3018A9008B4850 /* expandableImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expandableImage.png; sourceTree = "<group>"; };
@@ -334,6 +344,12 @@
 				6CBF93AF1EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.h */,
 				6CBF93B01EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.m */,
 				6CBF93B11EEAB7E40036EBA3 /* CustomTableFinancialAccountsTableViewCell.xib */,
+				49CDE1CF2473BA240018A0D0 /* TransactionsCellTableViewCell.xib */,
+				49CDE1D12473BA6E0018A0D0 /* TransactionsCellTableViewCell.h */,
+				49CDE1D22473BA6E0018A0D0 /* TransactionsCellTableViewCell.m */,
+				49CDE1D42473CDD80018A0D0 /* ReorderTableCell.h */,
+				49CDE1D52473CDD80018A0D0 /* ReorderTableCell.m */,
+				49CDE1D62473CDD80018A0D0 /* ReorderTableCell.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -658,7 +674,9 @@
 				6CBAB6D82023EAAC00E46A6B /* index.html in Resources */,
 				6CB399921EE0B4D000149C5D /* CustomTableViewCell2.xib in Resources */,
 				6CD9B0481ED3874B003ADF99 /* LaunchScreen.storyboard in Resources */,
+				49CDE1D02473BA240018A0D0 /* TransactionsCellTableViewCell.xib in Resources */,
 				6CB399801EDE2B7700149C5D /* MerchantShops.xib in Resources */,
+				49CDE1D82473CDD80018A0D0 /* ReorderTableCell.xib in Resources */,
 				6CC818A81F0B3370009AC29E /* MerchantAccountCoffee.xib in Resources */,
 				6C91FBAC1EDC78EA000243DA /* GoogleService-Info.plist in Resources */,
 				6CD9B0431ED3874B003ADF99 /* Main.storyboard in Resources */,
@@ -804,9 +822,11 @@
 				6CD9B03D1ED3874B003ADF99 /* AppDelegate.m in Sources */,
 				6C6B95561F463D7D00BDE4B7 /* CustomCellForCoffeeTableViewCell.m in Sources */,
 				6CBAB6D32023869F00E46A6B /* TWRChartView.m in Sources */,
+				49CDE1D32473BA6E0018A0D0 /* TransactionsCellTableViewCell.m in Sources */,
 				6CB399841EDE2BA700149C5D /* MerchantEating.m in Sources */,
 				6CB3997F1EDE2B7700149C5D /* MerchantShops.m in Sources */,
 				6CB399911EE0B4D000149C5D /* CustomTableViewCell2.m in Sources */,
+				49CDE1D72473CDD80018A0D0 /* ReorderTableCell.m in Sources */,
 				6CD9B03A1ED3874B003ADF99 /* main.m in Sources */,
 				6C91FBA81EDB8245000243DA /* MainViewController.m in Sources */,
 				6CBAB6D22023869F00E46A6B /* TWRLineChart.m in Sources */,
@@ -936,6 +956,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Zeal/Zeal.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U3DJW66E3Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -946,10 +969,11 @@
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Zeal-Prefix.pch";
 				INFOPLIST_FILE = Zeal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LINK_ENV = Sandbox;
 				LINK_KEY = 667778757a11bac2a6ee9b156c914a;
+				MARKETING_VERSION = 2.2.7;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -997,6 +1021,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Zeal/Zeal.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U3DJW66E3Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1007,10 +1032,11 @@
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Zeal-Prefix.pch";
 				INFOPLIST_FILE = Zeal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LINK_ENV = Production;
 				LINK_KEY = 667778757a11bac2a6ee9b156c914a;
+				MARKETING_VERSION = 2.2.7;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",

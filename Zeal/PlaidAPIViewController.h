@@ -15,6 +15,12 @@
     
 }
 
+@property (weak, nonatomic) IBOutlet UIView *reorderView;
+@property (weak, nonatomic) IBOutlet UILabel *reorderOfficialNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *reorderAmountLabel;
+@property (weak, nonatomic) IBOutlet UIView *bodyView;
+@property (weak, nonatomic) IBOutlet UITableView *reorderTableView;
+@property (weak, nonatomic) IBOutlet UIButton *sendReorderBtn;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
 
 -(NSMutableDictionary*)dictionaryFromLinkUrl:(NSURL*)linkURL;

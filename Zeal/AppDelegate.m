@@ -20,7 +20,8 @@
 @synthesize feedbackAddButtonAndBackButtonFlag, indexOfSelectedImageOfMerchantAccount, onceInitFlag, menuItems, indexOfSelectedMenu, mUserID, mUserName, mUserEmail, mFBProfile, showChatFlag, arr_shops_merchantAccounts, maxAmount,arr_eating_merchantAccounts, arr_travel_merchantAccounts, isSelectedPlusButtonForHome, arrForLineGraphDataLastMonth, arrForLineGraphDataCurrentMonth, isMaxInLast, arrMerchantShops, arrMerchantEatings;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    NSLog(@"ENVVVVV-----------");
+    NSLog(ENV);
     //    #if USE_CUSTOM_CONFIG
     //        [self setupPlaidLinkWithCustomConfiguration];
     //    #else

@@ -9,6 +9,8 @@
 #import "PlaidAPIViewController.h"
 #import "ToastHelper.h"
 #import "CustomTableFinancialAccountsTableViewCell.h"
+#import "TransactionsCellTableViewCell.h"
+#import "ReorderTableCell.h"
 #import "PlaidHTTPClient.h"
 #import "UIViewController+Alerts.h"
 #import "MBProgressHUD.h"
@@ -19,12 +21,13 @@
     __weak IBOutlet UIButton *btn_linkWithPlaid;
     __weak IBOutlet UIButton *btn_addMoreBank;
     __weak IBOutlet UIView *tableViewContainer;
-    NSMutableArray *arr_savedFinancialAccounts;
+    NSMutableArray *arr_savedFinancialAccounts, *arrOfficialNames, *arrAmounts, *arrBanks;
     NSArray *arr_everyTransactionsForBank;
     FIRDatabaseReference *dbRef;
     PlaidHTTPClient *httpClientPlaid;
     // params of Cell
     NSDictionary *saveDic, *institutionsDic;
+    NSInteger selectedReorderIndex;
     MBProgressHUD *hud;
     NSString *sel_institution_id;
     NSString *lastMonthStartDate,* lastMonthEndDate,
@@ -50,10 +53,10 @@
 
     [table_view registerNib: [UINib nibWithNibName: @"CustomTableFinancialAccountsTableViewCell" bundle:nil] forCellReuseIdentifier: @"cell_financial"];
 
-    [tableViewOfTransactions registerNib: [UINib nibWithNibName: @"CustomTableFinancialAccountsTableViewCell" bundle:nil] forCellReuseIdentifier: @"cell_financial"];
+    [tableViewOfTransactions registerNib: [UINib nibWithNibName: @"TransactionsCellTableViewCell" bundle:nil] forCellReuseIdentifier: @"cell_financial"];
 
-    tableViewOfTransactions.hidden = YES;
-
+[_reorderTableView registerNib: [UINib nibWithNibName: @"ReorderTableCell" bundle:nil] forCellReuseIdentifier: @"reorder"];
+    
     // initialize PlaidClientHttp to retrieve transactions
     httpClientPlaid = [PlaidHTTPClient sharedPlaidHTTPClient];
     
@@ -61,9 +64,20 @@
     isUpdate = NO;
     [self retreiveDataFromDB];
     [self createBaseLineOfButton];
+    [self setReorderView];
     
 }
 
+- (void) setReorderView {
+    _sendReorderBtn.clipsToBounds = YES;
+
+    //half of the width
+    _sendReorderBtn.layer.cornerRadius = 10;
+    _sendReorderBtn.layer.borderColor=[UIColor greenColor].CGColor;
+    _sendReorderBtn.layer.borderWidth=2.0f;
+    selectedReorderIndex = 0;
+    
+}
 - (void) getListsOfInstitutions
 {
 //    [httpClientPlaid downloadPlaidInstitutionsWithCompletionHandler:^(NSArray *institutions) {
@@ -115,6 +129,9 @@
 - (void) retreiveDataFromDB
 {
     arr_savedFinancialAccounts = [[NSMutableArray alloc] init];
+    arrAmounts = [[NSMutableArray alloc] init];
+    arrOfficialNames = [[NSMutableArray alloc] init];
+    arrBanks = [[NSMutableArray alloc] init];
     NSString *userID = TEST_MODE==1 ? UID:[[[FIRAuth auth] currentUser] uid];
     dbRef = [[[baseDBRef child:kconsumers] child: userID] child: kFINANCIAL_DB];
     if (dbRef != nil) {
@@ -122,7 +139,9 @@
         [dbRef observeEventType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
             if ([snapshot exists]) {
                 arr_savedFinancialAccounts = [[NSMutableArray alloc] init];
+                NSMutableArray *bankNames = [[NSMutableArray alloc] init];
                 for (snapshot in snapshot.children) {
+                    [bankNames addObject: snapshot.key];
                     [arr_savedFinancialAccounts addObject:[snapshot value]];
                 }
                 
@@ -149,8 +168,26 @@
                     NSArray *accounts = [eachBank objectForKey: kAccount];
                     for (int j = 0; j < accounts.count; j ++) {
                         NSDictionary *eachAccountsinBank = [accounts objectAtIndex: j];
+                        NSString *cardNo = [eachAccountsinBank objectForKey: @"mask"];
+                        [cardNumbersArray addObject: cardNo];
+                        for (int k = 0; k < cardNumbersArray.count-1; k++) {
+                            if ([cardNo isEqualToString:[cardNumbersArray objectAtIndex: k]]) {
+                                [cardNumbersArray removeObjectAtIndex:cardNumbersArray.count-1];
+                                break;
+                            }
+                        }
                         
-                        [cardNumbersArray addObject: [eachAccountsinBank objectForKey: @"mask"]];
+                        ///
+                        NSString *officialName = [eachAccountsinBank objectForKey:@"name"];
+//                        if ([eachAccountsinBank objectForKey: @"official_name"]) {
+//                            officialName = [eachAccountsinBank objectForKey:@"official_name"];
+//                        }
+                        
+                        [arrOfficialNames addObject:officialName];
+                        [arrBanks addObject: [bankNames objectAtIndex: i]];
+                        
+                        NSDictionary *balances = [eachAccountsinBank objectForKey: @"balances"];
+                        [arrAmounts addObject: [balances objectForKey: @"current"]];
                         
                     }
                 }
@@ -159,6 +196,10 @@
  
                 tableViewContainer.hidden = NO;
                 [table_view reloadData];
+                [tableViewOfTransactions reloadData];
+                // reload transaction view
+                
+//                [self retrievTransactions:@"ins_1"];
             } else
             {
                 tableViewContainer.hidden = YES;
@@ -180,7 +221,6 @@
     
     if ([btn_addMoreBank.titleLabel.text isEqualToString: @"BACK"]) {
         [btn_addMoreBank setTitle: @"Add more banks" forState: UIControlStateNormal];
-        tableViewOfTransactions.hidden = YES;
     } else
     {
         [self initWebViewForPlaid];
@@ -225,15 +265,18 @@
 {
     NSUInteger tableCellCount = arr_savedFinancialAccounts.count;
     if (tableView.tag == 200) {
-        tableCellCount = arr_everyTransactionsForBank.count;
+        tableCellCount = arrAmounts.count;
+    } else if (tableView.tag == 300 && arrAmounts.count >0) {
+        tableCellCount = 1;
     }
     return tableCellCount;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CustomTableFinancialAccountsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cell_financial" forIndexPath:indexPath];
+    id returnValue = nil;
     if (tableView.tag == 100) {
+        CustomTableFinancialAccountsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cell_financial" forIndexPath:indexPath];
         NSDictionary *dic = [arr_savedFinancialAccounts objectAtIndex: indexPath.row];
         cell.plaid_main_list_view.hidden = NO;
         cell.plaid_title.text = @"Plaid";
@@ -246,36 +289,83 @@
         if (image != nil) {
             cell.plaid_institution_logo.image = image;
         }
-    } else
-    {
-        cell.plaid_main_list_view.hidden = YES;
-        NSDictionary *dic = [arr_everyTransactionsForBank objectAtIndex: indexPath.row];
-        cell.logo_img_ChartView.hidden = YES;
-        NSString *institutionName = [institutionsDic objectForKey: sel_institution_id];
-        UIImage *image = [UIImage imageNamed: institutionName];
         
-        if (image != nil && indexPath.row == 0) {
-            cell.logo_img.image = image;
-            cell.logo_img.hidden = NO;
-        } else
-            cell.logo_img.hidden = YES;
-        long amount = [[dic objectForKey: @"amount"] longValue];
+        returnValue = cell;
+    } else if (tableView.tag == 200)
+    {
+        TransactionsCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cell_financial" forIndexPath:indexPath];
+        
+        NSString *institutionName = [institutionsDic objectForKey: sel_institution_id];
+        
+        
+        long amount = [[arrAmounts objectAtIndex: indexPath.row] longValue];
         if (amount < 0) {
             amount = 0 - amount;
-            cell.mAmounts.text = [NSString stringWithFormat: @"$ -%lu", amount];
+            cell.amount_label.text = [NSString stringWithFormat: @"$ -%lu", amount];
 //            cell.mAmounts.textColor = [UIColor redColor];
         } else
         {
-            cell.mAmounts.text = [NSString stringWithFormat: @"$ %lu", amount];
+            cell.amount_label.text = [NSString stringWithFormat: @"$ %lu", amount];
 //            cell.mAmounts.textColor = [UIColor blackColor];
         }
         
-        cell.mLabelAccountName.text = [dic objectForKey: @"name"];
-        cell.minstitutionName.text = [dic objectForKey: @"date"];
+        cell.btn_reorder.clipsToBounds = YES;
+
+        //half of the width
+        cell.btn_reorder.layer.cornerRadius = 10;
+        cell.btn_reorder.layer.borderColor=[UIColor greenColor].CGColor;
+        cell.btn_reorder.layer.borderWidth=2.0f;
         
+        cell.officialname_label.text = [arrOfficialNames objectAtIndex: indexPath.row];
+        cell.btn_reorder.tag = indexPath.row;
+        
+        [cell.btn_reorder addTarget:self action:@selector(didSelectReorder:) forControlEvents:UIControlEventTouchUpInside];
+        
+        returnValue = cell;
+        
+    } else {
+        ReorderTableCell *cell = [tableView dequeueReusableCellWithIdentifier: @"reorder" forIndexPath:indexPath];
+        cell.orderName.text = [arrOfficialNames objectAtIndex: selectedReorderIndex];
+        long amount = [[arrAmounts objectAtIndex: selectedReorderIndex] longValue];
+                if (amount < 0) {
+                    amount = 0 - amount;
+                    cell.orderAmount.text = [NSString stringWithFormat: @"$ -%lu", amount];
+        //            cell.mAmounts.textColor = [UIColor redColor];
+                } else
+                {
+                    cell.orderAmount.text = [NSString stringWithFormat: @"$ %lu", amount];
+        //            cell.mAmounts.textColor = [UIColor blackColor];
+                }
+        returnValue = cell;
     }
     
-    return cell;
+    return returnValue;
+}
+
+-(void)didSelectReorder:(UIButton*)sender
+{
+    self.bodyView.hidden = YES;
+    self.reorderView.hidden = NO;
+    _reorderOfficialNameLabel.text = [arrOfficialNames objectAtIndex: sender.tag];
+    selectedReorderIndex = sender.tag;
+    
+    long amount = [[arrAmounts objectAtIndex: selectedReorderIndex] longValue];
+            if (amount < 0) {
+                amount = 0 - amount;
+                _reorderAmountLabel.text = [NSString stringWithFormat: @"$ -%lu", amount];
+    //            cell.mAmounts.textColor = [UIColor redColor];
+            } else
+            {
+                _reorderAmountLabel.text = [NSString stringWithFormat: @"$ %lu", amount];
+    //            cell.mAmounts.textColor = [UIColor blackColor];
+            }
+    
+    [_reorderTableView reloadData];
+}
+
+- (IBAction)didSelectSendOrder:(UIButton *)sender {
+    self.bodyView.hidden = NO;
+    self.reorderView.hidden = YES;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -300,8 +390,8 @@
 //                                    }];
     // ************** //
     
-    [tableView deselectRowAtIndexPath: indexPath animated:YES];
-//
+    [tableView deselectRowAtIndexPath: indexPath animated:NO];
+
 //    if (tableView.tag == 100) {
 //        NSDictionary *sel_dic = [arr_savedFinancialAccounts objectAtIndex: indexPath.row];
 //        sel_institution_id = [sel_dic objectForKey: @"institution_id"];
@@ -316,7 +406,7 @@
     if ([[dbRef child: institutionName] child: @"transactions"] != nil) {
         
         [self showProgressBar: @"Loading..."];
-        [[[dbRef child: institutionName] child: @"transactions"] observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
+        [[[dbRef child: institutionName] child: @"accounts"] observeSingleEventOfType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
             hud.hidden = YES;
             if ([snapshot exists]) {
                 
@@ -324,7 +414,7 @@
                 [tableViewOfTransactions reloadData];
                 
                 tableViewOfTransactions.hidden = NO;
-                [btn_addMoreBank setTitle: @"BACK" forState: UIControlStateNormal];
+//                [btn_addMoreBank setTitle: @"BACK" forState: UIControlStateNormal];
                 
             }
         }];

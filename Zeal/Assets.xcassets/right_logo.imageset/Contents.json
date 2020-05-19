@@ -1,13 +1,13 @@
 {
   "images" : [
     {
+      "filename" : "pp_logo.png",
       "idiom" : "universal",
-      "filename" : "right_logo.png",
       "scale" : "1x"
     },
     {
+      "filename" : "pp_logo@2x.png",
       "idiom" : "universal",
-      "filename" : "right_logo@2x.png",
       "scale" : "2x"
     },
     {
@@ -16,7 +16,7 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

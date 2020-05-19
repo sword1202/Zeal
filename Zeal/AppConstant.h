@@ -14,12 +14,13 @@
 #define UID @"F0fIUs7z30ZVkBDz1B07rprRC5w1"
 #define KEY(str)    [CommonUtils getString:str]
 
-#define TEST_ACCESS_TOKEN @"access-development-624a0d39-c649-4346-b327-ac4a1fa19da8" // Bank of America
+#define TEST_ACCESS_TOKEN (TEST_MODE==1?@"access-sandbox-b8509b20-b6b5-4e2b-9563-cca736bafb9f":@"access-development-624a0d39-c649-4346-b327-ac4a1fa19da8") // Bank of America
+
 // Key For Plaid API Integration
 #define PLAID_PUBLIC_KEY @"667778757a11bac2a6ee9b156c914a"
 // production, development, sandbox
-#define ENV @"development"
-//#define ENV @"sandbox"
+//#define ENV @"development"
+#define ENV (TEST_MODE==1?@"sandbox":@"development")
 #define CLIENT_NAME @"ZEAL"
 #define PRODUCTION @"transactions" // auth, transactions, balance, identity, income
 #define TRANS_DELAY 12.0
