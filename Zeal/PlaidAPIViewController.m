@@ -73,7 +73,7 @@
 
     //half of the width
     _sendReorderBtn.layer.cornerRadius = 10;
-    _sendReorderBtn.layer.borderColor=[UIColor greenColor].CGColor;
+    _sendReorderBtn.layer.borderColor=[UIColor blueColor].CGColor;
     _sendReorderBtn.layer.borderWidth=2.0f;
     selectedReorderIndex = 0;
     
@@ -139,6 +139,12 @@
         [dbRef observeEventType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
             if ([snapshot exists]) {
                 arr_savedFinancialAccounts = [[NSMutableArray alloc] init];
+                
+                arrOfficialNames = [[NSMutableArray alloc] init];
+                arrAmounts = [[NSMutableArray alloc] init];
+                arrBanks = [[NSMutableArray alloc] init];
+
+                
                 NSMutableArray *bankNames = [[NSMutableArray alloc] init];
                 for (snapshot in snapshot.children) {
                     [bankNames addObject: snapshot.key];
@@ -177,20 +183,28 @@
                             }
                         }
                         
-                        ///
-                        NSString *officialName = [eachAccountsinBank objectForKey:@"name"];
-//                        if ([eachAccountsinBank objectForKey: @"official_name"]) {
-//                            officialName = [eachAccountsinBank objectForKey:@"official_name"];
-//                        }
-                        
-                        [arrOfficialNames addObject:officialName];
-                        [arrBanks addObject: [bankNames objectAtIndex: i]];
-                        
-                        NSDictionary *balances = [eachAccountsinBank objectForKey: @"balances"];
-                        [arrAmounts addObject: [balances objectForKey: @"current"]];
                         
                     }
+                    
+                    ///
+                    
+                    if ([eachBank objectForKey: @"monthly_transaction"] != nil && [[eachBank objectForKey: @"monthly_transaction"] objectForKey: [CommonUtils getMonthKey: currentMonth]] != nil) {
+                        NSArray *currentMonthTransactions = [[eachBank objectForKey: @"monthly_transaction"] objectForKey: [CommonUtils getMonthKey: currentMonth]];
+                        
+                        for (int j=0 ; j < currentMonthTransactions.count; j++) {
+                            NSDictionary *eachTransaction = [currentMonthTransactions objectAtIndex: j];
+                            [arrAmounts addObject: [eachTransaction objectForKey: @"amount"]];
+                            [arrBanks addObject: [bankNames objectAtIndex: i]];
+                            [arrOfficialNames addObject: [eachTransaction objectForKey: @"name"]];
+                        }
+                    }
+                                            
+                                           
+
+                                            
+                                            
                 }
+                    
                 
                 [[[[baseDBRef child:kconsumers] child: userID] child: klinked_cards] setValue: cardNumbersArray];
  
@@ -220,7 +234,7 @@
 - (IBAction)didConnectPlaidLink:(id)sender {
     
     if ([btn_addMoreBank.titleLabel.text isEqualToString: @"BACK"]) {
-        [btn_addMoreBank setTitle: @"Add more banks" forState: UIControlStateNormal];
+        [btn_addMoreBank setTitle: @"Add Bank" forState: UIControlStateNormal];
     } else
     {
         [self initWebViewForPlaid];
@@ -283,12 +297,18 @@
         cell.plaid_subTitle.text = [dic objectForKey: @"institution_name"];
         cell.logo_img_ChartView.hidden = YES;
         NSString *institutionName = [institutionsDic objectForKey: [dic objectForKey: @"institution_id"]];
+        
         UIImage *image = [UIImage imageNamed: institutionName];
         //display general image
 //        UIImage *image = [UIImage imageNamed: @"plaid_logo"];
         if (image != nil) {
             cell.plaid_institution_logo.image = image;
         }
+        
+        cell.btn_close.hidden = NO;
+        cell.btn_close.tag = indexPath.row;
+        
+        [cell.btn_close addTarget:self action:@selector(didSelectClose:) forControlEvents:UIControlEventTouchUpInside];
         
         returnValue = cell;
     } else if (tableView.tag == 200)
@@ -313,7 +333,7 @@
 
         //half of the width
         cell.btn_reorder.layer.cornerRadius = 10;
-        cell.btn_reorder.layer.borderColor=[UIColor greenColor].CGColor;
+        cell.btn_reorder.layer.borderColor=[UIColor blueColor].CGColor;
         cell.btn_reorder.layer.borderWidth=2.0f;
         
         cell.officialname_label.text = [arrOfficialNames objectAtIndex: indexPath.row];
@@ -361,6 +381,14 @@
             }
     
     [_reorderTableView reloadData];
+}
+
+-(void)didSelectClose:(UIButton*)sender
+{
+    NSDictionary *dic = [arr_savedFinancialAccounts objectAtIndex: sender.tag];
+    NSString *institutionName = [dic objectForKey: @"institution_name"];
+    
+    [[dbRef child: institutionName] removeValue];
 }
 
 - (IBAction)didSelectSendOrder:(UIButton *)sender {

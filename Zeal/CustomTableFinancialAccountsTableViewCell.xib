@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -28,30 +24,30 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plaid_logo" translatesAutoresizingMaskIntoConstraints="NO" id="PSv-9d-VKq">
-                        <rect key="frame" x="19" y="14" width="30" height="30"/>
+                        <rect key="frame" x="19" y="15" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="OrY-5V-I60"/>
                             <constraint firstAttribute="height" constant="30" id="PQI-gJ-suS"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ma4-t5-1nC">
-                        <rect key="frame" x="15" y="11" width="174" height="18"/>
+                        <rect key="frame" x="15" y="11" width="175" height="18"/>
                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91F-Co-pSf">
-                        <rect key="frame" x="15" y="31.5" width="174" height="15.5"/>
+                        <rect key="frame" x="15" y="31.5" width="175" height="15.5"/>
                         <fontDescription key="fontDescription" name="Roboto-Italic" family="Roboto" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cl-2v-lH6">
-                        <rect key="frame" x="194" y="4.5" width="60" height="50"/>
+                        <rect key="frame" x="195" y="5" width="60" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="9MS-HC-IAI"/>
                             <constraint firstAttribute="width" constant="60" id="iFO-sm-7ei"/>
@@ -61,7 +57,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZ8-fE-dlT">
-                        <rect key="frame" x="304" y="48" width="0.0" height="1"/>
+                        <rect key="frame" x="305" y="48" width="0.0" height="1"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="7nb-uY-pBS"/>
@@ -71,7 +67,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sB-E0-kIi">
-                        <rect key="frame" x="264" y="14" width="40" height="30"/>
+                        <rect key="frame" x="265" y="15" width="40" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="1cI-iQ-l77"/>
                         </constraints>
@@ -83,7 +79,7 @@
                         </connections>
                     </button>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick-1" translatesAutoresizingMaskIntoConstraints="NO" id="A9D-lz-1PT">
-                        <rect key="frame" x="271.5" y="17.5" width="25" height="25"/>
+                        <rect key="frame" x="272.5" y="17.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="Hyg-2i-NAJ"/>
                             <constraint firstAttribute="height" constant="25" id="Pq9-YS-5nV"/>
@@ -99,17 +95,26 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sY-0d-ka7">
-                                <rect key="frame" x="136" y="8" width="37" height="18"/>
+                                <rect key="frame" x="136" y="8" width="152" height="18"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5v-0I-lQ2">
-                                <rect key="frame" x="136" y="28" width="31" height="15.5"/>
+                                <rect key="frame" x="136" y="28" width="152" height="15.5"/>
                                 <fontDescription key="fontDescription" name="Roboto-Italic" family="Roboto" pointSize="13"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKe-TH-5nx">
+                                <rect key="frame" x="293" y="19" width="25" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="lEn-id-7l5"/>
+                                </constraints>
+                                <state key="normal" image="clear.fill" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -117,7 +122,11 @@
                             <constraint firstItem="q5v-0I-lQ2" firstAttribute="leading" secondItem="5sY-0d-ka7" secondAttribute="leading" id="78H-vb-Z3a"/>
                             <constraint firstItem="7Lf-xH-7GR" firstAttribute="top" secondItem="GjR-I1-p9f" secondAttribute="top" constant="8" id="E5m-V3-0Bk"/>
                             <constraint firstItem="7Lf-xH-7GR" firstAttribute="leading" secondItem="GjR-I1-p9f" secondAttribute="leading" constant="8" id="Knu-EY-vHY"/>
+                            <constraint firstItem="RKe-TH-5nx" firstAttribute="leading" secondItem="5sY-0d-ka7" secondAttribute="trailing" constant="5" id="PKC-n4-rEm"/>
+                            <constraint firstItem="RKe-TH-5nx" firstAttribute="centerY" secondItem="GjR-I1-p9f" secondAttribute="centerY" id="RiZ-de-jFi"/>
                             <constraint firstItem="5sY-0d-ka7" firstAttribute="top" secondItem="GjR-I1-p9f" secondAttribute="top" constant="8" id="Y7l-bL-Zm3"/>
+                            <constraint firstAttribute="trailing" secondItem="RKe-TH-5nx" secondAttribute="trailing" constant="2" id="f9e-7c-Aaf"/>
+                            <constraint firstItem="RKe-TH-5nx" firstAttribute="leading" secondItem="q5v-0I-lQ2" secondAttribute="trailing" constant="5" id="fxW-4l-7UT"/>
                             <constraint firstItem="5sY-0d-ka7" firstAttribute="leading" secondItem="7Lf-xH-7GR" secondAttribute="trailing" constant="8" id="lkY-2X-r6c"/>
                             <constraint firstItem="7Lf-xH-7GR" firstAttribute="centerY" secondItem="GjR-I1-p9f" secondAttribute="centerY" id="vPb-Ra-fmq"/>
                         </constraints>
@@ -148,6 +157,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="btn_add" destination="4sB-E0-kIi" id="p9d-eE-INS"/>
+                <outlet property="btn_close" destination="RKe-TH-5nx" id="Wzr-qh-N5g"/>
                 <outlet property="img_tick" destination="A9D-lz-1PT" id="Cp7-4G-f1D"/>
                 <outlet property="logo_img_ChartView" destination="PSv-9d-VKq" id="fu9-S4-YKU"/>
                 <outlet property="mAmounts" destination="4Cl-2v-lH6" id="tAP-Rr-Xa2"/>
@@ -163,6 +173,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="clear.fill" catalog="system" width="128" height="114"/>
         <image name="plaid_logo" width="1521" height="1521"/>
         <image name="tick-1" width="30" height="30"/>
     </resources>

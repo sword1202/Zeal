@@ -25,4 +25,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *plaid_institution_logo;
 @property (weak, nonatomic) IBOutlet UILabel *plaid_title;
 @property (weak, nonatomic) IBOutlet UILabel *plaid_subTitle;
+@property (weak, nonatomic) IBOutlet UIButton *btn_close;
 @end
