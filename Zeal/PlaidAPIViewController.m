@@ -317,15 +317,17 @@
         
         NSString *institutionName = [institutionsDic objectForKey: sel_institution_id];
         
-        
-        long amount = [[arrAmounts objectAtIndex: indexPath.row] longValue];
+        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+        [fmt setPositiveFormat:@"0.##"];
+        NSLog(@"%@", [fmt stringFromNumber:[NSNumber numberWithFloat:25.342]]);
+        float amount = [[arrAmounts objectAtIndex: indexPath.row] floatValue];
         if (amount < 0) {
             amount = 0 - amount;
-            cell.amount_label.text = [NSString stringWithFormat: @"$ -%lu", amount];
+            cell.amount_label.text = [NSString stringWithFormat: @"$ -%.2f", amount];
 //            cell.mAmounts.textColor = [UIColor redColor];
         } else
         {
-            cell.amount_label.text = [NSString stringWithFormat: @"$ %lu", amount];
+            cell.amount_label.text = [NSString stringWithFormat: @"$ %.2f", amount];
 //            cell.mAmounts.textColor = [UIColor blackColor];
         }
         
