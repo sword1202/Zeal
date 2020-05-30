@@ -136,6 +136,8 @@
     dbRef = [[[baseDBRef child:kconsumers] child: userID] child: kFINANCIAL_DB];
     if (dbRef != nil) {
         
+        [self showProgressBar: @"Loading..."];
+        
         [dbRef observeEventType:(FIRDataEventTypeValue) withBlock: ^(FIRDataSnapshot *_Nonnull snapshot) {
             if ([snapshot exists]) {
                 arr_savedFinancialAccounts = [[NSMutableArray alloc] init];
@@ -157,7 +159,10 @@
                     NSDictionary *eachBank = [arr_savedFinancialAccounts objectAtIndex: i];
                     
                     // download transaction every month first day automatically
-                    
+                    if ([eachBank objectForKey: kAccessToken] == nil) {
+                        [[dbRef child: [bankNames objectAtIndex: i]] setValue: nil];
+                        continue;
+                    }
                     saveDic = [NSDictionary dictionaryWithObjectsAndKeys:
                                [eachBank objectForKey: kAccessToken], kAccessToken,
                                [eachBank objectForKey: kInstitutionName], kInstitutionName,
@@ -216,12 +221,14 @@
 //                [self retrievTransactions:@"ins_1"];
             } else
             {
+                hud.hidden = YES;
                 tableViewContainer.hidden = YES;
             }
         }];
         
     } else
     {
+        hud.hidden = YES;
         tableViewContainer.hidden = YES;
     }
 }
@@ -387,10 +394,42 @@
 
 -(void)didSelectClose:(UIButton*)sender
 {
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Zeal"
+                                 message:@"Are You Sure Want to Delete?"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+
+    //Add Buttons
+
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"Yes"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    //Handle your yes please button action here
+                                    [self clearAllData: sender];
+                                }];
+
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"Cancel"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   //Handle no, thanks button
+                               }];
+
+    //Add your buttons to alert controller
+
+    [alert addAction:yesButton];
+    [alert addAction:noButton];
+
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+- (void) clearAllData: (UIButton *) sender {
     NSDictionary *dic = [arr_savedFinancialAccounts objectAtIndex: sender.tag];
     NSString *institutionName = [dic objectForKey: @"institution_name"];
     
-    [[dbRef child: institutionName] removeValue];
+    [[dbRef child: institutionName] setValue: nil];
 }
 
 - (IBAction)didSelectSendOrder:(UIButton *)sender {
@@ -651,13 +690,15 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 - (void) downloadTransactionsAndStoreOnFirebase: (NSDictionary *) metadata startDate: (NSString *) mStartDate endDate: (NSString *) mEndDate isCurrentMonth: (int) isNowMonth
 {
 
-    if (isUpdate) {
+    NSString *accessToken = [metadata objectForKey: kAccessToken];
+    
+    if (isUpdate || accessToken == nil) {
         isUpdate = NO;
         return;
     }
     
     isUpdate = YES;
-    NSString *accessToken = [metadata objectForKey: kAccessToken];
+    
     
 //    accessToken = @"access-development-a26e7388-b04f-43a9-aceb-842882d2f4a7";
 //    NSString *startDate = [self getDateTime: pastDate];

@@ -10,8 +10,8 @@
 #define AppConstant_h
 
 //
-#define TEST_MODE    0
-#define UID @"F0fIUs7z30ZVkBDz1B07rprRC5w1"
+#define TEST_MODE    1
+#define UID @"VFaAXLflBMfrPZCiomYC3PNQ4jg2"
 #define KEY(str)    [CommonUtils getString:str]
 
 #define TEST_ACCESS_TOKEN (TEST_MODE==1?@"access-sandbox-b8509b20-b6b5-4e2b-9563-cca736bafb9f":@"access-development-624a0d39-c649-4346-b327-ac4a1fa19da8") // Bank of America
