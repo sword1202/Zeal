@@ -10,7 +10,7 @@
 #define AppConstant_h
 
 //
-#define TEST_MODE    1
+#define TEST_MODE    0
 #define UID @"VFaAXLflBMfrPZCiomYC3PNQ4jg2"
 #define KEY(str)    [CommonUtils getString:str]
 
